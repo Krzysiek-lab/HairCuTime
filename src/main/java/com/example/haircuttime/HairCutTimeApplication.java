@@ -8,7 +8,6 @@ public class HairCutTimeApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(HairCutTimeApplication.class, args);
-        System.out.printf("hello");
     }
 
 }
