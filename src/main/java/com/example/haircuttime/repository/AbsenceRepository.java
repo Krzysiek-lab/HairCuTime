@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface AbsenceRepository extends JpaRepository<Absence, Long> {
     List<Absence> findAbsencesByBarberId(Long barberId);
+
     List<Absence> findAbsencesByWorkDay_Id(Long workDayId);
 }

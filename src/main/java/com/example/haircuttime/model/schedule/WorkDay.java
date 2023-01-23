@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +22,19 @@ public class WorkDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Enumerated
+    @NotNull
     private WorkDefinition workDefinition;
+
+    @NotNull
     @Column(name = "barber_id")
     private Long barberId;
+
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "work_day_id")
     private List<Availability> availabilities = new ArrayList<>();
+
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "work_day_id")
     private List<Absence> absences = new ArrayList<>();

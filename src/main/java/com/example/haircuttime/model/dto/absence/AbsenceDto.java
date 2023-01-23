@@ -12,8 +12,8 @@ import java.time.LocalTime;
 @Setter
 public class AbsenceDto {
     private Long id;
-    private WorkDay workDay;
     private Long barberId;
     private LocalTime absenceStart;
     private LocalTime absenceEnd;
+    private WorkDay workDay;
 }

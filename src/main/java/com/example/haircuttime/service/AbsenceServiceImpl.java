@@ -50,13 +50,14 @@ public class AbsenceServiceImpl implements AbsenceService {
     @Override
     public Boolean removeAbsence(AbsenceDto absenceDto) {
         Optional<Absence> absence = absenceRepository.findById(absenceDto.getId());
-        if(absence.isPresent()) {
+        if (absence.isPresent()) {
             absenceRepository.delete(absence.get());
             return true;
         } else {
             return false;
         }
     }
+
     @Override
     public List<AbsenceDto> sortAbsences() {
         return absenceRepository.findAll()
