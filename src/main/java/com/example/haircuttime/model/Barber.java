@@ -22,7 +22,7 @@ public class Barber {
     private Gender gender;
     private Role role;
     @ManyToMany
-    @JoinColumn(name = "services_id")
+    @JoinTable(name = "services_id")
     List<Services> services;
     @ManyToMany
     Map<Long, Services> barberServices;
