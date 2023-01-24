@@ -17,9 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
-
     private Long id;
-
     @Size(max = 64, message = "Size can't be bigger than 64 characters")
     @NotBlank(message = "Name is mandatory")
     private String name;
@@ -34,7 +32,6 @@ public class UserDto {
     @NotBlank(message = "Phone number is mandatory")
     @Pattern(regexp = "[0-9]{9}",message = "Please enter correct phone number")
     private String phoneNumber;
-
     private List<RoleEntity> roles;
 
    // private List<AppointmentDto> appointmentDtos;
