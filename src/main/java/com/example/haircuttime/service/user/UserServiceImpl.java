@@ -1,9 +1,14 @@
 package com.example.haircuttime.service.user;
 
+import com.example.haircuttime.exception.exceptions.UniqueValueException;
+import com.example.haircuttime.exception.messages.ExceptionMessages;
 import com.example.haircuttime.model.dto.user.UserCreateDto;
 import com.example.haircuttime.model.dto.user.UserDto;
+import com.example.haircuttime.model.entity.RoleEntity;
 import com.example.haircuttime.model.entity.User;
+import com.example.haircuttime.model.enums.Role;
 import com.example.haircuttime.model.mapper.UserMapper;
+import com.example.haircuttime.repository.RoleEntityRepository;
 import com.example.haircuttime.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,11 +20,15 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    private final RoleEntityRepository roleRepository;
+
     private final UserMapper userMapper;
+
+
 
     @Override
     public List<UserDto> getAllUsers() {
@@ -32,6 +41,16 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public UserDto createUser(UserCreateDto createDto) {
         User user = userMapper.toNewEntity(createDto);
+        if (roleRepository.existsByName(Role.USER)) {
+            user.setRoles(List.of(roleRepository.findByName(Role.USER)));
+        } else {
+            user.setRoles(List.of(RoleEntity.builder().name(Role.USER).build()));
+        }
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new UniqueValueException(ExceptionMessages.EMAIL_IS_ALREADY_EXIST.getMessage());
+        } else if (userRepository.existsByLogin(user.getLogin())) {
+            throw new UniqueValueException(ExceptionMessages.LOGIN_IS_ALREADY_EXIST.getMessage());
+        }
         return userMapper.toDto(userRepository.save(user));
     }
 
@@ -43,7 +62,7 @@ public class UserServiceImpl implements UserService{
             user.setName(userDto.getName());
             user.setSurname(userDto.getSurname());
             user.setEmail(userDto.getEmail());
-           user.setPhoneNumber(userDto.getPhoneNumber());
+            user.setPhoneNumber(userDto.getPhoneNumber());
             return userMapper.toDto(user);
         }).orElseThrow(EntityNotFoundException::new);
     }

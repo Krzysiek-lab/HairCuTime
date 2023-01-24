@@ -1,6 +1,8 @@
 package com.example.haircuttime.model.entity;
 
+import com.example.haircuttime.model.enums.Role;
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
@@ -11,13 +13,15 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class RoleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private RoleName roleName;
+    @Enumerated(EnumType.STRING)
+    @Column(name="name")
+    private Role name;
 
 }
