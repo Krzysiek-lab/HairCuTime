@@ -1,10 +1,10 @@
 package com.example.haircuttime.model;
 
+
 import com.example.haircuttime.model.enums.Target;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,26 +16,28 @@ import java.util.List;
 public class Product {
 
     @Id
-    @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-
-    @Column
+    @Column(nme="product_id")
+    private Long productId;
+    
+    @Column(nme="product_name")
     private String productName;
-
-    @Column
+    
     private String description;
-
-    @Column
     private BigDecimal price;
-
-    @Column
+    
+    @Column(nme="product_duration")
     private Long serviceDuration;
+    
+    @Column(nme="target_cutsomer")
+    Target targetCustomer;
+    
+    @ManyToMany(mappedBy = "products")
+    List<Barber> barbers;
 
-    @Column
-    private Target targetCustomer;
+    @ManyToOne(mappedBy = "products")
+    List<Comment> comments;
 
     @OneToMany(mappedBy = "product")
-    private List<Appointment> appointments;
+    List<Appointment> appointments;
 }
