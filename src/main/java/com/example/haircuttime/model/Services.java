@@ -14,13 +14,13 @@ public class Services {
     private String description;
     private BigDecimal price;
     private Long serviceDuration;
+    Target targetCustomer;
     @ManyToMany(mappedBy = "services")
-    List<Barber> barbers;
+    List<Barbers> barbers;
 
     @ManyToOne(mappedBy = "services")
     List<Comment> comments;
 
-    @ManyToMany(mappedBy = "service")
+    @OneToMany(mappedBy = "service")
     List<Appointment> appointments;
-    // private Target targetCustomer;
 }

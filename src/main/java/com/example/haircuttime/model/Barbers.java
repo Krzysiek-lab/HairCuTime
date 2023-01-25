@@ -1,10 +1,12 @@
 package com.example.haircuttime.model;
 
+import com.example.haircuttime.model.enums.Gender;
+import com.example.haircuttime.model.enums.Role;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.xml.stream.events.Comment;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 //@Table(name = "barbers")
@@ -13,7 +15,7 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Barber {
+public class Barbers {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -21,10 +23,11 @@ public class Barber {
     private String surname;
     private Gender gender;
     private Role role;
+    @ManyToOne
+    List<Comment> comments;
     @ManyToMany
     @JoinTable(name = "services_id")
     List<Services> services;
     @ManyToMany
-    Map<Long, Services> barberServices;
-  //  Map<Long,Week> availability;
+    List<WorkYear> availability;
 }

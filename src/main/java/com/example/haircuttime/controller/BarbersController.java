@@ -1,6 +1,6 @@
 package com.example.haircuttime.controller;
 
-import com.example.haircuttime.model.Barber;
+import com.example.haircuttime.model.Barbers;
 import com.example.haircuttime.service.BarbersService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,16 +16,16 @@ public class BarbersController {
     private final BarbersService barbersService;
 
     @GetMapping("/barbers")
-    public List<Barber>getAllBarbers(){
+    public List<Barbers>getAllBarbers(){
         return barbersService.findAll();
     }
     @PostMapping("/barbers")
-    public void createBarber(@RequestBody Barber barber){
-        barbersService.save(barber);
+    public void createBarber(@RequestBody Barbers barbers){
+        barbersService.save(barbers);
     }
     @PutMapping("/barbers/{id}")
-    public ResponseEntity<Barber>updateBarber(@PathVariable("id") long id, @RequestBody Barber barber){
-        return  barbersService.updateBarber(id,barber);
+    public ResponseEntity<Barbers>updateBarber(@PathVariable("id") long id, @RequestBody Barbers barbers){
+        return  barbersService.updateBarber(id, barbers);
     }
     @DeleteMapping("/barbers/{id}")
     public ResponseEntity<String>deleteBarber(@PathVariable("id")long id){
