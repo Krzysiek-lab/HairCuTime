@@ -2,7 +2,6 @@ package com.example.haircuttime.model.dto.user;
 
 import com.example.haircuttime.model.entity.RoleEntity;
 import lombok.*;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Email;

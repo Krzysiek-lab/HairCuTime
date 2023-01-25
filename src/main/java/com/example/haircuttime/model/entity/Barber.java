@@ -1,15 +1,16 @@
-package com.example.haircuttime.model;
+package com.example.haircuttime.model.entity;
 
 import com.example.haircuttime.model.enums.Gender;
 import com.example.haircuttime.model.enums.Role;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import javax.xml.stream.events.Comment;
 import java.util.List;
 
 @Entity
-//@Table(name = "barbers")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -23,11 +24,11 @@ public class Barber {
     private String surname;
     private Gender gender;
     private Role role;
-    @ManyToOne
-    List<Comment> comments;
+    //    @ManyToOne
+//    List<Comment> comments;
     @ManyToMany
     @JoinTable(name = "product_id")
     List<Product> products;
-    @ManyToMany
-    List<WorkYear> availability;
+//    @ManyToMany
+//    List<WorkYear> availability;
 }

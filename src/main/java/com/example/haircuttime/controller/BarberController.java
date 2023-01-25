@@ -1,6 +1,6 @@
 package com.example.haircuttime.controller;
 
-import com.example.haircuttime.model.Barber;
+import com.example.haircuttime.model.entity.Barber;
 import com.example.haircuttime.service.BarberService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
 package com.example.haircuttime.dto;
 
-import com.example.haircuttime.model.Product;
-import com.example.haircuttime.model.User;
+import com.example.haircuttime.model.entity.Product;
+import com.example.haircuttime.model.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,7 +1,7 @@
 package com.example.haircuttime.service;
 
 import com.example.haircuttime.exceptions.ResourceNotFoundException;
-import com.example.haircuttime.model.Barber;
+import com.example.haircuttime.model.entity.Barber;
 import com.example.haircuttime.repository.BarberRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

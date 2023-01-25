@@ -1,27 +1,34 @@
-package com.example.haircuttime.model;
+package com.example.haircuttime.model.entity;
 
-import com.example.haircuttime.model.enums.Role;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.time.LocalDate;
 
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Data
-public class Role_Entity {
+@Builder
+public class Appointment {
 
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
-    private Role role;
+    @ManyToOne
+    private User userId;
 
-    @ManyToMany
-    private List<User> users;
+    @Column
+    private LocalDate from;
+
+    @Column
+    private LocalDate to;
+
+    @ManyToOne
+    private Product product;
 }

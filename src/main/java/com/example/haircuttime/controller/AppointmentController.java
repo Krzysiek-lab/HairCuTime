@@ -3,7 +3,7 @@ package com.example.haircuttime.controller;
 import com.example.haircuttime.dto.AppointmentDto;
 import com.example.haircuttime.exception.NoElementException;
 import com.example.haircuttime.mapper.AppointmentMapper;
-import com.example.haircuttime.model.Appointment;
+import com.example.haircuttime.model.entity.Appointment;
 import com.example.haircuttime.repository.AppointmentRepository;
 import com.example.haircuttime.repository.ProductRepository;
 import lombok.Data;
