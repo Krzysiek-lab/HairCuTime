@@ -1,6 +1,7 @@
 package com.example.haircuttime.model.mapper;
 
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
+import com.example.haircuttime.model.dto.workweek.CreateWorkWeekDto;
 import com.example.haircuttime.model.dto.workweek.WorkWeekDto;
 import com.example.haircuttime.model.enums.Day;
 import com.example.haircuttime.model.entity.WorkDay;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.AbstractMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -33,6 +35,14 @@ public class WorkWeekMapper {
                 .barberId(workWeek.getBarberId())
                 .weekNumber(workWeek.getWeekNumber())
                 .weekAvailability(getWorkDaysEntityToDto(workWeek))
+                .build();
+    }
+
+    public WorkWeekDto toNewEntity(CreateWorkWeekDto createWorkWeekDto) {
+        return WorkWeekDto.builder()
+                .barberId(createWorkWeekDto.getBarberId())
+                .weekNumber(createWorkWeekDto.getWeekNumber())
+                .weekAvailability(new TreeMap<>())
                 .build();
     }
     private Map<Day, WorkDay> getWorkDaysDtoToEntities(WorkWeekDto workWeekDto) {

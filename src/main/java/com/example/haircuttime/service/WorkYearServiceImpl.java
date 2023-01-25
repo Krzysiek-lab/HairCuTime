@@ -1,10 +1,13 @@
 package com.example.haircuttime.service;
 
+import com.example.haircuttime.model.dto.workweek.CreateWorkWeekDto;
 import com.example.haircuttime.model.dto.workweek.WorkWeekDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
+import com.example.haircuttime.model.entity.WorkWeek;
 import com.example.haircuttime.model.mapper.WorkWeekMapper;
 import com.example.haircuttime.model.mapper.WorkYearMapper;
 import com.example.haircuttime.model.entity.WorkYear;
+import com.example.haircuttime.repository.WorkWeekRepository;
 import com.example.haircuttime.repository.WorkYearRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,7 @@ public class WorkYearServiceImpl implements WorkYearService {
     private final WorkYearRepository workYearRepository;
     private final WorkYearMapper workYearMapper;
     private final WorkWeekMapper workWeekMapper;
+    private final WorkWeekRepository workWeekRepository;
 
     //TODO Optional
     @Override
@@ -62,12 +66,16 @@ public class WorkYearServiceImpl implements WorkYearService {
                 .collect(Collectors.toList());
     }
 
-    public WorkYearDto addWorkWeekToYear (Long barberId, Long year, WorkWeekDto workWeekDto) {
+    public WorkYearDto addWorkWeekToYear (Long barberId, Long year, Long weekNumber) {
         Optional<WorkYear> workYear = workYearRepository.findWorkYearByBarberIdAndYear(barberId, year);
+        Optional<WorkWeek> week = workWeekRepository.findWorkWeekByBarberIdAndWeekNumber(barberId, weekNumber);
         if (workYear.isPresent()) {
-            var workYearDto = workYearMapper.toDto(workYear.get());
-            workYearDto.addWorkWeek(workWeekDto);
-          return workYearMapper.toDto(workYearRepository.save(workYearMapper.toEntity(workYearDto)));
+            if (week.isEmpty()){
+
+
+            }
+
+            return null;
         }
         else throw new NoSuchElementException("no work year");
     }

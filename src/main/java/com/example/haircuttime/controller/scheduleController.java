@@ -41,23 +41,27 @@ public class scheduleController {
     }
 
     @GetMapping("years/year-barber")
-    public WorkYearDto getSchedulesForBarberInYear(@RequestParam Long barberId, @RequestParam Long year) {
+    public WorkYearDto getSchedulesForBarberInYear(@RequestParam Long barberId,
+                                                   @RequestParam Long year) {
         return workYearService.getScheduleOfBarber(barberId, year);
     }
 
-    @PostMapping("years/add")
-    public WorkYearDto addScheduleForBarber(@RequestParam Long barberId, @RequestParam long year) {
-        return workYearService.addWorkYear(barberId, year);
-    }
-
     @GetMapping("week")
-    public List<WorkDayDto> getDaysInWorkWeek (@RequestParam Long weekId){
+    public List<WorkDayDto> getDaysInWorkWeek(@RequestParam Long weekId) {
         return workWeekService.getDaysInWorkWeek(weekId);
     }
 
+    @PostMapping("years/add")
+    public WorkYearDto addScheduleForBarber(@RequestParam Long barberId,
+                                            @RequestParam long year) {
+        return workYearService.addWorkYear(barberId, year);
+    }
+
     @PostMapping("week/add")
-    public WorkYearDto addWorkWeek (@RequestParam Long workWeek, @RequestParam Long barberId, @RequestBody WorkWeekDto workWeekDto) {
-        return workYearService.addWorkWeekToYear(barberId, workWeek, workWeekDto);
+    public WorkYearDto addWorkWeek(@RequestParam Long barberId,
+                                   @RequestParam Long year,
+                                   @RequestParam Long week) {
+        return workYearService.addWorkWeekToYear(barberId, year, week);
     }
 
 }

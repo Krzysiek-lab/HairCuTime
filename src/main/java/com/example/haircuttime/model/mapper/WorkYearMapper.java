@@ -2,16 +2,19 @@ package com.example.haircuttime.model.mapper;
 
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
 import com.example.haircuttime.model.entity.WorkYear;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.AbstractMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Component
 public class WorkYearMapper {
+
     private WorkWeekMapper workWeekMapper;
 
     public WorkYear toEntity (WorkYearDto workYearDto){
