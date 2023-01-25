@@ -1,4 +1,4 @@
-package com.example.haircuttime.dto;
+package com.example.haircuttime.model.dto.appointment;
 
 import com.example.haircuttime.model.entity.Product;
 import com.example.haircuttime.model.entity.User;

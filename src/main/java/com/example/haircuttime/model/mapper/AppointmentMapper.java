@@ -1,6 +1,6 @@
-package com.example.haircuttime.mapper;
+package com.example.haircuttime.model.mapper;
 
-import com.example.haircuttime.dto.AppointmentDto;
+import com.example.haircuttime.model.dto.appointment.AppointmentDto;
 import com.example.haircuttime.model.entity.Appointment;
 import org.springframework.stereotype.Service;
 

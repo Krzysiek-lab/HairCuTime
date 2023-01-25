@@ -1,6 +1,6 @@
 package com.example.haircuttime.service;
 
-import com.example.haircuttime.exceptions.ResourceNotFoundException;
+import com.example.haircuttime.exception.exceptions.ResourceNotFoundException;
 import com.example.haircuttime.model.entity.Product;
 import com.example.haircuttime.repository.ProductRepository;
 import lombok.AllArgsConstructor;

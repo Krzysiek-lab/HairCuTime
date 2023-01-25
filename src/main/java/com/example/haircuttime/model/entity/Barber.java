@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Barber {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String surname;
@@ -27,7 +27,6 @@ public class Barber {
     //    @ManyToOne
 //    List<Comment> comments;
     @ManyToMany
-    @JoinTable(name = "product_id")
     List<Product> products;
 //    @ManyToMany
 //    List<WorkYear> availability;

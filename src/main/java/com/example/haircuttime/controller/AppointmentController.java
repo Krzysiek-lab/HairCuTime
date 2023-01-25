@@ -1,9 +1,9 @@
 package com.example.haircuttime.controller;
 
-import com.example.haircuttime.dto.AppointmentDto;
-import com.example.haircuttime.exception.NoElementException;
-import com.example.haircuttime.mapper.AppointmentMapper;
+import com.example.haircuttime.exception.exceptions.ResourceNotFoundException;
+import com.example.haircuttime.model.dto.appointment.AppointmentDto;
 import com.example.haircuttime.model.entity.Appointment;
+import com.example.haircuttime.model.mapper.AppointmentMapper;
 import com.example.haircuttime.repository.AppointmentRepository;
 import com.example.haircuttime.repository.ProductRepository;
 import lombok.Data;
@@ -41,7 +41,7 @@ public class AppointmentController {
     @PutMapping("/updateAppointment")
     public String updateAppointment(@RequestParam long id, @RequestBody AppointmentDto appointmentDto) {
         var appointment = appointmentRepository.findById(id).orElseThrow(() ->
-                new NoElementException("No element with given id"));
+                new ResourceNotFoundException("No element with given id"));
         appointment = appointmentMapper.mapper(appointmentDto);
         appointmentRepository.save(appointment);
         return "redirect:/allAppointments";
@@ -55,14 +55,15 @@ public class AppointmentController {
         return "redirect:/allAppointments";
     }
 
+//TODO DOROBIC dto PRODUCT I MAPPER PRODUCT
 
-//    @PostMapping("/addNewProductToAnAppointment") // DOPOKI NIE MA SERVICE ENCJI
-//    public String addNewProductToAnAppointment(@RequestParam long id, @RequestBody ServicesDto servicesDto) {
+//    @PostMapping("/addNewProductToAnAppointment") // DOPOKI NIE MA PRODUCT
+//    public String addNewProductToAnAppointment(@RequestParam long id, @RequestBody ProductDto productDto) {
 //        var appointment = appointmentRepository.findById(id).orElseThrow(() ->
-//                new NoElementException("No element with given id"));
+//                new ResourceNotFoundException("No element with given id"));
 //
-//        var service = servicesRepository.save(servicesMapper.mapper((servicesDto)));
-//        appointment.setServices(service);
+//        var product = productRepository.save(productMapper.mapper((productDto)));
+//        appointment.setProduct(product);
 //        appointmentRepository.save(appointment);
 //        return "redirect:/allAppointments";
 //    }
@@ -78,7 +79,7 @@ public class AppointmentController {
             service.getAppointments().add(appointment);
             appointmentRepository.save(appointment);
         } else {
-            throw new NoElementException("No element with given id");
+            throw new ResourceNotFoundException("No element with given id");
         }
         return "redirect:/allAppointments";
     }

@@ -26,9 +26,9 @@ public class Comment {
     private Long grade;
 
     @ManyToMany
-    @JoinTable(name = "comments_services",
-            joinColumns = @JoinColumn(name = "comment_id"),
-            inverseJoinColumns = @JoinColumn(name = "service_id"))
+//    @JoinTable(name = "comments_services",
+//            joinColumns = @JoinColumn(name = "comment_id"),
+//            inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> products;
 
 

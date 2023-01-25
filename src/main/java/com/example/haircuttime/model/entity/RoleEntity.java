@@ -26,7 +26,7 @@ public class RoleEntity {
     @Column(name = "name")
     private Role name;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
 }
