@@ -1,9 +1,9 @@
 package com.example.haircuttime.repository;
 
-import com.example.haircuttime.model.Product;
+import com.example.haircuttime.model.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 }
