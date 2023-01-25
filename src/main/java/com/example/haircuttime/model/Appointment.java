@@ -30,5 +30,5 @@ public class Appointment {
     private LocalDate to;
 
     @ManyToOne
-    private Services services;
+    private Product product;
 }

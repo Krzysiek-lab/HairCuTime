@@ -5,7 +5,7 @@ import com.example.haircuttime.exception.NoElementException;
 import com.example.haircuttime.mapper.AppointmentMapper;
 import com.example.haircuttime.model.Appointment;
 import com.example.haircuttime.repository.AppointmentRepository;
-import com.example.haircuttime.repository.ServicesRepository;
+import com.example.haircuttime.repository.ProductRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ public class AppointmentController {
 
     private final AppointmentRepository appointmentRepository;
     private final AppointmentMapper appointmentMapper;
-    private final ServicesRepository servicesRepository;
+    private final ProductRepository productRepository;
 
 
     @GetMapping("/allAppointments")
@@ -56,8 +56,8 @@ public class AppointmentController {
     }
 
 
-//    @PostMapping("/addNewServiceToAnAppointment") // DOPOKI NIE MA SERVICE ENCJI
-//    public String addNewServiceToAnAppointment(@RequestParam long id, @RequestBody ServicesDto servicesDto) {
+//    @PostMapping("/addNewProductToAnAppointment") // DOPOKI NIE MA SERVICE ENCJI
+//    public String addNewProductToAnAppointment(@RequestParam long id, @RequestBody ServicesDto servicesDto) {
 //        var appointment = appointmentRepository.findById(id).orElseThrow(() ->
 //                new NoElementException("No element with given id"));
 //
@@ -68,13 +68,13 @@ public class AppointmentController {
 //    }
 
 
-    @PostMapping("/addExistingServiceToAnAppointment")
-    public String addExistingServiceToAnAppointment(@RequestParam long id, @RequestParam long serviceId) {
+    @PostMapping("/addExistingProductToAnAppointment")
+    public String addExistingProductToAnAppointment(@RequestParam long id, @RequestParam long serviceId) {
 
-        if (servicesRepository.findById(serviceId).isPresent() && appointmentRepository.findById(id).isPresent()) {
+        if (productRepository.findById(serviceId).isPresent() && appointmentRepository.findById(id).isPresent()) {
             var appointment = appointmentRepository.findById(id).get();
-            var service = servicesRepository.findById(serviceId).get();
-            appointment.setServices(service);
+            var service = productRepository.findById(serviceId).get();
+            appointment.setProduct(service);
             service.getAppointments().add(appointment);
             appointmentRepository.save(appointment);
         } else {

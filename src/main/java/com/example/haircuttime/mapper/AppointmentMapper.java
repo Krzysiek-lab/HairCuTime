@@ -12,7 +12,7 @@ public class AppointmentMapper {
                 .userId(appointment.getUserId())
                 .to(appointment.getTo())
                 .from(appointment.getFrom())
-                .services(appointment.getServices())
+                .product(appointment.getProduct())
                 .build();
     }
 
@@ -22,7 +22,7 @@ public class AppointmentMapper {
                 .userId(appointmentDto.getUserId())
                 .to(appointmentDto.getTo())
                 .from(appointmentDto.getFrom())
-                .services(appointmentDto.getServices())
+                .product(appointmentDto.getProduct())
                 .build();
     }
 }

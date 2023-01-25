@@ -26,7 +26,7 @@ public class User {
     @Column(name = "usernames")
     private String surname;
 
-    @Column
+    @Column(unique = true)
     private String login;
 
     @Column

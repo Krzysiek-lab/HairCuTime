@@ -1,6 +1,6 @@
 package com.example.haircuttime.dto;
 
-import com.example.haircuttime.model.Services;
+import com.example.haircuttime.model.Product;
 import com.example.haircuttime.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,5 +26,5 @@ public class AppointmentDto {
     @DateTimeFormat
     private LocalDate to;
 
-    private Services services;
+    private Product product;
 }

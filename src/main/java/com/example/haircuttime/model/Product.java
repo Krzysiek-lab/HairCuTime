@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Data
-public class Services {
+public class Product {
 
     @Id
     @Column
@@ -22,7 +22,7 @@ public class Services {
 
 
     @Column
-    private String serviceName;
+    private String productName;
 
     @Column
     private String description;
@@ -36,6 +36,6 @@ public class Services {
     @Column
     private Target targetCustomer;
 
-    @OneToMany(mappedBy = "services")
+    @OneToMany(mappedBy = "product")
     private List<Appointment> appointments;
 }
