@@ -1,40 +1,42 @@
-package com.example.haircuttime.model.schedule;
+package com.example.haircuttime.model.entity;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
-@Getter
 @Entity
-@Table(name = "absences")
+@Table(name = "availability")
+@Getter
 @Builder
+@RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
-public class Absence {
+public class Availability {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @ManyToOne
+    @NotNull
+    @JoinColumn(name = "work_day_id")
+    private WorkDay workDay;
+
     @NotNull
     @Column(name = "barber_id")
     private Long barberId;
 
     @NotNull
-    @Column(name = "absence_start")
-    private LocalTime absenceStart;
+    @Column(name = "start_time")
+    private LocalTime startTime;
 
     @NotNull
-    @Column(name = "absence_end")
-    private LocalTime absenceEnd;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "work_day_id")
-    private WorkDay workDay;
+    @Column(name = "end_time")
+    private LocalTime endTime;
 }

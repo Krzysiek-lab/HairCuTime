@@ -2,7 +2,7 @@ package com.example.haircuttime.model.mapper;
 
 import com.example.haircuttime.model.dto.availability.AvailabilityDto;
 import com.example.haircuttime.model.dto.availability.CreateAvailabilityDto;
-import com.example.haircuttime.model.schedule.Availability;
+import com.example.haircuttime.model.entity.Availability;
 import org.springframework.stereotype.Component;
 
 @Component

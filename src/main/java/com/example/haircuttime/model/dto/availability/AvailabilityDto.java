@@ -1,7 +1,7 @@
 package com.example.haircuttime.model.dto.availability;
 
 
-import com.example.haircuttime.model.schedule.WorkDay;
+import com.example.haircuttime.model.entity.WorkDay;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

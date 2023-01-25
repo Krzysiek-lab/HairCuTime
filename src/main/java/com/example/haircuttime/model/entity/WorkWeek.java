@@ -1,5 +1,6 @@
-package com.example.haircuttime.model.schedule;
+package com.example.haircuttime.model.entity;
 
+import com.example.haircuttime.model.enums.Day;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,6 +21,8 @@ public class WorkWeek {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+    @NonNull
+    private Long barberId;
 
     @Column(name = "week_number")
     @Max(52)
@@ -29,7 +32,7 @@ public class WorkWeek {
     @ElementCollection
     @CollectionTable(name = "workweek_days", joinColumns = @JoinColumn(name = "week_id"))
     @MapKeyEnumerated(EnumType.STRING)
-    @MapKeyClass(Days.class)
+    @MapKeyClass(Day.class)
     @MapKeyColumn(name = "day")
-    private Map<Days, WorkDay> weekAvailability = new TreeMap<>();
+    private Map<Day, WorkDay> weekAvailability = new TreeMap<>();
 }

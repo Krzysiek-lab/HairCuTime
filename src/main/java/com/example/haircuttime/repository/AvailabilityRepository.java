@@ -1,6 +1,6 @@
 package com.example.haircuttime.repository;
 
-import com.example.haircuttime.model.schedule.Availability;
+import com.example.haircuttime.model.entity.Availability;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

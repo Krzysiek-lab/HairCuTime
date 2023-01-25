@@ -4,9 +4,9 @@ import com.example.haircuttime.model.dto.absence.AbsenceDto;
 import com.example.haircuttime.model.dto.availability.AvailabilityDto;
 import com.example.haircuttime.model.dto.workday.CreateWorkDayDto;
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
-import com.example.haircuttime.model.schedule.Absence;
-import com.example.haircuttime.model.schedule.Availability;
-import com.example.haircuttime.model.schedule.WorkDay;
+import com.example.haircuttime.model.entity.Absence;
+import com.example.haircuttime.model.entity.Availability;
+import com.example.haircuttime.model.entity.WorkDay;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,7 @@
 package com.example.haircuttime.service;
 
 import com.example.haircuttime.model.dto.availability.AvailabilityDto;
-import com.example.haircuttime.model.schedule.WorkDay;
+import com.example.haircuttime.model.entity.WorkDay;
 
 import java.util.List;
 

@@ -4,13 +4,14 @@ import com.example.haircuttime.model.dto.workweek.WorkWeekDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
 import com.example.haircuttime.model.mapper.WorkWeekMapper;
 import com.example.haircuttime.model.mapper.WorkYearMapper;
-import com.example.haircuttime.model.schedule.WorkYear;
+import com.example.haircuttime.model.entity.WorkYear;
 import com.example.haircuttime.repository.WorkYearRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -24,15 +25,15 @@ public class WorkYearServiceImpl implements WorkYearService {
     //TODO Optional
     @Override
     public WorkYearDto addWorkYear(Long barberId, Long year) {
-       var newYear = workYearRepository.findWorkYearByBarberIdAndYear(barberId, year);
-       if (newYear.isEmpty()){
-           return workYearMapper.toDto(workYearRepository.save(WorkYear.builder()
-                   .id(0L)
-                   .barberId(barberId)
-                   .yearSchedule(new TreeMap<>())
-                   .build()));
-       }else throw new NoSuchElementException("No such year for this barber");
-
+        var newYear = workYearRepository.findWorkYearByBarberIdAndYear(barberId, year);
+        if (newYear.isEmpty()) {
+            var newWorkYear = workYearRepository.save(WorkYear.builder()
+                    .year(year)
+                    .barberId(barberId)
+                    .yearSchedule(new TreeMap<>())
+                    .build());
+            return workYearMapper.toDto(newWorkYear);
+        } else throw new NoSuchElementException("No such year for this barber");
     }
 
     //TODO Optional
@@ -59,5 +60,15 @@ public class WorkYearServiceImpl implements WorkYearService {
                 .stream()
                 .map(workWeekMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    public WorkYearDto addWorkWeekToYear (Long barberId, Long year, WorkWeekDto workWeekDto) {
+        Optional<WorkYear> workYear = workYearRepository.findWorkYearByBarberIdAndYear(barberId, year);
+        if (workYear.isPresent()) {
+            var workYearDto = workYearMapper.toDto(workYear.get());
+            workYearDto.addWorkWeek(workWeekDto);
+          return workYearMapper.toDto(workYearRepository.save(workYearMapper.toEntity(workYearDto)));
+        }
+        else throw new NoSuchElementException("no work year");
     }
 }

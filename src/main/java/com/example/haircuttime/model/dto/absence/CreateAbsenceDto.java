@@ -1,6 +1,6 @@
 package com.example.haircuttime.model.dto.absence;
 
-import com.example.haircuttime.model.schedule.WorkDay;
+import com.example.haircuttime.model.entity.WorkDay;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.example.haircuttime.model.schedule;
+package com.example.haircuttime.model.enums;
 
 import lombok.Getter;
 

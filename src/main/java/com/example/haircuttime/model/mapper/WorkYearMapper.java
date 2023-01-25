@@ -1,7 +1,7 @@
 package com.example.haircuttime.model.mapper;
 
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
-import com.example.haircuttime.model.schedule.WorkYear;
+import com.example.haircuttime.model.entity.WorkYear;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

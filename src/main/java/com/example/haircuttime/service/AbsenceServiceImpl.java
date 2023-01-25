@@ -3,7 +3,7 @@ package com.example.haircuttime.service;
 import com.example.haircuttime.model.dto.absence.AbsenceDto;
 import com.example.haircuttime.model.dto.absence.CreateAbsenceDto;
 import com.example.haircuttime.model.mapper.AbsenceMapper;
-import com.example.haircuttime.model.schedule.Absence;
+import com.example.haircuttime.model.entity.Absence;
 import com.example.haircuttime.repository.AbsenceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

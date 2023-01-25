@@ -1,6 +1,7 @@
-package com.example.haircuttime.model.schedule;
+package com.example.haircuttime.model.entity;
 
 
+import com.example.haircuttime.model.enums.WorkDefinition;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

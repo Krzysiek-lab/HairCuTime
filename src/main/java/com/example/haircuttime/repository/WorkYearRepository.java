@@ -1,6 +1,6 @@
 package com.example.haircuttime.repository;
 
-import com.example.haircuttime.model.schedule.WorkYear;
+import com.example.haircuttime.model.entity.WorkYear;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -13,4 +13,5 @@ public interface WorkYearService {
     List<WorkYearDto> getAllSchedules();
 
     List<WorkWeekDto> getAllWorkWeeksInYear(Long barberId, Long year);
+    WorkYearDto addWorkWeekToYear (Long barberId, Long year, WorkWeekDto workWeekDto);
 }
