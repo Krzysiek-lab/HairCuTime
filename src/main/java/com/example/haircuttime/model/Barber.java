@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Barbers {
+public class Barber {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -26,8 +26,8 @@ public class Barbers {
     @ManyToOne
     List<Comment> comments;
     @ManyToMany
-    @JoinTable(name = "services_id")
-    List<Services> services;
+    @JoinTable(name = "product_id")
+    List<Product> products;
     @ManyToMany
     List<WorkYear> availability;
 }
