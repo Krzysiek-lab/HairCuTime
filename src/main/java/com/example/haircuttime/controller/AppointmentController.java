@@ -2,8 +2,10 @@ package com.example.haircuttime.controller;
 
 import com.example.haircuttime.exception.exceptions.ResourceNotFoundException;
 import com.example.haircuttime.model.dto.appointment.AppointmentDto;
+import com.example.haircuttime.model.dto.product.ProductDto;
 import com.example.haircuttime.model.entity.Appointment;
 import com.example.haircuttime.model.mapper.AppointmentMapper;
+import com.example.haircuttime.model.mapper.ProductMapper;
 import com.example.haircuttime.repository.AppointmentRepository;
 import com.example.haircuttime.repository.ProductRepository;
 import lombok.Data;
@@ -23,6 +25,7 @@ public class AppointmentController {
 
     private final AppointmentRepository appointmentRepository;
     private final AppointmentMapper appointmentMapper;
+    private final ProductMapper productMapper;
     private final ProductRepository productRepository;
 
 
@@ -55,18 +58,16 @@ public class AppointmentController {
         return "redirect:/allAppointments";
     }
 
-//TODO DOROBIC dto PRODUCT I MAPPER PRODUCT
+    @PostMapping("/addNewProductToAnAppointment")
+    public String addNewProductToAnAppointment(@RequestParam long id, @RequestBody ProductDto productDto) {
+        var appointment = appointmentRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("No element with given id"));
 
-//    @PostMapping("/addNewProductToAnAppointment") // DOPOKI NIE MA PRODUCT
-//    public String addNewProductToAnAppointment(@RequestParam long id, @RequestBody ProductDto productDto) {
-//        var appointment = appointmentRepository.findById(id).orElseThrow(() ->
-//                new ResourceNotFoundException("No element with given id"));
-//
-//        var product = productRepository.save(productMapper.mapper((productDto)));
-//        appointment.setProduct(product);
-//        appointmentRepository.save(appointment);
-//        return "redirect:/allAppointments";
-//    }
+        var product = productRepository.save(productMapper.mapper((productDto)));
+        appointment.setProduct(product);
+        appointmentRepository.save(appointment);
+        return "redirect:/allAppointments";
+    }
 
 
     @PostMapping("/addExistingProductToAnAppointment")

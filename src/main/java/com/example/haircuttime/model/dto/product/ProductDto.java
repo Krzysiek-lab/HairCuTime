@@ -1,6 +1,9 @@
-package com.example.haircuttime.model.entity;
+package com.example.haircuttime.model.dto.product;
 
 
+import com.example.haircuttime.model.entity.Appointment;
+import com.example.haircuttime.model.entity.Barber;
+import com.example.haircuttime.model.entity.Comment;
 import com.example.haircuttime.model.enums.Target;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,40 +11,30 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Table(name = "products")
 @Data
 @Builder
-public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id")
-    private Long productId;
-
-    @Column(name = "product_name")
+public class ProductDto {
+    @NotEmpty(message = "filed can not be empty")
     private String productName;
-
+    @NotEmpty(message = "filed can not be empty")
     private String description;
+    @NotEmpty(message = "filed can not be empty")
     private BigDecimal price;
-
-    @Column(name = "product_duration")
+    @NotEmpty(message = "filed can not be empty")
     private Long serviceDuration;
 
-    @Column(name = "target_cutsomer")
+    //lista rozwijana
     Target targetCustomer;
 
-    @ManyToMany(mappedBy = "products")
     List<Barber> barbers;
 
-    @ManyToMany(mappedBy = "products")
     List<Comment> comments;
 
-    @OneToMany(mappedBy = "product")
     List<Appointment> appointments;
 }
