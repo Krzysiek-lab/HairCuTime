@@ -28,9 +28,10 @@ public class WorkDay {
     @NotNull
     private WorkDefinition workDefinition;
 
+    @ManyToOne
     @NotNull
     @Column(name = "barber_id")
-    private Long barberId;
+    private Barber barberId;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "work_day_id")

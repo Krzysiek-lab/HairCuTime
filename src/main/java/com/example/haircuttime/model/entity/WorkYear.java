@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -22,9 +23,10 @@ public class WorkYear {
 
     private Long year;
 
+    @ManyToOne
+    @NotNull
     @Column(name = "barber_id")
-    private Long barberId;
-
+    private Barber barberId;
     @ElementCollection
     @CollectionTable(name = "workyear_weeks", joinColumns = @JoinColumn(name = "work_year_id"))
     private Map<Integer, WorkWeek> yearSchedule= new TreeMap<>();

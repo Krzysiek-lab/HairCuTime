@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -21,9 +22,10 @@ public class WorkWeek {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @NonNull
-    private Long barberId;
-
+    @ManyToOne
+    @NotNull
+    @Column(name = "barber_id")
+    private Barber barberId;
     @Column(name = "week_number")
     @Max(52)
     @NonNull

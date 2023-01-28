@@ -28,9 +28,10 @@ public class Availability {
     @JoinColumn(name = "work_day_id")
     private WorkDay workDay;
 
+    @ManyToOne
     @NotNull
     @Column(name = "barber_id")
-    private Long barberId;
+    private Barber barberId;
 
     @NotNull
     @Column(name = "start_time")

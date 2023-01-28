@@ -22,9 +22,10 @@ public class Absence {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @ManyToOne
     @NotNull
     @Column(name = "barber_id")
-    private Long barberId;
+    private Barber barberId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "work_day_id")
