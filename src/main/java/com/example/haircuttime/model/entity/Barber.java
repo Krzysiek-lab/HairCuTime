@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.example.haircuttime.model.enums.Gender;
+import com.example.haircuttime.model.enums.Role;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,14 +15,21 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Barber {
 
+public class Barber {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String surname;
+    private Gender gender;
+    private Role role;
+    
+//    @ManyToOne
+//    List<Comment> comments;
+
+    @ManyToMany
+    List<Product> products;
     @OneToMany(mappedBy = "barber")
     private List<Absence> absences;
     @OneToMany(mappedBy = "barber")
@@ -31,5 +40,4 @@ public class Barber {
     private List<WorkWeek> workWeeks;
     @OneToMany(mappedBy = "barber")
     private List<WorkDay> workDays;
-
 }
