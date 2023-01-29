@@ -19,7 +19,6 @@ import java.util.TreeMap;
 @NoArgsConstructor
 public class WorkWeekDto {
     private Long id;
-    private BarberDto barberDto;
     private Long weekNumber;
     private Map<Day, WorkDayDto> weekAvailability = new TreeMap<>();
 }

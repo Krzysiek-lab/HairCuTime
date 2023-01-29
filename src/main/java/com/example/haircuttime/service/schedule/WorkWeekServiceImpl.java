@@ -1,7 +1,5 @@
 package com.example.haircuttime.service.schedule;
 
-import com.example.haircuttime.model.dto.barber.BarberDto;
-import com.example.haircuttime.model.dto.barber.CreateBarberDto;
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
 import com.example.haircuttime.model.dto.workweek.WorkWeekDto;
 import com.example.haircuttime.model.entity.WorkWeek;
@@ -37,15 +35,15 @@ public class WorkWeekServiceImpl implements WorkWeekService {
                 .map(workDayMapper::toDto)
                 .collect(Collectors.toList());
     }
+//TODO
 
     @Override
-    public WorkWeekDto addWorkWeek(Long weekNumber, BarberDto barberDto) {
-        var workWeek = workWeekRepository.findWorkWeekByBarberIdAndWeekNumber(weekNumber, barberDto.getId());
+    public WorkWeekDto addWorkWeek(Long weekNumber, Long barberId) {
+        var workWeek = workWeekRepository.findWorkWeekByWeekNumber(weekNumber);
         if (workWeek.isEmpty()) {
             WorkWeekDto workWeekDto = workWeekMapper.toDto(workWeekRepository.save(WorkWeek
                     .builder()
                     .weekNumber(weekNumber)
-                    .barber(barberMapper.toEntity(barberDto))
                     .weekAvailability(new TreeMap<>())
                     .build()));
             return workWeekDto;

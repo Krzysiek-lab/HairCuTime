@@ -19,7 +19,6 @@ import java.util.List;
 @AllArgsConstructor
 public class CreateWorkDayDto {
     private WorkDefinition workDefinition;
-    private BarberDto barberDto;
     private List<AbsenceDto> absences = new ArrayList<>();
     private List<AvailabilityDto> availabilities = new ArrayList<>();
 

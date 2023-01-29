@@ -14,7 +14,6 @@ import java.time.LocalTime;
 @Setter
 public class AbsenceDto {
     private Long id;
-    private BarberDto barberDto;
     private LocalTime absenceStart;
     private LocalTime absenceEnd;
     private WorkDay workDay;

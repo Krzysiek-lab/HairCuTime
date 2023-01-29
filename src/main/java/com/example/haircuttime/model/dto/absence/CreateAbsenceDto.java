@@ -13,7 +13,6 @@ import java.time.LocalTime;
 @Getter
 @Setter
 public class CreateAbsenceDto {
-    private BarberDto barberDto;
     private WorkDay workDay;
     private LocalTime absenceStart;
     private LocalTime absenceEnd;

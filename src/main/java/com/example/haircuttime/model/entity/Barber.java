@@ -27,17 +27,8 @@ public class Barber {
     
 //    @ManyToOne
 //    List<Comment> comments;
-
     @ManyToMany
     private List<Product> products;
-    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL)
-    private List<Absence> absences;
-    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL)
-    private List<Availability> availabilityList;
-    @OneToMany(mappedBy = "barber", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "barberId", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<WorkYear> workYears;
-    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL)
-    private List<WorkWeek> workWeeks;
-    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL)
-    private List<WorkDay> workDays;
 }

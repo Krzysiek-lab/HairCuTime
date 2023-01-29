@@ -13,6 +13,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateWorkWeekDto {
-    private BarberDto barberDto;
     private Long weekNumber;
 }

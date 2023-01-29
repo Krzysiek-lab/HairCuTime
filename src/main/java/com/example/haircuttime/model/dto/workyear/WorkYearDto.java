@@ -18,7 +18,7 @@ public class WorkYearDto {
     @NotNull
     private Long id;
     @NotNull
-    private BarberDto barberDto;
+    private Long barberId;
     @NotNull
     private Long year;
     private Map<Integer, WorkWeekDto> yearSchedule = new TreeMap<>();

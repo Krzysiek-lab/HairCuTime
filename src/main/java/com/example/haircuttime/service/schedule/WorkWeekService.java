@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface WorkWeekService {
     List<WorkDayDto> getDaysInWorkWeek(Long workWeekId);
-    WorkWeekDto addWorkWeek(Long weekNumber, BarberDto barberDto);
+    WorkWeekDto addWorkWeek(Long weekNumber, Long barberId);
 }

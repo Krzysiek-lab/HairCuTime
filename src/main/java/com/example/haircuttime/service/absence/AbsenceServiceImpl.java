@@ -27,10 +27,11 @@ public class AbsenceServiceImpl implements AbsenceService {
 
     @Override
     public List<AbsenceDto> getAbsenceByBarber(Long barberId) {
-        return absenceRepository.findAbsencesByBarberId(barberId)
-                .stream()
-                .map(absenceMapper::toDto)
-                .collect(Collectors.toList());
+//        return absenceRepository.findAbsencesByBarberId(barberId)
+//                .stream()
+//                .map(absenceMapper::toDto)
+//                .collect(Collectors.toList());
+        return null;
     }
 
     @Override

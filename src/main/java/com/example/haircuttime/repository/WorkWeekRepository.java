@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface WorkWeekRepository extends JpaRepository<WorkWeek, Long> {
 
-    Optional<WorkWeek> findWorkWeekByBarberIdAndWeekNumber(Long barberId, Long weekNumber);
+    Optional<WorkWeek> findWorkWeekByWeekNumber(Long weekNumber);
 }

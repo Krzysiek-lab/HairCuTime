@@ -18,12 +18,10 @@ import java.util.stream.Collectors;
 public class WorkDayMapper {
     private final AbsenceMapper absenceMapper;
     private final AvailabilityMapper availabilityMapper;
-    private final BarberMapper barberMapper;
 
     public WorkDay toEntity(WorkDayDto workDayDto) {
         return WorkDay.builder()
                 .id(workDayDto.getId())
-                .barber(barberMapper.toEntity(workDayDto.getBarberDto()))
                 .workDefinition(workDayDto.getWorkDefinition())
                 .availabilities(getAvailabilitiesDtoList(workDayDto))
                 .absences(getAbsenceListFromDto(workDayDto))
@@ -33,7 +31,6 @@ public class WorkDayMapper {
     public WorkDayDto toDto(WorkDay workDay) {
         return WorkDayDto.builder()
                 .id(workDay.getId())
-                .barberDto(barberMapper.toDto(workDay.getBarber()))
                 .workDefinition(workDay.getWorkDefinition())
                 .availabilities(getAvailabilitiesList(workDay))
                 .absences(getAbsenceDtoListFromAbsence(workDay))
@@ -43,7 +40,6 @@ public class WorkDayMapper {
     public WorkDay toNewEntity(CreateWorkDayDto createWorkDayDto) {
         return WorkDay.builder()
                 .id(0L)
-                .barber(barberMapper.toEntity(createWorkDayDto.getBarberDto()))
                 .workDefinition(createWorkDayDto.getWorkDefinition())
                 .availabilities(getAvailabilitiesDtoList(createWorkDayDto))
                 .absences(getAbsenceListFromDto(createWorkDayDto))

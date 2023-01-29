@@ -4,17 +4,15 @@ import com.example.haircuttime.model.dto.absence.AbsenceDto;
 import com.example.haircuttime.model.dto.absence.CreateAbsenceDto;
 import com.example.haircuttime.model.entity.Absence;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
 public class AbsenceMapper {
 
-    private final BarberMapper barberMapper;
 
     public Absence toEntity(AbsenceDto absenceDto) {
         return Absence.builder()
-                .barber(barberMapper.toEntity(absenceDto.getBarberDto()))
                 .workDay(absenceDto.getWorkDay())
                 .absenceStart(absenceDto.getAbsenceStart())
                 .absenceEnd(absenceDto.getAbsenceEnd())
@@ -25,7 +23,6 @@ public class AbsenceMapper {
         return AbsenceDto.builder()
                 .id(absence.getId())
                 .workDay(absence.getWorkDay())
-                .barberDto(barberMapper.toDto(absence.getBarber()))
                 .absenceStart(absence.getAbsenceStart())
                 .absenceEnd(absence.getAbsenceEnd())
                 .build();
@@ -35,7 +32,6 @@ public class AbsenceMapper {
         return Absence.builder()
                 .id(0L)
                 .workDay(createAbsenceDto.getWorkDay())
-                .barber(barberMapper.toEntity(createAbsenceDto.getBarberDto()))
                 .absenceStart(createAbsenceDto.getAbsenceStart())
                 .absenceEnd(createAbsenceDto.getAbsenceEnd())
                 .build();

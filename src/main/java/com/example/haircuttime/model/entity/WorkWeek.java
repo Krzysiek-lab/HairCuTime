@@ -22,10 +22,7 @@ public class WorkWeek {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @ManyToOne
-    @NotNull
-    @JoinColumn(name = "barber_id")
-    private Barber barber;
+
     @Column(name = "week_number")
     @Max(52)
     @NonNull

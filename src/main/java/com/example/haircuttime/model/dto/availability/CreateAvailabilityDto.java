@@ -14,8 +14,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateAvailabilityDto {
-
     private WorkDay workDay;
-    private BarberDto barberDto;
-
 }

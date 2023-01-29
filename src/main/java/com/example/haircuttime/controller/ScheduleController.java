@@ -1,12 +1,12 @@
 package com.example.haircuttime.controller;
 
 import com.example.haircuttime.model.dto.barber.BarberDto;
-import com.example.haircuttime.model.dto.barber.CreateBarberDto;
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
 import com.example.haircuttime.service.schedule.WorkWeekServiceImpl;
 import com.example.haircuttime.service.schedule.WorkYearServiceImpl;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/schedule")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ScheduleController {
 
     private final WorkYearServiceImpl workYearService;
@@ -29,7 +29,7 @@ public class ScheduleController {
     public List<WorkYearDto> getSchedulesForBarber(@RequestParam Long barberId) {
         return workYearService.getAllSchedules()
                 .stream()
-                .filter(e -> e.getBarberDto().getId().equals(barberId))
+                .filter(e -> e.getBarberId().equals(barberId))
                 .collect(Collectors.toList());
     }
 

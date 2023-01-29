@@ -20,7 +20,6 @@ import java.util.List;
 public class WorkDayDto {
     private Long id;
     private WorkDefinition workDefinition;
-    private BarberDto barberDto;
     private List<AbsenceDto> absences = new ArrayList<>();
     private List<AvailabilityDto> availabilities = new ArrayList<>();
 }

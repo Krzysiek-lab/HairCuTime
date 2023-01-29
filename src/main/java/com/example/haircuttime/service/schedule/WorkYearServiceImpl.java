@@ -1,17 +1,15 @@
 package com.example.haircuttime.service.schedule;
 
 import com.example.haircuttime.model.dto.barber.BarberDto;
-import com.example.haircuttime.model.dto.barber.CreateBarberDto;
 import com.example.haircuttime.model.dto.workweek.WorkWeekDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
 import com.example.haircuttime.model.entity.WorkWeek;
-import com.example.haircuttime.model.mapper.BarberMapper;
 import com.example.haircuttime.model.mapper.WorkWeekMapper;
 import com.example.haircuttime.model.mapper.WorkYearMapper;
 import com.example.haircuttime.model.entity.WorkYear;
 import com.example.haircuttime.repository.WorkWeekRepository;
 import com.example.haircuttime.repository.WorkYearRepository;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,13 +19,12 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class WorkYearServiceImpl implements WorkYearService {
     private final WorkYearRepository workYearRepository;
     private final WorkYearMapper workYearMapper;
     private final WorkWeekMapper workWeekMapper;
     private final WorkWeekRepository workWeekRepository;
-    private final BarberMapper barberMapper;
 
     //TODO Optional
     @Override
@@ -36,7 +33,7 @@ public class WorkYearServiceImpl implements WorkYearService {
         if (newYear.isEmpty()) {
             var newWorkYear = workYearRepository.save(WorkYear.builder()
                     .year(year)
-                    .barber(barberMapper.toEntity(barberDto))
+                    .barberId(barberDto.getId())
                     .yearSchedule(new TreeMap<>())
                     .build());
             return workYearMapper.toDto(newWorkYear);
@@ -71,7 +68,7 @@ public class WorkYearServiceImpl implements WorkYearService {
 
     public WorkYearDto addWorkWeekToYear (Long barberId, Long year, Long weekNumber) {
         Optional<WorkYear> workYear = workYearRepository.findWorkYearByBarberIdAndYear(barberId, year);
-        Optional<WorkWeek> week = workWeekRepository.findWorkWeekByBarberIdAndWeekNumber(barberId, weekNumber);
+        Optional<WorkWeek> week = workWeekRepository.findWorkWeekByWeekNumber(weekNumber);
         if (workYear.isPresent()) {
             if (week.isEmpty()){
 

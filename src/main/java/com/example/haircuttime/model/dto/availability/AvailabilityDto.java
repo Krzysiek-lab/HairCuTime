@@ -19,7 +19,6 @@ public class AvailabilityDto {
 
     private Long id;
     private WorkDay workDay;
-    private BarberDto barberDto;
     private LocalTime startTime;
     private LocalTime endTime;
 

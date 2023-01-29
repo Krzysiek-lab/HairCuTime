@@ -22,9 +22,6 @@ public class BarberDto {
     private Gender gender;
     private Role role;
     List<Product> products;
-    private List<AbsenceDto> absences;
-    private List<AvailabilityDto> availabilityList;
     private List<WorkYearDto> workYears;
-    private List<WorkWeekDto> workWeeks;
-    private List<WorkDayDto> workDays;
+
 }
