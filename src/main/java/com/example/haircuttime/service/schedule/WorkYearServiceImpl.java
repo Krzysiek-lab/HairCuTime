@@ -1,7 +1,6 @@
-package com.example.haircuttime.service;
+package com.example.haircuttime.service.schedule;
 
 import com.example.haircuttime.model.dto.barber.BarberDto;
-import com.example.haircuttime.model.dto.workweek.CreateWorkWeekDto;
 import com.example.haircuttime.model.dto.workweek.WorkWeekDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
 import com.example.haircuttime.model.entity.WorkWeek;

@@ -1,4 +1,4 @@
-package com.example.haircuttime.service;
+package com.example.haircuttime.service.schedule;
 
 import com.example.haircuttime.model.dto.absence.AbsenceDto;
 import com.example.haircuttime.model.dto.absence.CreateAbsenceDto;
@@ -9,6 +9,8 @@ import com.example.haircuttime.model.mapper.AbsenceMapper;
 import com.example.haircuttime.model.mapper.AvailabilityMapper;
 import com.example.haircuttime.model.mapper.WorkDayMapper;
 import com.example.haircuttime.repository.WorkDayRepository;
+import com.example.haircuttime.service.absence.AbsenceService;
+import com.example.haircuttime.service.availability.AvailabilityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

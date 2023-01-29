@@ -1,4 +1,4 @@
-package com.example.haircuttime.service;
+package com.example.haircuttime.service.schedule;
 
 import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
@@ -10,7 +10,6 @@ import com.example.haircuttime.model.mapper.WorkWeekMapper;
 import com.example.haircuttime.repository.WorkWeekRepository;
 import com.example.haircuttime.repository.WorkYearRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -2,10 +2,9 @@ package com.example.haircuttime.controller;
 
 import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
-import com.example.haircuttime.model.dto.workweek.WorkWeekDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
-import com.example.haircuttime.service.WorkWeekServiceImpl;
-import com.example.haircuttime.service.WorkYearServiceImpl;
+import com.example.haircuttime.service.schedule.WorkWeekServiceImpl;
+import com.example.haircuttime.service.schedule.WorkYearServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +14,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(path = "/schedule")
 @AllArgsConstructor
-public class scheduleController {
+public class ScheduleController {
 
     private final WorkYearServiceImpl workYearService;
     private final WorkWeekServiceImpl workWeekService;

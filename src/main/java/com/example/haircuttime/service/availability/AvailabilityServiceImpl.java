@@ -1,4 +1,4 @@
-package com.example.haircuttime.service;
+package com.example.haircuttime.service.availability;
 
 import com.example.haircuttime.model.dto.availability.AvailabilityDto;
 import com.example.haircuttime.model.dto.availability.CreateAvailabilityDto;

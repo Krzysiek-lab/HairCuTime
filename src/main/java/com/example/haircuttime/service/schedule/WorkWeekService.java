@@ -1,4 +1,4 @@
-package com.example.haircuttime.service;
+package com.example.haircuttime.service.schedule;
 
 import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
