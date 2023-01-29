@@ -34,7 +34,7 @@ public class AvailabilityMapper {
     public AvailabilityDto toDto(Availability availability) {
         return AvailabilityDto.builder()
                 .id(availability.getId())
-                .barberDto(barberMapper.toDTO(availability.getBarber()))
+                .barberDto(barberMapper.toDto(availability.getBarber()))
                 .workDay(availability.getWorkDay())
                 .startTime(availability.getStartTime())
                 .endTime(availability.getEndTime())

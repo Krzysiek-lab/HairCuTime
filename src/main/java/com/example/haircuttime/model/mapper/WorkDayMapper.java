@@ -33,7 +33,7 @@ public class WorkDayMapper {
     public WorkDayDto toDto(WorkDay workDay) {
         return WorkDayDto.builder()
                 .id(workDay.getId())
-                .barberDto(barberMapper.toDTO(workDay.getBarber()))
+                .barberDto(barberMapper.toDto(workDay.getBarber()))
                 .workDefinition(workDay.getWorkDefinition())
                 .availabilities(getAvailabilitiesList(workDay))
                 .absences(getAbsenceDtoListFromAbsence(workDay))

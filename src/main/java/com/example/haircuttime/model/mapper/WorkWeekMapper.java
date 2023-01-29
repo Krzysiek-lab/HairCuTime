@@ -33,7 +33,7 @@ public class WorkWeekMapper {
     public WorkWeekDto toDto (WorkWeek workWeek) {
         return WorkWeekDto.builder()
                 .id(workWeek.getId())
-                .barberDto(barberMapper.toDTO(workWeek.getBarber()))
+                .barberDto(barberMapper.toDto(workWeek.getBarber()))
                 .weekNumber(workWeek.getWeekNumber())
                 .weekAvailability(getWorkDaysEntityToDto(workWeek))
                 .build();

@@ -29,15 +29,15 @@ public class Barber {
 //    List<Comment> comments;
 
     @ManyToMany
-    List<Product> products;
-    @OneToMany(mappedBy = "barber")
+    private List<Product> products;
+    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL)
     private List<Absence> absences;
-    @OneToMany(mappedBy = "barber")
+    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL)
     private List<Availability> availabilityList;
-    @OneToMany(mappedBy = "barber", orphanRemoval = true)
+    @OneToMany(mappedBy = "barber", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<WorkYear> workYears;
-    @OneToMany(mappedBy = "barber")
+    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL)
     private List<WorkWeek> workWeeks;
-    @OneToMany(mappedBy = "barber")
+    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL)
     private List<WorkDay> workDays;
 }

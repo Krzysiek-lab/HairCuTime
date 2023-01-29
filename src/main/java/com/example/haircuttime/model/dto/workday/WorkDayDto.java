@@ -3,6 +3,7 @@ package com.example.haircuttime.model.dto.workday;
 import com.example.haircuttime.model.dto.absence.AbsenceDto;
 import com.example.haircuttime.model.dto.availability.AvailabilityDto;
 import com.example.haircuttime.model.dto.barber.BarberDto;
+import com.example.haircuttime.model.dto.barber.CreateBarberDto;
 import com.example.haircuttime.model.enums.WorkDefinition;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -3,8 +3,6 @@ package com.example.haircuttime.model.mapper;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
 import com.example.haircuttime.model.entity.WorkYear;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.AbstractMap;
@@ -37,7 +35,7 @@ public class WorkYearMapper {
         return WorkYearDto.builder()
                 .id(workYear.getId())
                 .year(workYear.getYear())
-                .barberDto(barberMapper.toDTO(workYear.getBarber()))
+                .barberDto(barberMapper.toDto(workYear.getBarber()))
                 .yearSchedule(workYear
                         .getYearSchedule()
                         .entrySet()
