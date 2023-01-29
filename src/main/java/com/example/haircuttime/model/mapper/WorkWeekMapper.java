@@ -18,12 +18,13 @@ import java.util.stream.Collectors;
 @Component
 public class WorkWeekMapper {
 
-    private WorkDayMapper workDayMapper;
+    private final WorkDayMapper workDayMapper;
+    private final BarberMapper barberMapper;
 
     public WorkWeek toEntity (WorkWeekDto workWeekDto) {
         return WorkWeek.builder()
                 .id(workWeekDto.getId())
-                .barberId(workWeekDto.getBarberId())
+                .barber(barberMapper.toEntity(workWeekDto.getBarberDto()))
                 .weekNumber(workWeekDto.getWeekNumber())
                 .weekAvailability(getWorkDaysDtoToEntities(workWeekDto))
                 .build();
@@ -32,7 +33,7 @@ public class WorkWeekMapper {
     public WorkWeekDto toDto (WorkWeek workWeek) {
         return WorkWeekDto.builder()
                 .id(workWeek.getId())
-                .barberId(workWeek.getBarberId())
+                .barberDto(barberMapper.toDTO(workWeek.getBarber()))
                 .weekNumber(workWeek.getWeekNumber())
                 .weekAvailability(getWorkDaysEntityToDto(workWeek))
                 .build();
@@ -40,7 +41,7 @@ public class WorkWeekMapper {
 
     public WorkWeekDto toNewEntity(CreateWorkWeekDto createWorkWeekDto) {
         return WorkWeekDto.builder()
-                .barberId(createWorkWeekDto.getBarberId())
+                .barberDto(createWorkWeekDto.getBarberDto())
                 .weekNumber(createWorkWeekDto.getWeekNumber())
                 .weekAvailability(new TreeMap<>())
                 .build();

@@ -16,12 +16,13 @@ import java.util.stream.Collectors;
 public class WorkYearMapper {
 
     private WorkWeekMapper workWeekMapper;
+    private final BarberMapper barberMapper;
 
     public WorkYear toEntity (WorkYearDto workYearDto){
         return WorkYear.builder()
                 .id(workYearDto.getId())
                 .year(workYearDto.getYear())
-                .barberId(workYearDto.getBarberId())
+                .barber(barberMapper.toEntity(workYearDto.getBarberDto()))
                 .yearSchedule(workYearDto
                         .getYearSchedule()
                         .entrySet()
@@ -36,7 +37,7 @@ public class WorkYearMapper {
         return WorkYearDto.builder()
                 .id(workYear.getId())
                 .year(workYear.getYear())
-                .barberId(workYear.getBarberId())
+                .barberDto(barberMapper.toDTO(workYear.getBarber()))
                 .yearSchedule(workYear
                         .getYearSchedule()
                         .entrySet()

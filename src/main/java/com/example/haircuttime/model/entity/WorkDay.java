@@ -31,7 +31,7 @@ public class WorkDay {
     @ManyToOne
     @NotNull
     @Column(name = "barber_id")
-    private Barber barberId;
+    private Barber barber;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "work_day_id")

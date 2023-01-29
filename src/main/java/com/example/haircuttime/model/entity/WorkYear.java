@@ -26,7 +26,7 @@ public class WorkYear {
     @ManyToOne
     @NotNull
     @Column(name = "barber_id")
-    private Barber barberId;
+    private Barber barber;
     @ElementCollection
     @CollectionTable(name = "workyear_weeks", joinColumns = @JoinColumn(name = "work_year_id"))
     private Map<Integer, WorkWeek> yearSchedule= new TreeMap<>();

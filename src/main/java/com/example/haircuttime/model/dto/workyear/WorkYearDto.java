@@ -1,5 +1,6 @@
 package com.example.haircuttime.model.dto.workyear;
 
+import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.workweek.WorkWeekDto;
 import lombok.*;
 
@@ -17,7 +18,7 @@ public class WorkYearDto {
     @NotNull
     private Long id;
     @NotNull
-    private Long barberId;
+    private BarberDto barberDto;
     @NotNull
     private Long year;
     private Map<Integer, WorkWeekDto> yearSchedule = new TreeMap<>();

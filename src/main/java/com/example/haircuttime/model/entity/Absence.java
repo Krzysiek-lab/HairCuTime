@@ -25,7 +25,7 @@ public class Absence {
     @ManyToOne
     @NotNull
     @Column(name = "barber_id")
-    private Barber barberId;
+    private Barber barber;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "work_day_id")

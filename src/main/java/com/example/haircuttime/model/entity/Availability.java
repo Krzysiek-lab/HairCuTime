@@ -31,7 +31,7 @@ public class Availability {
     @ManyToOne
     @NotNull
     @Column(name = "barber_id")
-    private Barber barberId;
+    private Barber barber;
 
     @NotNull
     @Column(name = "start_time")

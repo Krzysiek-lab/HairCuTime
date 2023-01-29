@@ -1,5 +1,6 @@
 package com.example.haircuttime.model.dto.absence;
 
+import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.entity.WorkDay;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import java.time.LocalTime;
 @Setter
 public class AbsenceDto {
     private Long id;
-    private Long barberId;
+    private BarberDto barberDto;
     private LocalTime absenceStart;
     private LocalTime absenceEnd;
     private WorkDay workDay;
