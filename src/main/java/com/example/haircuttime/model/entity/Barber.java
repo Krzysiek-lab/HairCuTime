@@ -21,15 +21,15 @@ public class Barber {
 
     private String name;
     private String surname;
-    @OneToMany(mappedBy = "barberId")
+    @OneToMany(mappedBy = "barber")
     private List<Absence> absences;
-    @OneToMany(mappedBy = "barberId")
+    @OneToMany(mappedBy = "barber")
     private List<Availability> availabilityList;
-    @OneToMany(mappedBy = "barberId", orphanRemoval = true)
+    @OneToMany(mappedBy = "barber", orphanRemoval = true)
     private List<WorkYear> workYears;
-    @OneToMany(mappedBy = "barberId")
+    @OneToMany(mappedBy = "barber")
     private List<WorkWeek> workWeeks;
-    @OneToMany(mappedBy = "barberId")
+    @OneToMany(mappedBy = "barber")
     private List<WorkDay> workDays;
 
 }

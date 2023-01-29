@@ -30,9 +30,8 @@ public class WorkDay {
 
     @ManyToOne
     @NotNull
-    @Column(name = "barber_id")
+    @JoinColumn(name = "barber_id")
     private Barber barber;
-
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "work_day_id")
     private List<Availability> availabilities = new ArrayList<>();

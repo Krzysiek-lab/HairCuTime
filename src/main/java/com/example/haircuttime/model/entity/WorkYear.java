@@ -25,7 +25,7 @@ public class WorkYear {
 
     @ManyToOne
     @NotNull
-    @Column(name = "barber_id")
+    @JoinColumn(name = "barber_id")
     private Barber barber;
     @ElementCollection
     @CollectionTable(name = "workyear_weeks", joinColumns = @JoinColumn(name = "work_year_id"))

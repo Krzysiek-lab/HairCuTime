@@ -24,7 +24,7 @@ public class WorkWeek {
     private Long id;
     @ManyToOne
     @NotNull
-    @Column(name = "barber_id")
+    @JoinColumn(name = "barber_id")
     private Barber barber;
     @Column(name = "week_number")
     @Max(52)
