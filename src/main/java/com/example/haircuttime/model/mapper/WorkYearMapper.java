@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 public class WorkYearMapper {
 
     private WorkWeekMapper workWeekMapper;
-    private final CreateBarberMapper barberMapper;
 
     public WorkYear toEntity (WorkYearDto workYearDto){
         return WorkYear.builder()

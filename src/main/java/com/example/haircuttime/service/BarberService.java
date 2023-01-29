@@ -1,7 +1,10 @@
 package com.example.haircuttime.service;
 
 import com.example.haircuttime.exception.exceptions.ResourceNotFoundException;
+import com.example.haircuttime.model.dto.barber.BarberDto;
+import com.example.haircuttime.model.dto.barber.CreateBarberDto;
 import com.example.haircuttime.model.entity.Barber;
+import com.example.haircuttime.model.mapper.BarberMapper;
 import com.example.haircuttime.repository.BarberRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +17,14 @@ import java.util.List;
 public class BarberService {
 
     private final BarberRepository barberRepository;
+    private final BarberMapper barberMapper;
 
     public List<Barber> findAll() {
         return barberRepository.findAll();
     }
 
-    public void save(Barber barber) {
-        barberRepository.save(barber);
+    public BarberDto save(CreateBarberDto barber) {
+        return barberMapper.toDto(barberRepository.save(barberMapper.toNewEntity(barber)));
     }
 
     public ResponseEntity<Barber> updateBarber(long id, Barber barber) {

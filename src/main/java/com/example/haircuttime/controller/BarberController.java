@@ -1,5 +1,7 @@
 package com.example.haircuttime.controller;
 
+import com.example.haircuttime.model.dto.barber.BarberDto;
+import com.example.haircuttime.model.dto.barber.CreateBarberDto;
 import com.example.haircuttime.model.entity.Barber;
 import com.example.haircuttime.service.BarberService;
 import lombok.AllArgsConstructor;
@@ -20,8 +22,8 @@ public class BarberController {
         return barberService.findAll();
     }
     @PostMapping("/barbers")
-    public void createBarber(@RequestBody Barber barber){
-        barberService.save(barber);
+    public void createBarber(@RequestBody CreateBarberDto createBarberDto){
+        barberService.save(createBarberDto);
     }
     @PutMapping("/barbers/{id}")
     public ResponseEntity<Barber>updateBarber(@PathVariable("id") long id, @RequestBody Barber barber){

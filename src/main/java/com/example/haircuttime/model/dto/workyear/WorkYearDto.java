@@ -8,8 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Map;
 import java.util.TreeMap;
 
-@Getter
-@Setter
+@Data
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -23,7 +22,4 @@ public class WorkYearDto {
     private Long year;
     private Map<Integer, WorkWeekDto> yearSchedule = new TreeMap<>();
 
-    public WorkWeekDto addWorkWeek(WorkWeekDto workWeekDto) {
-        return yearSchedule.put(Math.toIntExact(workWeekDto.getWeekNumber()), workWeekDto);
-    }
 }

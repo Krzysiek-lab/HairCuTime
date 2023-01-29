@@ -8,7 +8,6 @@ import lombok.Data;
 @Builder
 @Data
 public class CreateBarberDto {
-    private Long id;
     private String name;
     private String surname;
     private Gender gender;

@@ -16,17 +16,16 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BarberMapper {
     private final WorkYearMapper workYearMapper;
-//    public Barber toNewEntity(CreateBarberDto createBarberDTO) {
-//        return Barber.builder()
-//                .id(createBarberDTO.getId())
-//                .name(createBarberDTO.getName())
-//                .surname(createBarberDTO.getSurname())
-//                .gender(createBarberDTO.getGender())
-//                .role(createBarberDTO.getRole())
-//                .products(new ArrayList<>())
-//                .workYears(new ArrayList<>())
-//                .build();
-//    }
+    public Barber toNewEntity(CreateBarberDto createBarberDTO) {
+        return Barber.builder()
+                .name(createBarberDTO.getName())
+                .surname(createBarberDTO.getSurname())
+                .gender(createBarberDTO.getGender())
+                .role(createBarberDTO.getRole())
+                .products(new ArrayList<>())
+                .workYears(new ArrayList<>())
+                .build();
+    }
 
     public Barber toEntity(BarberDto barberDto) {
         return Barber.builder()
