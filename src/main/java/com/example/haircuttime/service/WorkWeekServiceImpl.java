@@ -1,8 +1,10 @@
 package com.example.haircuttime.service;
 
+import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
 import com.example.haircuttime.model.dto.workweek.WorkWeekDto;
 import com.example.haircuttime.model.entity.WorkWeek;
+import com.example.haircuttime.model.mapper.BarberMapper;
 import com.example.haircuttime.model.mapper.WorkDayMapper;
 import com.example.haircuttime.model.mapper.WorkWeekMapper;
 import com.example.haircuttime.repository.WorkWeekRepository;
@@ -23,6 +25,7 @@ public class WorkWeekServiceImpl implements WorkWeekService {
     private final WorkYearRepository workYearRepository;
     private final WorkDayMapper workDayMapper;
     private final WorkWeekMapper workWeekMapper;
+    private final BarberMapper barberMapper;
 
     @Override
     public List<WorkDayDto> getDaysInWorkWeek(Long workWeekId) {
@@ -36,13 +39,13 @@ public class WorkWeekServiceImpl implements WorkWeekService {
     }
 
     @Override
-    public WorkWeekDto addWorkWeek(Long weekNumber, Long barberId) {
-        var workWeek = workWeekRepository.findWorkWeekByBarberIdAndWeekNumber(weekNumber, barberId);
+    public WorkWeekDto addWorkWeek(Long weekNumber, BarberDto barberDto) {
+        var workWeek = workWeekRepository.findWorkWeekByBarberIdAndWeekNumber(weekNumber, barberDto.getId());
         if (workWeek.isEmpty()) {
             WorkWeekDto workWeekDto = workWeekMapper.toDto(workWeekRepository.save(WorkWeek
                     .builder()
                     .weekNumber(weekNumber)
-                    .barberId(barberId)
+                    .barber(barberMapper.toEntity(barberDto))
                     .weekAvailability(new TreeMap<>())
                     .build()));
             return workWeekDto;

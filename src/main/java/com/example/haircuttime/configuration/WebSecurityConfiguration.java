@@ -1,4 +1,4 @@
-package com.example.haircuttime;
+package com.example.haircuttime.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

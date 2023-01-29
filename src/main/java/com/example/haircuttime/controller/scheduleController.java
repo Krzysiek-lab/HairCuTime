@@ -1,5 +1,6 @@
 package com.example.haircuttime.controller;
 
+import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
 import com.example.haircuttime.model.dto.workweek.WorkWeekDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
@@ -28,7 +29,7 @@ public class scheduleController {
     public List<WorkYearDto> getSchedulesForBarber(@RequestParam Long barberId) {
         return workYearService.getAllSchedules()
                 .stream()
-                .filter(e -> e.getBarberId().equals(barberId))
+                .filter(e -> e.getBarberDto().getId().equals(barberId))
                 .collect(Collectors.toList());
     }
 
@@ -52,9 +53,9 @@ public class scheduleController {
     }
 
     @PostMapping("years/add")
-    public WorkYearDto addScheduleForBarber(@RequestParam Long barberId,
+    public WorkYearDto addScheduleForBarber(@RequestBody BarberDto barberDto,
                                             @RequestParam long year) {
-        return workYearService.addWorkYear(barberId, year);
+        return workYearService.addWorkYear(barberDto, year);
     }
 
     @PostMapping("week/add")

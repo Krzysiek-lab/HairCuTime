@@ -87,7 +87,7 @@ public class WorkDayServiceImpl implements WorkDayService {
                 newAvailabilityList.add(AvailabilityDto
                                 .builder()
                                 .workDay(absence.getWorkDay())
-                                .barberId(absence.getBarberId())
+                                .barberDto(absence.getBarberDto())
                                 .startTime(current)
                                 .endTime(absence.getAbsenceStart())
                                 .build());
@@ -97,7 +97,7 @@ public class WorkDayServiceImpl implements WorkDayService {
                 newAvailabilityList.add(AvailabilityDto
                         .builder()
                         .workDay(absence.getWorkDay())
-                        .barberId(absence.getBarberId())
+                        .barberDto(absence.getBarberDto())
                         .startTime(current)
                         .endTime(absence.getWorkDay().getWorkDefinition().getEnd())
                         .build());
@@ -108,7 +108,7 @@ public class WorkDayServiceImpl implements WorkDayService {
                 .forEach(availabilityDto -> availabilityService.removeAvailability(availabilityDto.getId()));
 
         newAvailabilityList
-                .forEach( availabilityDto -> availabilityService.createAvailability(currentWorkDay, availabilityDto.getId()));
+                .forEach( availabilityDto -> availabilityService.createAvailability(currentWorkDay, availabilityDto.getBarberDto()));
 
 
         return getAbsencesByWorkDayId(workDayId);
@@ -138,7 +138,7 @@ public class WorkDayServiceImpl implements WorkDayService {
                 newAvailabilityList.add(AvailabilityDto
                         .builder()
                         .workDay(absence.getWorkDay())
-                        .barberId(absence.getBarberId())
+                        .barberDto(absence.getBarberDto())
                         .startTime(current)
                         .endTime(absence.getAbsenceStart())
                         .build());
@@ -148,7 +148,7 @@ public class WorkDayServiceImpl implements WorkDayService {
                 newAvailabilityList.add(AvailabilityDto
                         .builder()
                         .workDay(absence.getWorkDay())
-                        .barberId(absence.getBarberId())
+                        .barberDto(absence.getBarberDto())
                         .startTime(current)
                         .endTime(absence.getWorkDay().getWorkDefinition().getEnd())
                         .build());
@@ -159,7 +159,7 @@ public class WorkDayServiceImpl implements WorkDayService {
                 .forEach(availabilityDto -> availabilityService.removeAvailability(availabilityDto.getId()));
 
         newAvailabilityList
-                .forEach( availabilityDto -> availabilityService.createAvailability(currentWorkDay, availabilityDto.getId()));
+                .forEach( availabilityDto -> availabilityService.createAvailability(currentWorkDay, availabilityDto.getBarberDto()));
 
 
         return getAbsencesByWorkDayId(workDayId);

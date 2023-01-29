@@ -1,9 +1,11 @@
 package com.example.haircuttime.service;
 
+import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.workweek.CreateWorkWeekDto;
 import com.example.haircuttime.model.dto.workweek.WorkWeekDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
 import com.example.haircuttime.model.entity.WorkWeek;
+import com.example.haircuttime.model.mapper.BarberMapper;
 import com.example.haircuttime.model.mapper.WorkWeekMapper;
 import com.example.haircuttime.model.mapper.WorkYearMapper;
 import com.example.haircuttime.model.entity.WorkYear;
@@ -25,15 +27,16 @@ public class WorkYearServiceImpl implements WorkYearService {
     private final WorkYearMapper workYearMapper;
     private final WorkWeekMapper workWeekMapper;
     private final WorkWeekRepository workWeekRepository;
+    private final BarberMapper barberMapper;
 
     //TODO Optional
     @Override
-    public WorkYearDto addWorkYear(Long barberId, Long year) {
-        var newYear = workYearRepository.findWorkYearByBarberIdAndYear(barberId, year);
+    public WorkYearDto addWorkYear(BarberDto barberDto, Long year) {
+        var newYear = workYearRepository.findWorkYearByBarberIdAndYear(barberDto.getId(), year);
         if (newYear.isEmpty()) {
             var newWorkYear = workYearRepository.save(WorkYear.builder()
                     .year(year)
-                    .barberId(barberId)
+                    .barber(barberMapper.toEntity(barberDto))
                     .yearSchedule(new TreeMap<>())
                     .build());
             return workYearMapper.toDto(newWorkYear);

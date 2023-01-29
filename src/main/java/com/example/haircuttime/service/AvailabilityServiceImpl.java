@@ -2,6 +2,7 @@ package com.example.haircuttime.service;
 
 import com.example.haircuttime.model.dto.availability.AvailabilityDto;
 import com.example.haircuttime.model.dto.availability.CreateAvailabilityDto;
+import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.mapper.AvailabilityMapper;
 import com.example.haircuttime.model.entity.Availability;
 import com.example.haircuttime.model.entity.WorkDay;
@@ -21,9 +22,9 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     private final AvailabilityRepository availabilityRepository;
     private final AvailabilityMapper availabilityMapper;
     @Override
-    public AvailabilityDto createAvailability(WorkDay workDay, Long barberId) {
+    public AvailabilityDto createAvailability(WorkDay workDay, BarberDto barberDto) {
         CreateAvailabilityDto createAvailabilityDto = CreateAvailabilityDto.builder()
-                .barberId(barberId)
+                .barberDto(barberDto)
                 .workDay(workDay).build();
         return availabilityMapper.toDto(availabilityRepository
                         .save(availabilityMapper.toNewEntity(createAvailabilityDto)));
