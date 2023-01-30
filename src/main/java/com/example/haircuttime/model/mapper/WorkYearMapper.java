@@ -20,13 +20,13 @@ public class WorkYearMapper {
                 .id(workYearDto.getId())
                 .year(workYearDto.getYear())
                 .barberId(workYearDto.getBarberId())
-                .yearSchedule(workYearDto
-                        .getYearSchedule()
-                        .entrySet()
-                        .stream()
-                        .map((entry) -> new AbstractMap.SimpleEntry<>
-                                (entry.getKey(), workWeekMapper.toEntity(entry.getValue())))
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)))
+//                .yearSchedule(workYearDto
+//                        .getYearSchedule()
+//                        .entrySet()
+//                        .stream()
+//                        .map((entry) -> new AbstractMap.SimpleEntry<>
+//                                (entry.getKey(), workWeekMapper.toEntity(entry.getValue())))
+//                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)))
                 .build();
     }
 
@@ -35,13 +35,13 @@ public class WorkYearMapper {
                 .id(workYear.getId())
                 .year(workYear.getYear())
                 .barberId(workYear.getBarberId())
-                .yearSchedule(workYear
-                        .getYearSchedule()
-                        .entrySet()
-                        .stream()
-                        .map((entry) -> new AbstractMap.SimpleEntry<>
-                                (entry.getKey(), workWeekMapper.toDto(entry.getValue())))
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)))
+//                .yearSchedule(workYear
+//                        .getYearSchedule()
+//                        .entrySet()
+//                        .stream()
+//                        .map((entry) -> new AbstractMap.SimpleEntry<>
+//                                (entry.getKey(), workWeekMapper.toDto(entry.getValue())))
+//                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)))
                 .build();
     }
 

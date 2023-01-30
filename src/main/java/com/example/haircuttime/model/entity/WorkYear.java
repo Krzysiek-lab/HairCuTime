@@ -20,16 +20,12 @@ public class WorkYear {
     @Column(name = "id", nullable = false)
     private Long id;
     private Long year;
-//    @ManyToOne
-//    @NotNull
-//    @JoinColumn(name = "barber_id")
-//    private Barber barber;
 
     @NotNull
     @Column(name = "barber_id")
     private Long barberId;
     @ElementCollection
     @CollectionTable(name = "workyear_weeks", joinColumns = @JoinColumn(name = "work_year_id"))
-    private Map<Integer, WorkWeek> yearSchedule = new TreeMap<>();
+    private Map<Integer, WorkDay> yearSchedule = new TreeMap<>();
 
 }

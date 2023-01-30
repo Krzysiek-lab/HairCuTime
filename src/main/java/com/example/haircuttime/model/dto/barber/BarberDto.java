@@ -1,9 +1,5 @@
 package com.example.haircuttime.model.dto.barber;
 
-import com.example.haircuttime.model.dto.absence.AbsenceDto;
-import com.example.haircuttime.model.dto.availability.AvailabilityDto;
-import com.example.haircuttime.model.dto.workday.WorkDayDto;
-import com.example.haircuttime.model.dto.workweek.WorkWeekDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
 import com.example.haircuttime.model.entity.*;
 import com.example.haircuttime.model.enums.Gender;

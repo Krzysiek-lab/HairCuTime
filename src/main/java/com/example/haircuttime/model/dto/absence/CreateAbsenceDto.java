@@ -1,7 +1,5 @@
 package com.example.haircuttime.model.dto.absence;
 
-import com.example.haircuttime.model.dto.barber.BarberDto;
-import com.example.haircuttime.model.dto.barber.CreateBarberDto;
 import com.example.haircuttime.model.entity.WorkDay;
 import lombok.Builder;
 import lombok.Getter;
