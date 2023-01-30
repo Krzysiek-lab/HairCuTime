@@ -1,7 +1,9 @@
 package com.example.haircuttime.controller;
 
 import com.example.haircuttime.model.dto.barber.BarberDto;
+import com.example.haircuttime.model.dto.workday.CreateWorkDayDto;
 import com.example.haircuttime.model.dto.workweek.CreateWorkWeekDto;
+import com.example.haircuttime.model.enums.Day;
 import com.example.haircuttime.service.schedule.ScheduleServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -18,19 +20,29 @@ public class ScheduleController {
         return scheduleService.addWorkYear(barberId, year);
     }
 
-    @PostMapping("week/add-empty")
+    @PostMapping("week/add")
     public BarberDto addEmptyWorkWeek(@RequestParam Long barberId,
                                       @RequestParam Long year,
                                       @RequestParam Long week) {
         return scheduleService.addEmptyWorkWeekToWorkYear(barberId, year, week);
     }
 
-    @PostMapping("week/add")
-    public BarberDto addEmptyWorkWeek(@RequestParam Long barberId,
-                                      @RequestParam Long year,
-                                      @RequestBody CreateWorkWeekDto createWorkWeekDto) {
-        return scheduleService.addWorkWeekToWorkYear(barberId, year, createWorkWeekDto);
+    @PostMapping("day/add")
+    public BarberDto addWorkDay(@RequestParam Long barberId,
+                                @RequestParam Long year,
+                                @RequestParam Long week,
+                                @RequestParam Day day,
+                                @RequestBody CreateWorkDayDto createWorkDayDto) {
+        return scheduleService.addWorkDayToWorkWeek(barberId, year, week, day, createWorkDayDto);
+
     }
+
+//    @PostMapping("week/add")
+//    public BarberDto addWorkWeek(@RequestParam Long barberId,
+//                                 @RequestParam Long year,
+//                                 @RequestBody CreateWorkWeekDto createWorkWeekDto) {
+//        return scheduleService.addWorkWeekToWorkYear(barberId, year, createWorkWeekDto);
+//    }
 //    @GetMapping("years/all")
 //    public List<WorkYearDto> getAllSchedules() {
 //        return workYearService.getAllSchedules();

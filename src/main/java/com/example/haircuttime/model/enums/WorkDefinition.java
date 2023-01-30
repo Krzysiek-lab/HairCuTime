@@ -1,5 +1,6 @@
 package com.example.haircuttime.model.enums;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
 import java.time.LocalTime;
@@ -28,6 +29,11 @@ public enum WorkDefinition {
         this.dayLength = dayLength;
         this.start = start;
         this.end = end;
+    }
+
+    @JsonValue
+    public String getName() {
+        return name();
     }
 
 }
