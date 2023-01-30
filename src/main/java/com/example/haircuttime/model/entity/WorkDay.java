@@ -25,15 +25,13 @@ public class WorkDay {
     private Long id;
 
     @Enumerated
-    @NotNull
+//    @NotNull
     private WorkDefinition workDefinition;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "work_day_id")
+    @OneToMany(mappedBy = "id", cascade = CascadeType.PERSIST)
     private List<Availability> availabilities = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "work_day_id")
+    @OneToMany(mappedBy = "id",cascade = CascadeType.PERSIST)
     private List<Absence> absences = new ArrayList<>();
 }
 

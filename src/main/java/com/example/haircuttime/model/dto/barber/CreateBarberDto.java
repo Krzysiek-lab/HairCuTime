@@ -11,5 +11,4 @@ public class CreateBarberDto {
     private String name;
     private String surname;
     private Gender gender;
-    private Role role;
 }

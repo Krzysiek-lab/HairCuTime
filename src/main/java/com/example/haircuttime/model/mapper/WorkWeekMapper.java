@@ -3,15 +3,14 @@ package com.example.haircuttime.model.mapper;
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
 import com.example.haircuttime.model.dto.workweek.CreateWorkWeekDto;
 import com.example.haircuttime.model.dto.workweek.WorkWeekDto;
-import com.example.haircuttime.model.enums.Day;
 import com.example.haircuttime.model.entity.WorkDay;
 import com.example.haircuttime.model.entity.WorkWeek;
+import com.example.haircuttime.model.enums.Day;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.AbstractMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -36,14 +35,24 @@ public class WorkWeekMapper {
                 .build();
     }
 
-    public WorkWeekDto toNewEntity(CreateWorkWeekDto createWorkWeekDto) {
-        return WorkWeekDto.builder()
+    public WorkWeek toNewEntity(CreateWorkWeekDto createWorkWeekDto) {
+        return WorkWeek.builder()
                 .weekNumber(createWorkWeekDto.getWeekNumber())
-                .weekAvailability(new TreeMap<>())
+                .weekAvailability(getWorkDaysDtoToEntities(createWorkWeekDto))
                 .build();
     }
     private Map<Day, WorkDay> getWorkDaysDtoToEntities(WorkWeekDto workWeekDto) {
         return workWeekDto
+                .getWeekAvailability()
+                .entrySet()
+                .stream()
+                .map((entry) -> new AbstractMap.SimpleEntry<>
+                        (entry.getKey(), workDayMapper.toEntity(entry.getValue())))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
+    private Map<Day, WorkDay> getWorkDaysDtoToEntities(CreateWorkWeekDto createWorkWeekDto) {
+        return createWorkWeekDto
                 .getWeekAvailability()
                 .entrySet()
                 .stream()

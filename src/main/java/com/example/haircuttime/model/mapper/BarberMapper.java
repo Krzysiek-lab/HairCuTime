@@ -21,7 +21,6 @@ public class BarberMapper {
                 .name(createBarberDTO.getName())
                 .surname(createBarberDTO.getSurname())
                 .gender(createBarberDTO.getGender())
-                .role(createBarberDTO.getRole())
                 .products(new ArrayList<>())
                 .workYears(new ArrayList<>())
                 .build();

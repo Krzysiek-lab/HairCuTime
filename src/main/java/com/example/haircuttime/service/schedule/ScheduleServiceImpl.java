@@ -2,19 +2,19 @@ package com.example.haircuttime.service.schedule;
 
 import com.example.haircuttime.exception.exceptions.UniqueValueException;
 import com.example.haircuttime.model.dto.barber.BarberDto;
+import com.example.haircuttime.model.dto.workweek.CreateWorkWeekDto;
 import com.example.haircuttime.model.dto.workweek.WorkWeekDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
 import com.example.haircuttime.model.entity.WorkWeek;
 import com.example.haircuttime.model.mapper.BarberMapper;
 import com.example.haircuttime.model.mapper.WorkWeekMapper;
-import com.example.haircuttime.model.mapper.WorkYearMapper;
 import com.example.haircuttime.repository.BarberRepository;
+import com.example.haircuttime.repository.WorkDayRepository;
 import com.example.haircuttime.repository.WorkWeekRepository;
-import com.example.haircuttime.repository.WorkYearRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,19 +22,17 @@ import java.util.stream.Collectors;
 public class ScheduleServiceImpl implements ScheduleService {
 
     private final BarberRepository barberRepository;
-    private final BarberMapper barberMapper;
-    private final WorkYearRepository workYearRepository;
-    private final WorkYearMapper workYearMapper;
-    private final WorkWeekMapper workWeekMapper;
     private final WorkWeekRepository workWeekRepository;
-
+    private final WorkDayRepository workDayRepository;
+    private final BarberMapper barberMapper;
+    private final WorkWeekMapper workWeekMapper;
     //TODO Optional
     @Override
     public BarberDto addWorkYear(Long barberId, Long year) {
         BarberDto barberDto = getBarberDto(barberId);
 
-        if (isWorkYearEmpty(year, barberDto)) {
-            throw new UniqueValueException("year for this worker already exists");
+        if (!isWorkYearAbsent(year, barberDto)) {
+            throw new UniqueValueException(String.format("year %d for this worker %d already exists", year, barberId));
         }
 
         WorkYearDto workYearDto = WorkYearDto.builder()
@@ -48,14 +46,14 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public BarberDto addWorkWeekToWorkYear(Long barberId, Long year, Long weekNumber) {
+    public BarberDto addEmptyWorkWeekToWorkYear(Long barberId, Long year, Long weekNumber) {
         BarberDto barberDto = getBarberDto(barberId);
 
-//        if (!isWorkYearEmpty(year, barberDto)) {
-//            throw new UniqueValueException("year for this worker already exists. Year: " + year);
-//        }
+        if (isWorkYearAbsent(year, barberDto)) {
+            throw new UniqueValueException(String.format("year %d for this worker ID %d does not exists", year, barberId));
+        }
 
-        if (!isWorkWeekEmpty(year, barberDto, weekNumber)) {
+        if (!isWorkWeekAbsent(year, barberDto, weekNumber)) {
             throw new UniqueValueException("week for this worker already exists. Week number: " + weekNumber);
         }
 
@@ -64,13 +62,40 @@ public class ScheduleServiceImpl implements ScheduleService {
                 .weekAvailability(new TreeMap<>())
                 .weekNumber(weekNumber)
                 .build()));
+        barberDto.setWorkYears(
+                barberDto.getWorkYears().stream()
+                        .peek(workYear -> {
+                            if (workYear.getYear().equals(year)) {
+                                var yearSchedule = workYear.getYearSchedule();
+                                yearSchedule.put(Math.toIntExact(weekNumber), workWeekDto);
+                                workYear.setYearSchedule(yearSchedule);
+                            }
+                        }).collect(Collectors.toList())
+        );
+
+        return barberMapper.toDto(barberRepository.save(barberMapper.toEntity(barberDto)));
+    }
+
+    //TODO make it work
+    @Override
+    public BarberDto addWorkWeekToWorkYear(Long barberId, Long year, CreateWorkWeekDto createWorkWeekDto) {
+        BarberDto barberDto = getBarberDto(barberId);
+
+        if (!isWorkYearAbsent(year, barberDto)) {
+            throw new UniqueValueException(String.format("year %d for this worker %d already exists", year, barberId));
+        }
+
+        var workWeekToSave = workWeekMapper.toNewEntity(createWorkWeekDto);
+
+        workWeekToSave.getWeekAvailability().forEach((key, value) -> workDayRepository.save(value));
+        WorkWeekDto updatedWorkWeek = workWeekMapper.toDto(workWeekRepository.save(workWeekToSave));
 
         barberDto.setWorkYears(
                 barberDto.getWorkYears().stream()
                         .map(workYear -> {
                             if (workYear.getYear().equals(year)) {
                                 var yearSchedule = workYear.getYearSchedule();
-                                yearSchedule.put(Math.toIntExact(weekNumber), workWeekDto);
+                                yearSchedule.put(Math.toIntExact(updatedWorkWeek.getWeekNumber()), updatedWorkWeek);
                                 workYear.setYearSchedule(yearSchedule);
                             }
                             return workYear;
@@ -81,26 +106,22 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     private BarberDto getBarberDto(Long barberId) {
-        BarberDto barberDto = barberMapper.toDto(barberRepository
+        return barberMapper.toDto(barberRepository
                 .findById(barberId)
                 .orElseThrow(() -> new UniqueValueException("barber with id " + barberId + " not found")));
-        return barberDto;
     }
 
-    private static boolean isWorkYearEmpty(Long newYear, BarberDto barberDto) {
+    private boolean isWorkYearAbsent(Long newYear, BarberDto barberDto) {
+        return barberDto.getWorkYears().stream()
+                .noneMatch(e -> e.getYear().equals(newYear));
+    }
+
+    private static boolean isWorkWeekAbsent(Long newYear, BarberDto barberDto, Long weekNumber) {
         return barberDto.getWorkYears().stream()
                 .filter(e -> e.getYear().equals(newYear))
-                .findAny().isEmpty();
+                .noneMatch(e -> e.getYearSchedule().containsKey(Math.toIntExact(weekNumber)));
     }
 
-    private static boolean isWorkWeekEmpty(Long newYear, BarberDto barberDto, Long weekNumber) {
-        return barberDto.getWorkYears().stream()
-                .filter(e -> e.getYear().equals(newYear))
-                .filter(e -> e.getYearSchedule().containsKey(weekNumber))
-                .findAny().isEmpty();
-    }
-
-    //TODO AddWorkWeekToYear
     //TODO AddWorkDaysToWeek
     //TODO UpdateWorkDaysInWeek
 

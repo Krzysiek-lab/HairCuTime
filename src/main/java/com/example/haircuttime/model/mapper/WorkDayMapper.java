@@ -21,7 +21,6 @@ public class WorkDayMapper {
 
     public WorkDay toEntity(WorkDayDto workDayDto) {
         return WorkDay.builder()
-                .id(workDayDto.getId())
                 .workDefinition(workDayDto.getWorkDefinition())
                 .availabilities(getAvailabilitiesDtoList(workDayDto))
                 .absences(getAbsenceListFromDto(workDayDto))
