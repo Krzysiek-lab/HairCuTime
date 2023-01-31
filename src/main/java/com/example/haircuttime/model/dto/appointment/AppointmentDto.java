@@ -19,12 +19,9 @@ public class AppointmentDto {
 
     @DateTimeFormat
     private LocalDate from;
-
     @NotNull
     private User userId;
-
     @DateTimeFormat
     private LocalDate to;
-
     private Product product;
 }

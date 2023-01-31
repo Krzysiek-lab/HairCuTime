@@ -18,6 +18,6 @@ public class WorkYearDto {
     private Long id;
     private Long year;
     private Long barberId;
-    private List<WorkDay> workDayList;
+    private List<WorkDayDto> workDayList;
 
 }

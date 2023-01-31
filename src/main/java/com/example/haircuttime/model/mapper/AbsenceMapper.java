@@ -13,6 +13,7 @@ public class AbsenceMapper {
 
     public Absence toEntity(AbsenceDto absenceDto) {
         return Absence.builder()
+                .id(absenceDto.getId())
                 .workDay(absenceDto.getWorkDay())
                 .absenceStart(absenceDto.getAbsenceStart())
                 .absenceEnd(absenceDto.getAbsenceEnd())
@@ -30,7 +31,6 @@ public class AbsenceMapper {
 
     public Absence toNewEntity(CreateAbsenceDto createAbsenceDto) {
         return Absence.builder()
-                .id(0L)
                 .workDay(createAbsenceDto.getWorkDay())
                 .absenceStart(createAbsenceDto.getAbsenceStart())
                 .absenceEnd(createAbsenceDto.getAbsenceEnd())

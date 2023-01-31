@@ -17,7 +17,7 @@ public class BarberDto {
     private String surname;
     private Gender gender;
 
-    List<Product> products;
+    private List<Product> products;
     private List<WorkYearDto> workYears;
 
 }

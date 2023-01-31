@@ -11,7 +11,7 @@ public class AvailabilityMapper {
 
     public Availability toEntity(AvailabilityDto availabilityDto) {
         return Availability.builder()
-                .id(0L)
+                .id(availabilityDto.getId())
                 .workDay(availabilityDto.getWorkDay())
                 .startTime(availabilityDto.getStartTime())
                 .endTime(availabilityDto.getEndTime())
@@ -20,7 +20,6 @@ public class AvailabilityMapper {
 
     public Availability toNewEntity(CreateAvailabilityDto createAvailabilityDto) {
         return Availability.builder()
-                .id(0L)
                 .workDay(createAvailabilityDto.getWorkDay())
                 .startTime(createAvailabilityDto.getWorkDay().getWorkDefinition().getStart())
                 .endTime(createAvailabilityDto.getWorkDay().getWorkDefinition().getEnd())
