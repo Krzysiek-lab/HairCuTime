@@ -1,9 +1,5 @@
 package com.example.haircuttime.service.schedule;
 
-import com.example.haircuttime.model.dto.barber.BarberDto;
-import com.example.haircuttime.model.dto.workweek.CreateWorkWeekDto;
-import com.example.haircuttime.model.enums.Day;
-
 public interface ScheduleService {
 //    BarberDto addWorkYear(Long barberId, Long year);
 //

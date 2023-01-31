@@ -21,16 +21,13 @@ public class Absence {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "work_day_id")
+    @NotNull
+    @JoinColumn(name = "work_day_id", referencedColumnName = "id")
     private WorkDay workDay;
-
     @NotNull
     @Column(name = "absence_start")
     private LocalTime absenceStart;
-
     @NotNull
     @Column(name = "absence_end")
     private LocalTime absenceEnd;

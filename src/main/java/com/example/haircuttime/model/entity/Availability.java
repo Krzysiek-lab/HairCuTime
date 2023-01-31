@@ -23,9 +23,9 @@ public class Availability {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @NotNull
-    @JoinColumn(name = "work_day_id")
+    @JoinColumn(name = "work_day_id", referencedColumnName = "id")
     private WorkDay workDay;
 
     @NotNull

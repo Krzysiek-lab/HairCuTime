@@ -32,7 +32,6 @@ public class BarberMapper {
                 .name(barberDto.getName())
                 .surname(barberDto.getSurname())
                 .gender(barberDto.getGender())
-                .role(barberDto.getRole())
                 .products(barberDto.getProducts())
                 .workYears(getWorkYears(barberDto))
                 .build();
@@ -51,7 +50,6 @@ public class BarberMapper {
                 .name(barber.getName())
                 .surname(barber.getSurname())
                 .gender(barber.getGender())
-                .role(barber.getRole())
                 .products(barber.getProducts())
                 .workYears(getWorkYearDtos(barber))
                 .build();
