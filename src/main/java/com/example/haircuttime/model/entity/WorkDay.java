@@ -14,6 +14,7 @@ import java.util.List;
 @Embeddable
 @Builder
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class WorkDay {

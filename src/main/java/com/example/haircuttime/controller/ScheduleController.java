@@ -1,7 +1,8 @@
 package com.example.haircuttime.controller;
 
 import com.example.haircuttime.model.dto.barber.BarberDto;
-import com.example.haircuttime.model.enums.Day;
+import com.example.haircuttime.model.dto.workday.CreateWorkDayDto;
+import com.example.haircuttime.model.enums.WorkDefinition;
 import com.example.haircuttime.service.schedule.ScheduleServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -12,18 +13,19 @@ import org.springframework.web.bind.annotation.*;
 public class ScheduleController {
     private final ScheduleServiceImpl scheduleService;
 
-//    @PostMapping("years")
-//    public BarberDto addScheduleForBarber(@RequestParam long barberId,
-//                                          @RequestParam long year) {
-//        return scheduleService.addWorkYear(barberId, year);
-//    }
-//
-//    @PostMapping("week/add")
-//    public BarberDto addEmptyWorkWeek(@RequestParam Long barberId,
-//                                      @RequestParam Long year,
-//                                      @RequestParam Long week) {
-//        return scheduleService.addEmptyWorkWeekToWorkYear(barberId, year, week);
-//    }
+    @PostMapping("years")
+    public BarberDto addScheduleForBarber(@RequestParam long barberId,
+                                          @RequestParam long year) {
+        return scheduleService.addWorkYear(barberId, year);
+    }
+
+    @PostMapping("week/add")
+    public BarberDto addWorkDay(@RequestParam Long barberId,
+                                @RequestParam Long year,
+                                @RequestParam Long dayInYear,
+                                @RequestBody WorkDefinition workDefinition) {
+        return scheduleService.addWorkDay(barberId, year, dayInYear, workDefinition);
+    }
 //
 //    @PostMapping("day/add")
 //    public BarberDto addWorkDay(@RequestParam Long barberId,

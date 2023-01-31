@@ -15,5 +15,5 @@ import lombok.NoArgsConstructor;
 public class CreateWorkDayDto {
     private Long dayInYear;
     private WorkYear workYear;
-    private WorkDefinition workDefinition;
+//    private WorkDefinition workDefinition;
 }
