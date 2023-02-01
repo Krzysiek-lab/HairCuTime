@@ -2,22 +2,27 @@ package com.example.haircuttime.service.schedule;
 
 import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.workday.CreateWorkDayDto;
+import com.example.haircuttime.model.dto.workday.WorkDayDto;
+import com.example.haircuttime.model.dto.workdefinition.CreateWorkDefinitionDto;
 import com.example.haircuttime.model.dto.workyear.CreateWorkYearDto;
+import com.example.haircuttime.model.dto.workyear.WorkYearDto;
 import com.example.haircuttime.model.entity.WorkDay;
-import com.example.haircuttime.model.entity.WorkYear;
-import com.example.haircuttime.model.enums.WorkDefinition;
+import com.example.haircuttime.model.entity.WorkDefinition;
 import com.example.haircuttime.model.mapper.BarberMapper;
 import com.example.haircuttime.model.mapper.WorkDayMapper;
+import com.example.haircuttime.model.mapper.WorkDefinitionMapper;
 import com.example.haircuttime.model.mapper.WorkYearMapper;
 import com.example.haircuttime.repository.BarberRepository;
 import com.example.haircuttime.repository.WorkDayRepository;
 import com.example.haircuttime.exception.exceptions.*;
 
+import com.example.haircuttime.repository.WorkDefinitionRepository;
 import com.example.haircuttime.repository.WorkYearRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -25,10 +30,12 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     private final BarberRepository barberRepository;
     private final WorkDayRepository workDayRepository;
+    private final WorkDefinitionRepository workDefinitionRepository;
     private final WorkYearRepository workYearRepository;
     private final BarberMapper barberMapper;
     private final WorkDayMapper workDayMapper;
     private final WorkYearMapper workYearMapper;
+    private final WorkDefinitionMapper workDefinitionMapper;
 
     @Override
     public BarberDto addWorkYear(Long barberId, Long year) {
@@ -50,13 +57,17 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public BarberDto addWorkDay(Long barberId, Long year, Long dayInYear, WorkDefinition workDefinition) {
+    public BarberDto addWorkDay(Long barberId, Long year, Long dayInYear, String workDefinitionName ) {
+
         BarberDto barberDto = getBarberDto(barberId);
 
-        var yearDto = barberDto.getWorkYears().stream().filter(e -> e.getYear().equals(year))
+        WorkDefinition workDefinition = workDefinitionRepository.findByName(workDefinitionName);
+
+        WorkYearDto yearDto = barberDto.getWorkYears().stream().filter(e -> e.getYear().equals(year))
                 .findFirst()
                 .orElseThrow(() -> new UniqueValueException(String.format("No year %d for this worker id %d", year, barberId)));
-        var yearSchedule =yearDto.getWorkDayList();
+
+        List<WorkDayDto> yearSchedule =yearDto.getWorkDayList();
 
         if (yearSchedule.stream()
                 .filter(e->e.getDayInYear()
@@ -64,19 +75,15 @@ public class ScheduleServiceImpl implements ScheduleService {
                 .findFirst()
                 .isEmpty()) {
 
-            WorkDay newWorkDayDefinition = WorkDay.builder()
-                    .workYear(yearSchedule.stream()
-                            .filter(e->e.getDayInYear()
-                                    .equals(dayInYear))
-                            .findFirst().get().getWorkYear())
+            CreateWorkDayDto newlyCreatedWorkDay = CreateWorkDayDto.builder()
+                    .workYear(workYearMapper.toEntity(yearDto))
                     .dayInYear(dayInYear)
-                    .workDefinition(workDefinition)
-                    .availabilities(new ArrayList<>())
-                    .absences(new ArrayList<>())
+                    .workDefinitionDto(workDefinitionMapper.toDto(workDefinition))
                     .build();
-
-            WorkDay newWorkDay = workDayRepository.save(newWorkDayDefinition);
-            yearSchedule.add(Math.toIntExact(newWorkDay.getDayInYear()), workDayMapper.toDto(newWorkDay));
+ //TODO jedź na wakacje a nie próbujesz pisać kod co pare godzin po parę minut
+//            WorkDay newWorkDay = workDayRepository.save(newWorkDayDefinition);
+            WorkDay newWorkDay = workDayMapper.toNewEntity(newlyCreatedWorkDay);
+            yearSchedule.add(workDayMapper.toDto(newWorkDay));
             yearDto.setWorkDayList(yearSchedule);
             var newWorkYear = workYearRepository.save(workYearMapper.toEntity(yearDto));
             barberDto.getWorkYears().add(Math.toIntExact(year), workYearMapper.toDto(newWorkYear));

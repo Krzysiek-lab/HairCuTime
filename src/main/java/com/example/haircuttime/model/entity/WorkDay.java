@@ -1,6 +1,5 @@
 package com.example.haircuttime.model.entity;
 
-import com.example.haircuttime.model.enums.WorkDefinition;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,8 +29,10 @@ public class WorkDay {
     @ManyToOne
     @JoinColumn(name = "work_year_id")
     private WorkYear workYear;
-    @Enumerated
+
     @NotNull
+    @ManyToOne
+    @JoinColumn(name = "work_definition_id", referencedColumnName = "id")
     private WorkDefinition workDefinition;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.PERSIST)

@@ -5,6 +5,7 @@ import com.example.haircuttime.model.entity.WorkDay;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -18,6 +19,6 @@ public class WorkYearDto {
     private Long id;
     private Long year;
     private Long barberId;
-    private List<WorkDayDto> workDayList;
+    private List<WorkDayDto> workDayList = new ArrayList<>();
 
 }

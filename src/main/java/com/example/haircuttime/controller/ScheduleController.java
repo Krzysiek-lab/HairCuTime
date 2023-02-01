@@ -1,8 +1,8 @@
 package com.example.haircuttime.controller;
 
 import com.example.haircuttime.model.dto.barber.BarberDto;
-import com.example.haircuttime.model.dto.workday.CreateWorkDayDto;
-import com.example.haircuttime.model.enums.WorkDefinition;
+import com.example.haircuttime.model.dto.workdefinition.CreateWorkDefinitionDto;
+import com.example.haircuttime.model.entity.WorkDefinition;
 import com.example.haircuttime.service.schedule.ScheduleServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -23,10 +23,11 @@ public class ScheduleController {
     public BarberDto addWorkDay(@RequestParam Long barberId,
                                 @RequestParam Long year,
                                 @RequestParam Long dayInYear,
-                                @RequestBody WorkDefinition workDefinition) {
-        return scheduleService.addWorkDay(barberId, year, dayInYear, workDefinition);
+                                @RequestParam String workDefinitionName) {
+        return scheduleService.addWorkDay(barberId, year, dayInYear, workDefinitionName);
     }
-//
+
+
 //    @PostMapping("day/add")
 //    public BarberDto addWorkDay(@RequestParam Long barberId,
 //                                @RequestParam Long year,
