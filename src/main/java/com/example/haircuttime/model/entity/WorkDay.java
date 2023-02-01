@@ -30,8 +30,7 @@ public class WorkDay {
     @JoinColumn(name = "work_year_id")
     private WorkYear workYear;
 
-    @NotNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "work_definition_id", referencedColumnName = "id")
     private WorkDefinition workDefinition;
 

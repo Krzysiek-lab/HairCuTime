@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -57,39 +58,58 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public BarberDto addWorkDay(Long barberId, Long year, Long dayInYear, String workDefinitionName ) {
+    public BarberDto addWorkDay(Long barberId, Long year, Long dayInYear, String workDefinitionName) {
 
+        //get workDefinition
+        Optional<WorkDefinition> workDefinition = workDefinitionRepository.findByName(workDefinitionName);
+
+        if (workDefinition.isEmpty()) {
+            throw new UniqueValueException(String.format("No work definition named %s ", workDefinitionName));
+        }
+
+        //Get BarberDto
         BarberDto barberDto = getBarberDto(barberId);
 
-        WorkDefinition workDefinition = workDefinitionRepository.findByName(workDefinitionName);
-
-        WorkYearDto yearDto = barberDto.getWorkYears().stream().filter(e -> e.getYear().equals(year))
+        //get workYearDto
+        WorkYearDto workYearDto = barberDto.getWorkYears()
+                .stream()
+                .filter(y -> y.getYear().equals(year))
                 .findFirst()
                 .orElseThrow(() -> new UniqueValueException(String.format("No year %d for this worker id %d", year, barberId)));
 
-        List<WorkDayDto> yearSchedule =yearDto.getWorkDayList();
+        //check if workday exists
+        if (workYearDto.getWorkDayList()
+                .stream()
+                .filter(wd -> wd.getDayInYear().equals(dayInYear))
+                .findAny().isEmpty()) {
 
-        if (yearSchedule.stream()
-                .filter(e->e.getDayInYear()
-                        .equals(dayInYear))
-                .findFirst()
-                .isEmpty()) {
 
-            CreateWorkDayDto newlyCreatedWorkDay = CreateWorkDayDto.builder()
-                    .workYear(workYearMapper.toEntity(yearDto))
+            //create CreateWorkDay
+            CreateWorkDayDto createWorkDayDto = CreateWorkDayDto.builder()
+                    .workYear(workYearMapper.toEntity(workYearDto))
                     .dayInYear(dayInYear)
-                    .workDefinitionDto(workDefinitionMapper.toDto(workDefinition))
+                    .workDefinitionDto(workDefinitionMapper.toDto(workDefinition.get()))
                     .build();
- //TODO jedź na wakacje a nie próbujesz pisać kod co pare godzin po parę minut
-//            WorkDay newWorkDay = workDayRepository.save(newWorkDayDefinition);
-            WorkDay newWorkDay = workDayMapper.toNewEntity(newlyCreatedWorkDay);
-            yearSchedule.add(workDayMapper.toDto(newWorkDay));
-            yearDto.setWorkDayList(yearSchedule);
-            var newWorkYear = workYearRepository.save(workYearMapper.toEntity(yearDto));
-            barberDto.getWorkYears().add(Math.toIntExact(year), workYearMapper.toDto(newWorkYear));
+
+
+            WorkDay workDayBeforeSave = workDayMapper.toNewEntity(createWorkDayDto);
+            WorkDay newWorkDay = workDayRepository.save(workDayBeforeSave);
+            newWorkDay.getWorkYear().getWorkDayList().add(newWorkDay);
+            var newWorkYear = newWorkDay.getWorkYear();
+            var newerWorkYear = workYearRepository.save(newWorkYear);
+
+
+
+            //add the updated workYear back to the list
+            barberDto.getWorkYears().add(workYearMapper.toDto(newWorkYear));
+            //update work years
+
+            //add to database and return
             return barberMapper.toDto(barberRepository.save(barberMapper.toEntity(barberDto)));
-        } else throw new UniqueValueException(String.format("Day for barber ID %d exist", barberId));
+        }
+        return null;
     }
+
 
     private BarberDto getBarberDto(Long barberId) {
         return barberMapper.toDto(barberRepository

@@ -1,11 +1,12 @@
 package com.example.haircuttime.controller;
 
 import com.example.haircuttime.model.dto.barber.BarberDto;
-import com.example.haircuttime.model.dto.workdefinition.CreateWorkDefinitionDto;
-import com.example.haircuttime.model.entity.WorkDefinition;
 import com.example.haircuttime.service.schedule.ScheduleServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/schedule")
@@ -37,7 +38,6 @@ public class ScheduleController {
 //        return scheduleService.addWorkDayToWorkWeek(barberId, year, week, day, createWorkDayDto);
 //
 //    }
-
 //    @PostMapping("week/add")
 //    public BarberDto addWorkWeek(@RequestParam Long barberId,
 //                                 @RequestParam Long year,
@@ -75,7 +75,4 @@ public class ScheduleController {
 //    public List<WorkDayDto> getDaysInWorkWeek(@RequestParam Long weekId) {
 //        return workWeekService.getDaysInWorkWeek(weekId);
 //    }
-//
-
-
 }

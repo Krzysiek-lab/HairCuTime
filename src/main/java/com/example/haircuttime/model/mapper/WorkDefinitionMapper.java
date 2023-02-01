@@ -28,6 +28,7 @@ public class WorkDefinitionMapper {
 
     public WorkDefinition toEntity(WorkDefinitionDto workDefinitionDto) {
         return WorkDefinition.builder()
+                .id(workDefinitionDto.getId())
                 .name(workDefinitionDto.getName())
                 .start(workDefinitionDto.getStart())
                 .end(workDefinitionDto.getEnd())
@@ -41,6 +42,7 @@ public class WorkDefinitionMapper {
 
     public WorkDefinitionDto toDto(WorkDefinition workDefinition) {
         return WorkDefinitionDto.builder()
+                .id(workDefinition.getId())
                 .name(workDefinition.getName())
                 .start(workDefinition.getStart())
                 .end(workDefinition.getEnd())

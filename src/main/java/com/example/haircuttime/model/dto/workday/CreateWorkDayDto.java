@@ -1,7 +1,6 @@
 package com.example.haircuttime.model.dto.workday;
 
 import com.example.haircuttime.model.dto.workdefinition.WorkDefinitionDto;
-import com.example.haircuttime.model.entity.WorkDefinition;
 import com.example.haircuttime.model.entity.WorkYear;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

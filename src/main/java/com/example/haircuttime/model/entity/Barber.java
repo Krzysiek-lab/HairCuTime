@@ -26,6 +26,6 @@ public class Barber {
 
     @ManyToMany
     private List<Product> products;
-    @OneToMany(mappedBy = "barberId", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "barberId", cascade = CascadeType.ALL)
     private List<WorkYear> workYears;
 }
