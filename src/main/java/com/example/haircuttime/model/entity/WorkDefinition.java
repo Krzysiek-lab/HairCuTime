@@ -24,8 +24,5 @@ public class WorkDefinition {
     private LocalTime end;
     @Column(name = "work_duration")
     private Duration workDuration;
-
-    @OneToMany(mappedBy = "id", cascade = CascadeType.PERSIST)
-    private List<WorkDay> workDayList;
 }
 

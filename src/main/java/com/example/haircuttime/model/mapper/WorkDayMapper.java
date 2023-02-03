@@ -36,6 +36,7 @@ public class WorkDayMapper {
         return WorkDay.builder()
                 .dayInYear(createWorkDayDto.getDayInYear())
                 .workYear(createWorkDayDto.getWorkYear())
+                .workDefinition(createWorkDayDto.getWorkDefinition())
                 .availabilities(new ArrayList<>())
                 .absences(new ArrayList<>())
                 .build();

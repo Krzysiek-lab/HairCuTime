@@ -2,8 +2,6 @@ package com.example.haircuttime.service.schedule;
 
 import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.workday.CreateWorkDayDto;
-import com.example.haircuttime.model.dto.workday.WorkDayDto;
-import com.example.haircuttime.model.dto.workdefinition.CreateWorkDefinitionDto;
 import com.example.haircuttime.model.dto.workyear.CreateWorkYearDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
 import com.example.haircuttime.model.entity.WorkDay;
@@ -22,7 +20,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -83,25 +80,25 @@ public class ScheduleServiceImpl implements ScheduleService {
                 .filter(wd -> wd.getDayInYear().equals(dayInYear))
                 .findAny().isEmpty()) {
 
-
             //create CreateWorkDay
             CreateWorkDayDto createWorkDayDto = CreateWorkDayDto.builder()
                     .workYear(workYearMapper.toEntity(workYearDto))
                     .dayInYear(dayInYear)
-                    .workDefinitionDto(workDefinitionMapper.toDto(workDefinition.get()))
+                    .workDefinition(workDefinition.get())
                     .build();
 
 
             WorkDay workDayBeforeSave = workDayMapper.toNewEntity(createWorkDayDto);
             WorkDay newWorkDay = workDayRepository.save(workDayBeforeSave);
+
             newWorkDay.getWorkYear().getWorkDayList().add(newWorkDay);
             var newWorkYear = newWorkDay.getWorkYear();
             var newerWorkYear = workYearRepository.save(newWorkYear);
 
 
-
+            barberDto.getWorkYears().remove(workYearMapper.toDto(newWorkYear));
             //add the updated workYear back to the list
-            barberDto.getWorkYears().add(workYearMapper.toDto(newWorkYear));
+            barberDto.getWorkYears().set(Math.toIntExact(newerWorkYear.getId()-1),workYearMapper.toDto(newerWorkYear));
             //update work years
 
             //add to database and return
@@ -109,6 +106,11 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
         return null;
     }
+    //WorkDay savedWorkDay = workDayRepository.save(workDay);
+//WorkYear workYear = savedWorkDay.getWorkYear();
+//workYear.getWorkDayList().remove(savedWorkDay);
+//workYear.getWorkDayList().add(savedWorkDay);
+//workYearRepository.save(workYear);
 
 
     private BarberDto getBarberDto(Long barberId) {

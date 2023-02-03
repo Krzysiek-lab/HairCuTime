@@ -21,6 +21,7 @@ public class WorkYear {
     @NotNull
     private Long year;
     @NotNull
+
     @Column(name = "barber_id")
     private Long barberId;
 
