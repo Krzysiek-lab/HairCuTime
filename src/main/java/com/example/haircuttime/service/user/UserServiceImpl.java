@@ -26,8 +26,9 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
-
     private final RoleEntityRepository roleRepository;
+    private static final String USER_NOT_FOUND = "user with login not found";
+
 
     private final UserMapper userMapper;
 
@@ -41,12 +42,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     @Transactional
+    // MOZE LEPIEJ BEDZIE UZYC REPOSITORYEVENTHANDLER'A???
     public UserDto createUser(UserCreateDto createDto) {
         User user = userMapper.toNewEntity(createDto);
         if (roleRepository.existsByName(Role.USER)) {
             user.setRoles(List.of(roleRepository.findByName(Role.USER)));
         } else {
             user.setRoles(List.of(RoleEntity.builder().name(Role.USER).build()));
+            //CZY NIETRZEBA ZAPISAC DO REPOZYTORIUM NJPIERW???
         }
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new UniqueValueException(ExceptionMessages.EMAIL_IS_ALREADY_EXIST.getMessage());
@@ -58,7 +61,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 
     @Override
-    @Transactional
+    @Transactional// CZY METODY CRUD Z JPA NIE SA DEFAULTOWO TRANSACTIONAL, TYLKO PRZY NADPISYWANIU NIE SA?
     public UserDto updateUser(UserDto userDto) {
         return userRepository.findById(userDto.getId()).map(user -> {
             user.setName(userDto.getName());
@@ -77,8 +80,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     ///////////
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        return userRepository.findByLogin(login).orElseThrow(() -> new UsernameNotFoundException(
+                String.format(USER_NOT_FOUND, login)
+        ));
     }
     ////////////
 }

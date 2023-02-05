@@ -2,6 +2,7 @@ package com.example.haircuttime.config;
 
 import com.example.haircuttime.service.user.UserServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -15,18 +16,18 @@ import org.springframework.security.web.SecurityFilterChain;
 @AllArgsConstructor
 public class Security {
 
-    private final UserServiceImpl userService;
-    // private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserServiceImpl userServiceImpl;
 
+    //TODO DODAC ODPOWIEDNIE ENDPOINTY I ROLE DO FILTERCHAIN'A
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .csrf().disable().authorizeHttpRequests()
-//                .requestMatchers("/api/AdminPage")
+//                .requestMatchers("")
 //                .hasRole("ADMIN")
-//                .requestMatchers("/api/**")
+//                .requestMatchers("")
 //                .permitAll()
-//                .requestMatchers("/api/login")
+//                .requestMatchers("")
 //                .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -46,7 +47,7 @@ public class Security {
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(bCryptPasswordEncoder());
-        provider.setUserDetailsService(userService);
+        provider.setUserDetailsService(userServiceImpl);
         return provider;
     }
 
