@@ -2,6 +2,7 @@ package com.example.haircuttime.service.user;
 
 import com.example.haircuttime.model.dto.user.UserCreateDto;
 import com.example.haircuttime.model.dto.user.UserDto;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 

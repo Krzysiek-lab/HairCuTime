@@ -19,6 +19,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Data
+@CrossOrigin(origins = "http://localhost:8080")
 @Controller
 public class AppointmentController {
 

@@ -11,6 +11,8 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:8080")
+
 public class BarberController {
 
     private final BarberService barberService;
