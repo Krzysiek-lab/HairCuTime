@@ -1,12 +1,7 @@
 package com.example.haircuttime.model.mapper;
 
-import com.example.haircuttime.model.dto.appointment.AppointmentDto;
-import com.example.haircuttime.model.dto.comment.CommentDto;
 import com.example.haircuttime.model.dto.product.ProductDto;
-import com.example.haircuttime.model.entity.Appointment;
-import com.example.haircuttime.model.entity.Comment;
 import com.example.haircuttime.model.entity.Product;
-import com.example.haircuttime.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
