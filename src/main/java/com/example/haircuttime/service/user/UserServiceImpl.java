@@ -62,6 +62,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     @Transactional// CZY METODY CRUD Z JPA NIE SA DEFAULTOWO TRANSACTIONAL, TYLKO PRZY NADPISYWANIU NIE SA?
+    //czy wogole trzeba w jpa uzywac @Transactional???
     public UserDto updateUser(UserDto userDto) {
         return userRepository.findById(userDto.getId()).map(user -> {
             user.setName(userDto.getName());
