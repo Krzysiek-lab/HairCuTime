@@ -1,5 +1,6 @@
 package com.example.haircuttime.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,6 +27,12 @@ public class WorkDay {
     @Column(name = "day_in_year")
     private Long dayInYear;
 
+//    @Column(name = "work_year_id")
+//    private Long workYearId;
+
+    @ManyToOne
+    @JsonBackReference
+    private WorkYear workYear;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "work_definition_id", referencedColumnName = "id")
     private WorkDefinition workDefinition;

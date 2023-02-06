@@ -1,6 +1,8 @@
 package com.example.haircuttime.model.dto.workyear;
 
+import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
+import com.example.haircuttime.model.entity.Barber;
 import com.example.haircuttime.model.entity.WorkDay;
 import lombok.*;
 
@@ -18,7 +20,7 @@ public class WorkYearDto {
 
     private Long id;
     private Long year;
-    private Long barberId;
+    private Barber barber;
     private List<WorkDayDto> workDayList = new ArrayList<>();
 
 }

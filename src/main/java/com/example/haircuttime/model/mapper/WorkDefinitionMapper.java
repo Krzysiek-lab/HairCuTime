@@ -6,14 +6,10 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 @Data
 @Component
 public class WorkDefinitionMapper {
-
-    private final WorkDayMapper workDayMapper;
 
     public com.example.haircuttime.model.entity.WorkDefinition toNewEntity(CreateWorkDefinitionDto createWorkDefinitionDto) {
         return com.example.haircuttime.model.entity.WorkDefinition.builder()
@@ -21,7 +17,6 @@ public class WorkDefinitionMapper {
                 .start(createWorkDefinitionDto.getStart())
                 .end(createWorkDefinitionDto.getEnd())
                 .workDuration(Duration.between(createWorkDefinitionDto.getStart(), createWorkDefinitionDto.getEnd()))
-                .workDayList(new ArrayList<>())
                 .build();
     }
 
@@ -31,11 +26,7 @@ public class WorkDefinitionMapper {
                 .name(workDefinition.getName())
                 .start(workDefinition.getStart())
                 .end(workDefinition.getEnd())
-                .workDuration(Duration.between(workDefinition.getStart(), workDefinition.getEnd()))
-                .workDayList(workDefinition
-                        .getWorkDayList().stream()
-                        .map(workDayMapper::toEntity)
-                        .collect(Collectors.toList()))
+                .workDuration(workDefinition.getWorkDuration())
                 .build();
     }
 
@@ -45,11 +36,7 @@ public class WorkDefinitionMapper {
                 .name(workDefinition.getName())
                 .start(workDefinition.getStart())
                 .end(workDefinition.getEnd())
-                .workDuration(Duration.between(workDefinition.getStart(), workDefinition.getEnd()))
-                .workDayList(workDefinition
-                        .getWorkDayList().stream()
-                        .map(workDayMapper::toDto)
-                        .collect(Collectors.toList()))
+                .workDuration(workDefinition.getWorkDuration())
                 .build();
     }
 }

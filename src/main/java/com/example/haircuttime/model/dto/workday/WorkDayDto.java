@@ -17,7 +17,6 @@ public class WorkDayDto {
     private Long dayInYear;
     private WorkYear workYear;
     private WorkDefinition workDefinition;
-
     private List<Availability> availabilities;
     private List<Absence> absences;
 }

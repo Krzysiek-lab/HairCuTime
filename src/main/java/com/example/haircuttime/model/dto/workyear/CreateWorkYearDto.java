@@ -1,6 +1,8 @@
 package com.example.haircuttime.model.dto.workyear;
 
+import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
+import com.example.haircuttime.model.entity.Barber;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +17,7 @@ import java.util.List;
 public class CreateWorkYearDto {
 
     private Long year;
-    private Long barberId;
+    private Barber barberId;
     private List<WorkDayDto> workDayList;
 
 }

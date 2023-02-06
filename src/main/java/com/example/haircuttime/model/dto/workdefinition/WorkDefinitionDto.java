@@ -17,5 +17,4 @@ public class WorkDefinitionDto {
     private LocalTime start;
     private LocalTime end;
     private Duration workDuration;
-    private List<WorkDayDto> workDayList;
 }

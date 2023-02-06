@@ -15,6 +15,7 @@ public class WorkDayMapper {
     public WorkDay toEntity(WorkDayDto workDayDto) {
         return WorkDay.builder()
                 .id(workDayDto.getId())
+                .workYear(workDayDto.getWorkYear())
                 .dayInYear(workDayDto.getDayInYear())
                 .workDefinition(workDayDto.getWorkDefinition())
                 .availabilities(workDayDto.getAvailabilities())
@@ -25,6 +26,7 @@ public class WorkDayMapper {
     public WorkDayDto toDto(WorkDay workDay) {
         return WorkDayDto.builder()
                 .id(workDay.getId())
+                .workYear(workDay.getWorkYear())
                 .dayInYear(workDay.getDayInYear())
                 .workDefinition(workDay.getWorkDefinition())
                 .availabilities(workDay.getAvailabilities())

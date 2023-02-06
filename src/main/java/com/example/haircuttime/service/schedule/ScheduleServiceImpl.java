@@ -1,5 +1,6 @@
 package com.example.haircuttime.service.schedule;
 
+import com.example.haircuttime.exception.exceptions.UniqueValueException;
 import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.workday.CreateWorkDayDto;
 import com.example.haircuttime.model.dto.workyear.CreateWorkYearDto;
@@ -12,8 +13,6 @@ import com.example.haircuttime.model.mapper.WorkDefinitionMapper;
 import com.example.haircuttime.model.mapper.WorkYearMapper;
 import com.example.haircuttime.repository.BarberRepository;
 import com.example.haircuttime.repository.WorkDayRepository;
-import com.example.haircuttime.exception.exceptions.*;
-
 import com.example.haircuttime.repository.WorkDefinitionRepository;
 import com.example.haircuttime.repository.WorkYearRepository;
 import lombok.AllArgsConstructor;
@@ -44,7 +43,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
 
         var createWorkYearDto = workYearMapper.toNewEntity(CreateWorkYearDto.builder()
-                .barberId(barberId)
+                .barberId(barberMapper.toEntity(barberDto))
                 .year(year)
                 .workDayList(new ArrayList<>())
                 .build());
@@ -82,29 +81,34 @@ public class ScheduleServiceImpl implements ScheduleService {
 
             //create CreateWorkDay
             CreateWorkDayDto createWorkDayDto = CreateWorkDayDto.builder()
-                    .workYear(workYearMapper.toEntity(workYearDto))
                     .dayInYear(dayInYear)
+                    .workYear(workYearMapper.toEntity(workYearDto))
                     .workDefinition(workDefinition.get())
                     .build();
-
 
             WorkDay workDayBeforeSave = workDayMapper.toNewEntity(createWorkDayDto);
             WorkDay newWorkDay = workDayRepository.save(workDayBeforeSave);
 
-            newWorkDay.getWorkYear().getWorkDayList().add(newWorkDay);
-            var newWorkYear = newWorkDay.getWorkYear();
-            var newerWorkYear = workYearRepository.save(newWorkYear);
+//            Optional<WorkYear> workYear2 = workYearRepository.findById(barberDto
+//                    .getWorkYears()
+//                    .stream()
+//                    .filter(e->e.getYear().equals(year)).findFirst().get().getId());
+//
+//            List<WorkDay> list = workYear2.get().getWorkDayList();
+//            list.add(newWorkDay);
+//            workYear2.get().setWorkDayList(list);
+////
+////            var test = workYearDto.getWorkDayList();
+////            test.add(workDayMapper.toDto(newWorkDay));
+////            workYearDto.setWorkDayList(test);
+////            var newerWorkYear = workYearRepository.save(workYearMapper.toEntity(workYearDto));
+//            var newerWorkYear = workYearRepository.save(workYear2.get());
 
-
-            barberDto.getWorkYears().remove(workYearMapper.toDto(newWorkYear));
-            //add the updated workYear back to the list
-            barberDto.getWorkYears().set(Math.toIntExact(newerWorkYear.getId()-1),workYearMapper.toDto(newerWorkYear));
-            //update work years
-
-            //add to database and return
-            return barberMapper.toDto(barberRepository.save(barberMapper.toEntity(barberDto)));
-        }
-        return null;
+//            barberDto.getWorkYears().remove(workYearDto);
+//            barberDto.getWorkYears().add(workYearMapper.toDto(newerWorkYear));
+//            return barberMapper.toDto(barberRepository.save(barberMapper.toEntity(barberDto)));
+            return barberDto;
+        } else throw new UniqueValueException(String.format("Day %d for year %d for &d already exists", dayInYear,year, barberId));
     }
     //WorkDay savedWorkDay = workDayRepository.save(workDay);
 //WorkYear workYear = savedWorkDay.getWorkYear();

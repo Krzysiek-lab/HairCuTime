@@ -2,17 +2,16 @@ package com.example.haircuttime.model.entity;
 
 import com.example.haircuttime.model.enums.Gender;
 import com.example.haircuttime.model.enums.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Builder
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -27,5 +26,8 @@ public class Barber {
     @ManyToMany
     private List<Product> products;
     @OneToMany(mappedBy = "barberId", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<WorkYear> workYears;
+
+
 }

@@ -1,5 +1,7 @@
 package com.example.haircuttime.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,9 +24,18 @@ public class WorkYear {
     private Long year;
     @NotNull
 
-    @Column(name = "barber_id")
-    private Long barberId;
+//    @Column(name = "barber_id")
+//    private Long barberId;
+//    @Column(name = "barber_id")
+    @ManyToOne
+    @JsonBackReference
+    private Barber barberId;
 
     @OneToMany(mappedBy = "workYear", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<WorkDay> workDayList;
+
+    public Barber getBarberId() {
+        return barberId;
+    }
 }

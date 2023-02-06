@@ -8,12 +8,12 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Entity
-@Builder
 @Table(name = "work_definiton")
-@RequiredArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class WorkDefinition {
 
     @Id
