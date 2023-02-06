@@ -1,5 +1,6 @@
 package com.example.haircuttime.exception;
 
+import com.example.haircuttime.exception.exceptions.ResourceNotFoundException;
 import com.example.haircuttime.exception.exceptions.UniqueValueException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
@@ -35,7 +36,7 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
                 .stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
         return new ResponseEntity<>(getBody(HttpStatus.BAD_REQUEST, errors), HttpStatus.BAD_REQUEST);
     }
-    @ExceptionHandler(UniqueValueException.class)
+    @ExceptionHandler({UniqueValueException.class, ResourceNotFoundException.class})
     public ResponseEntity<Object> handleUniqueValueException(Exception e) {
         return new ResponseEntity<>(getBody(HttpStatus.BAD_REQUEST, e.getMessage()), HttpStatus.BAD_REQUEST);
     }
