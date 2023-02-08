@@ -1,4 +1,4 @@
-package com.example.haircuttime.service;
+package com.example.haircuttime.service.appointment;
 
 import com.example.haircuttime.exception.exceptions.ResourceNotFoundException;
 import com.example.haircuttime.model.dto.appointment.AppointmentDto;

@@ -18,5 +18,5 @@ public class CommentDto {
     @Size(min = 1, max = 5, message = "Please input value from 1 to 5")
     @NotBlank(message = "Grade is mandatory")
     private Long grade;
-   // private List<ServiceDto> serviceDtos;
+    // private List<ServiceDto> serviceDtos;
 }

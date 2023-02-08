@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UserMapper {
 
-  //  private final AppointmentMapper appointmentMapper;
+    //  private final AppointmentMapper appointmentMapper;
 
     public UserDto toDto(User user) {
         return UserDto.builder()
@@ -20,7 +20,7 @@ public class UserMapper {
                 .email(user.getEmail())
                 .phoneNumber(user.getPhoneNumber())
                 .roles(user.getRoles())
-               // .appointmentDtos(getAppointments(user.getAppointments()))
+                // .appointmentDtos(getAppointments(user.getAppointments()))
                 .build();
     }
 

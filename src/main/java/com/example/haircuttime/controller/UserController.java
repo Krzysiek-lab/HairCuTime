@@ -18,19 +18,22 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/all")
-    public List<UserDto> getUsers(){
+    public List<UserDto> getUsers() {
         return userService.getAllUsers();
     }
+
     @PostMapping("/add")
-    public UserDto saveUser(@RequestBody @Valid UserCreateDto createDto){
+    public UserDto saveUser(@RequestBody @Valid UserCreateDto createDto) {
         return userService.createUser(createDto);
     }
+
     @PutMapping("/update")
-    public UserDto updateUser(@RequestBody @Valid UserDto userDto){
+    public UserDto updateUser(@RequestBody @Valid UserDto userDto) {
         return userService.updateUser(userDto);
     }
+
     @DeleteMapping("/delete/{id}")
-    public void deleteUser(@PathVariable("id") Long id){
+    public void deleteUser(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
     }
 }

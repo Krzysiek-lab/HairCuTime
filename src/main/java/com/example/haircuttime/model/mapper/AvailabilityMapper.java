@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 public class AvailabilityMapper {
 
     private final BarberMapper barberMapper;
+
     public Availability toEntity(AvailabilityDto availabilityDto) {
         return Availability.builder()
                 .id(0L)
@@ -34,7 +35,7 @@ public class AvailabilityMapper {
     public AvailabilityDto toDto(Availability availability) {
         return AvailabilityDto.builder()
                 .id(availability.getId())
-                .barberDto(barberMapper.toDTO(availability.getBarber()))
+                .barberDto(barberMapper.toDto(availability.getBarber()))
                 .workDay(availability.getWorkDay())
                 .startTime(availability.getStartTime())
                 .endTime(availability.getEndTime())

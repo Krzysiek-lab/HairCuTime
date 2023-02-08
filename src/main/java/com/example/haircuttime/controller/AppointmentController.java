@@ -1,6 +1,5 @@
 package com.example.haircuttime.controller;
 
-import com.example.haircuttime.exception.exceptions.ResourceNotFoundException;
 import com.example.haircuttime.model.dto.appointment.AppointmentDto;
 import com.example.haircuttime.model.dto.product.ProductDto;
 import com.example.haircuttime.model.entity.Appointment;
@@ -8,7 +7,7 @@ import com.example.haircuttime.model.mapper.AppointmentMapper;
 import com.example.haircuttime.model.mapper.ProductMapper;
 import com.example.haircuttime.repository.AppointmentRepository;
 import com.example.haircuttime.repository.ProductRepository;
-import com.example.haircuttime.service.AppointmentService;
+import com.example.haircuttime.service.appointment.AppointmentService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -22,7 +22,6 @@ public class CommentController {
         return commentService.getComments();
     }
 
-    //CZY NIE TRZEBA DODAC BINDINGRESULT DO VAWALIDACJI???
     @PostMapping("/add")
     public CommentDto saveComment(@RequestBody @Valid CommentDto commentDto) {
         return commentService.createComment(commentDto);

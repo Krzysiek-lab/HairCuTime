@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CommentMapper {
 
-   // private final ServiceMapper serviceMapper;
+    // private final ServiceMapper serviceMapper;
 
-    public CommentDto toDto(Comment comment){
+    public CommentDto toDto(Comment comment) {
         return CommentDto.builder()
                 .id(comment.getId())
                 .content(comment.getContent())
@@ -25,7 +25,7 @@ public class CommentMapper {
                 .collect(Collectors.toList);
     }*/
 
-    public Comment toNewEntity (CommentDto commentDto){
+    public Comment toNewEntity(CommentDto commentDto) {
         return Comment.builder()
                 .content(commentDto.getContent())
                 .grade(commentDto.getGrade())

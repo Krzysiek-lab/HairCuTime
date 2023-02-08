@@ -29,9 +29,9 @@ public class UserDto {
     @Column(unique = true)
     private String email;
     @NotBlank(message = "Phone number is mandatory")
-    @Pattern(regexp = "[0-9]{9}",message = "Please enter correct phone number")
+    @Pattern(regexp = "[0-9]{9}", message = "Please enter correct phone number")
     private String phoneNumber;
     private List<RoleEntity> roles;
 
-   // private List<AppointmentDto> appointmentDtos;
+    // private List<AppointmentDto> appointmentDtos;
 }

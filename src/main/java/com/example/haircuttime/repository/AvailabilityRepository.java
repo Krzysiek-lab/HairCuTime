@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface AvailabilityRepository extends JpaRepository<Availability, Long> {
     List<Availability> findAvailabilitiesByBarberId(Long barberId);
+
     List<Availability> findAvailabilitiesByWorkDay_Id(Long workDayId);
 }

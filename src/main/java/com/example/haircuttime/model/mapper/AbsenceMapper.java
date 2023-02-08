@@ -25,7 +25,7 @@ public class AbsenceMapper {
         return AbsenceDto.builder()
                 .id(absence.getId())
                 .workDay(absence.getWorkDay())
-                .barberDto(barberMapper.toDTO(absence.getBarber()))
+                .barberDto(barberMapper.toDto(absence.getBarber()))
                 .absenceStart(absence.getAbsenceStart())
                 .absenceEnd(absence.getAbsenceEnd())
                 .build();

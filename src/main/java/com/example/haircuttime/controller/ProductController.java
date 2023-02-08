@@ -1,7 +1,7 @@
 package com.example.haircuttime.controller;
 
 import com.example.haircuttime.model.entity.Product;
-import com.example.haircuttime.service.ProductService;
+import com.example.haircuttime.service.product.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

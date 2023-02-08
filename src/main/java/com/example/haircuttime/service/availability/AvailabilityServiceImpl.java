@@ -3,9 +3,9 @@ package com.example.haircuttime.service.availability;
 import com.example.haircuttime.model.dto.availability.AvailabilityDto;
 import com.example.haircuttime.model.dto.availability.CreateAvailabilityDto;
 import com.example.haircuttime.model.dto.barber.BarberDto;
-import com.example.haircuttime.model.mapper.AvailabilityMapper;
 import com.example.haircuttime.model.entity.Availability;
 import com.example.haircuttime.model.entity.WorkDay;
+import com.example.haircuttime.model.mapper.AvailabilityMapper;
 import com.example.haircuttime.repository.AvailabilityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +21,14 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     @Autowired
     private final AvailabilityRepository availabilityRepository;
     private final AvailabilityMapper availabilityMapper;
+
     @Override
     public AvailabilityDto createAvailability(WorkDay workDay, BarberDto barberDto) {
         CreateAvailabilityDto createAvailabilityDto = CreateAvailabilityDto.builder()
                 .barberDto(barberDto)
                 .workDay(workDay).build();
         return availabilityMapper.toDto(availabilityRepository
-                        .save(availabilityMapper.toNewEntity(createAvailabilityDto)));
+                .save(availabilityMapper.toNewEntity(createAvailabilityDto)));
     }
 
     @Override
@@ -42,7 +43,7 @@ public class AvailabilityServiceImpl implements AvailabilityService {
         Availability toUpdate = availabilityRepository.getReferenceById(availabilityDto.getId());
         try {
             availabilityRepository.save(toUpdate);
-        }catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             System.out.println("No such availability :\n" + e);
         }
         return availabilityMapper.toDto(toUpdate);

@@ -1,12 +1,10 @@
 package com.example.haircuttime.model.dto.workyear;
 
-import com.example.haircuttime.model.dto.barber.BarberDto;
-import com.example.haircuttime.model.dto.workweek.WorkWeekDto;
+import com.example.haircuttime.model.dto.workday.WorkDayDto;
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,15 +13,8 @@ import java.util.TreeMap;
 @AllArgsConstructor
 public class WorkYearDto {
 
-    @NotNull
     private Long id;
-    @NotNull
-    private BarberDto barberDto;
-    @NotNull
     private Long year;
-    private Map<Integer, WorkWeekDto> yearSchedule = new TreeMap<>();
-
-    public WorkWeekDto addWorkWeek(WorkWeekDto workWeekDto) {
-        return yearSchedule.put(Math.toIntExact(workWeekDto.getWeekNumber()), workWeekDto);
-    }
+    private Long barberId;
+    private List<WorkDayDto> workDayList = new ArrayList<>();
 }
