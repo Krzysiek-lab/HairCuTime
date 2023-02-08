@@ -47,7 +47,8 @@ public class AppointmentController {
 
 
     @PutMapping("/updateAppointment")
-    public String updateAppointment(@RequestParam long id, @RequestBody @Valid AppointmentDto appointmentDto, BindingResult bindingResult) {
+    public String updateAppointment(@RequestParam long id, @RequestBody @Valid AppointmentDto appointmentDto,
+                                    BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             appointmentService.updateAppointment(id, appointmentDto);
         }
@@ -64,7 +65,8 @@ public class AppointmentController {
     }
 
     @PostMapping("/addNewProductToAnAppointment")
-    public String addNewProductToAnAppointment(@RequestParam long id, @RequestBody @Valid ProductDto productDto, BindingResult bindingResult) {
+    public String addNewProductToAnAppointment(@RequestParam long id, @RequestBody @Valid ProductDto productDto,
+                                               BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             appointmentService.addProductToAppointment(id, productDto);
         }

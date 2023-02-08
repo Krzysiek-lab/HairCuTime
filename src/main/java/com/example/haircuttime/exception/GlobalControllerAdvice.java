@@ -37,9 +37,7 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(getBody(HttpStatus.BAD_REQUEST, errors), HttpStatus.BAD_REQUEST);
     }
 
-    //CHYBA LEPIEJ DODAC TEZ , ResourceNotFoundException.class w @ExceptionHandler({UniqueValueException.class})
-    //UJEDNOLICIC SPOSOB POKAZYWANA NA FRONCIE WYJATKOW
-    @ExceptionHandler({UniqueValueException.class})
+    @ExceptionHandler({UniqueValueException.class, ResourceNotFoundException.class})
     public ResponseEntity<Object> handleUniqueValueException(Exception e) {
         return new ResponseEntity<>(getBody(HttpStatus.BAD_REQUEST, e.getMessage()), HttpStatus.BAD_REQUEST);
     }
@@ -51,8 +49,6 @@ public class GlobalControllerAdvice extends ResponseEntityExceptionHandler {
         body.put("error", status.getReasonPhrase());
         body.put("message", message);
         return body;
-        //ZWROCI CHYBA CALA MAPE CZYLI WSZYSTKIE WYJATKI A NIE TEN ADEKWATNY DO METODY
-        //CZY NIE LEPIEJ ZAMIENIC NA SET BY NIE DAWAC 2 RAZY HTTPSTATUS W 40 LINIJCE???
     }
 
 }

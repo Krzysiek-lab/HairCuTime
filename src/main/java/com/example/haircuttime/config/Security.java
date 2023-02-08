@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -17,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class Security {
 
     private final UserServiceImpl userServiceImpl;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     //TODO DODAC ODPOWIEDNIE ENDPOINTY I ROLE DO FILTERCHAIN'A
     @Bean
@@ -43,18 +46,17 @@ public class Security {
         return httpSecurity.build();
     }
 
+    //CZY POTRZEBNE???
+    protected void configure(AuthenticationManager authenticationManager) throws Exception {
+        authenticationManager.authenticate((Authentication) daoAuthenticationProvider());
+    }
+
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(bCryptPasswordEncoder());
+        provider.setPasswordEncoder(bCryptPasswordEncoder);
         provider.setUserDetailsService(userServiceImpl);
         return provider;
-    }
-
-
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
 

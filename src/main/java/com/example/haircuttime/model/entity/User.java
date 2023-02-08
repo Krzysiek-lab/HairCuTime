@@ -47,11 +47,10 @@ public class User implements UserDetails {
     private List<Appointment> appointments;
 
 
-
-////////////////
+    ////////////////
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(roles.toString());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(roles.get(0).getName().toString());
         return List.of(authority);
     }
 
