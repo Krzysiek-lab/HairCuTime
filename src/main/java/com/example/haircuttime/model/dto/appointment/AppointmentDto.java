@@ -17,6 +17,7 @@ import java.time.LocalDate;
 @Data
 public class AppointmentDto {
 
+    long id;
     @DateTimeFormat
     private LocalDate from;
 

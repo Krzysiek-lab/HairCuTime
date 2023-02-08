@@ -2,28 +2,36 @@ package com.example.haircuttime.controller;
 
 import com.example.haircuttime.exception.exceptions.ResourceNotFoundException;
 import com.example.haircuttime.model.dto.appointment.AppointmentDto;
+import com.example.haircuttime.model.dto.product.ProductDto;
 import com.example.haircuttime.model.entity.Appointment;
 import com.example.haircuttime.model.mapper.AppointmentMapper;
+import com.example.haircuttime.model.mapper.ProductMapper;
 import com.example.haircuttime.repository.AppointmentRepository;
 import com.example.haircuttime.repository.ProductRepository;
+import com.example.haircuttime.service.AppointmentService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Data
+@CrossOrigin(origins = "http://localhost:3000")
 @Controller
 public class AppointmentController {
 
 
     private final AppointmentRepository appointmentRepository;
     private final AppointmentMapper appointmentMapper;
+    private final ProductMapper productMapper;
     private final ProductRepository productRepository;
+    private final AppointmentService appointmentService;
 
 
     @GetMapping("/allAppointments")
@@ -39,48 +47,36 @@ public class AppointmentController {
 
 
     @PutMapping("/updateAppointment")
-    public String updateAppointment(@RequestParam long id, @RequestBody AppointmentDto appointmentDto) {
-        var appointment = appointmentRepository.findById(id).orElseThrow(() ->
-                new ResourceNotFoundException("No element with given id"));
-        appointment = appointmentMapper.mapper(appointmentDto);
-        appointmentRepository.save(appointment);
+    public String updateAppointment(@RequestParam long id, @RequestBody @Valid AppointmentDto appointmentDto,
+                                    BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            appointmentService.updateAppointment(id, appointmentDto);
+        }
         return "redirect:/allAppointments";
     }
 
 
     @PostMapping("/addAppointment")
-    public String addAppointment(@RequestBody AppointmentDto appointmentDto) {
-        var appointment = appointmentMapper.mapper(appointmentDto);
-        appointmentRepository.save(appointment);
+    public String addAppointment(@RequestBody @Valid AppointmentDto appointmentDto, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            appointmentService.addAppointment(appointmentDto);
+        }
         return "redirect:/allAppointments";
     }
 
-//TODO DOROBIC dto PRODUCT I MAPPER PRODUCT
-
-//    @PostMapping("/addNewProductToAnAppointment") // DOPOKI NIE MA PRODUCT
-//    public String addNewProductToAnAppointment(@RequestParam long id, @RequestBody ProductDto productDto) {
-//        var appointment = appointmentRepository.findById(id).orElseThrow(() ->
-//                new ResourceNotFoundException("No element with given id"));
-//
-//        var product = productRepository.save(productMapper.mapper((productDto)));
-//        appointment.setProduct(product);
-//        appointmentRepository.save(appointment);
-//        return "redirect:/allAppointments";
-//    }
+    @PostMapping("/addNewProductToAnAppointment")
+    public String addNewProductToAnAppointment(@RequestParam long id, @RequestBody @Valid ProductDto productDto,
+                                               BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            appointmentService.addProductToAppointment(id, productDto);
+        }
+        return "redirect:/allAppointments";
+    }
 
 
     @PostMapping("/addExistingProductToAnAppointment")
     public String addExistingProductToAnAppointment(@RequestParam long id, @RequestParam long serviceId) {
-
-        if (productRepository.findById(serviceId).isPresent() && appointmentRepository.findById(id).isPresent()) {
-            var appointment = appointmentRepository.findById(id).get();
-            var service = productRepository.findById(serviceId).get();
-            appointment.setProduct(service);
-            service.getAppointments().add(appointment);
-            appointmentRepository.save(appointment);
-        } else {
-            throw new ResourceNotFoundException("No element with given id");
-        }
+        appointmentService.addExistingProductToAppointment(id, serviceId);
         return "redirect:/allAppointments";
     }
 
