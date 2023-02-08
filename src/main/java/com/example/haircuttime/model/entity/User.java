@@ -1,14 +1,16 @@
 package com.example.haircuttime.model.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,25 +18,26 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false,name="id")
+    @Column(nullable = false, name = "id")
     private Long id;
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
-    @Column(name="surname")
+    @Column(name = "surname")
     private String surname;
-    @Column(unique = true,name="login")
+    @Column(unique = true, name = "login")
     private String login;
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
-    @Column(unique = true,name="email")
+    @Column(unique = true, name = "email")
     private String email;
-    @Column(name="phone_number")
+    @Column(name = "phone_number")
     private String phoneNumber;
-    @Column(name="roles")
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @Column(name = "roles")
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<RoleEntity> roles;
-   // @OneToMany(mappedBy = "user")
-   // private List<Appointment> appointments;
+
+    @OneToMany
+    private List<Appointment> appointments;
 
 }
 
