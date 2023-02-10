@@ -8,13 +8,21 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateAvailabilityDto {
 
+    @NotNull
+    @NotEmpty
     private WorkDay workDay;
+
+    @NotNull
+    @NotEmpty
     private BarberDto barberDto;
 
 }

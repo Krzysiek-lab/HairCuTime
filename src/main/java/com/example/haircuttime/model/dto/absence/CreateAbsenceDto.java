@@ -1,19 +1,37 @@
 package com.example.haircuttime.model.dto.absence;
 
 import com.example.haircuttime.model.dto.barber.BarberDto;
+import com.example.haircuttime.model.entity.Barber;
 import com.example.haircuttime.model.entity.WorkDay;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
 @Builder
 @Getter
 @Setter
 public class CreateAbsenceDto {
+    @NotNull
+    @NotEmpty
     private BarberDto barberDto;
+
+    @NotNull
+    @NotEmpty
     private WorkDay workDay;
+
+    @NotNull
+    @NotEmpty
     private LocalTime absenceStart;
+
+    @NotNull
+    @NotEmpty
     private LocalTime absenceEnd;
+
+    @NotNull
+    @NotEmpty
+    private Barber barber;
 }
