@@ -6,7 +6,6 @@ import com.example.haircuttime.model.entity.Availability;
 import com.example.haircuttime.model.entity.RoleEntity;
 import com.example.haircuttime.model.entity.User;
 import com.example.haircuttime.model.enums.Role;
-import com.example.haircuttime.repository.AbsenceRepository;
 import com.example.haircuttime.repository.AvailabilityRepository;
 import com.example.haircuttime.repository.RoleEntityRepository;
 import com.example.haircuttime.repository.UserRepository;
@@ -31,7 +30,6 @@ public class AbsenceRepositoryEventHandler {
 
     private final RoleEntityRepository roleRepository;
     private final UserRepository userRepository;
-    private final AbsenceRepository absenceRepository;
     private final AvailabilityRepository availabilityRepository;
 
     @HandleBeforeCreate
