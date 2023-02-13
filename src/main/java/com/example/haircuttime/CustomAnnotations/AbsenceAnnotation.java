@@ -38,7 +38,6 @@ class RangeValidator implements ConstraintValidator<AbsenceAnnotation, CreateAbs
                         && e.getWorkDay().equals(absenceDto.getWorkDay()));
     }
 
-
     @Override
     public void initialize(AbsenceAnnotation date) {
     }
