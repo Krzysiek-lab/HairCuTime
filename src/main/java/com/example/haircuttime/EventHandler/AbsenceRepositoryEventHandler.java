@@ -11,7 +11,7 @@ import com.example.haircuttime.repository.RoleEntityRepository;
 import com.example.haircuttime.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
-import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
+import org.springframework.data.rest.core.annotation.HandleAfterCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeDelete;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 
@@ -32,7 +32,7 @@ public class AbsenceRepositoryEventHandler {
     private final UserRepository userRepository;
     private final AvailabilityRepository availabilityRepository;
 
-    @HandleBeforeCreate
+    @HandleAfterCreate
     public void handleAbsenceBeforeCreate(Absence absence) {
         log.info("creating Absence entity");
 
@@ -60,7 +60,7 @@ public class AbsenceRepositoryEventHandler {
         availabilityRepository.save(availability);
     }
 
-    @HandleBeforeCreate
+    @HandleAfterCreate
     public void handleUserBeforeCreate(User user) {
         log.info("assigning default role to new User entity");
 

@@ -1,6 +1,6 @@
 package com.example.haircuttime.CustomAnnotations;
 
-import com.example.haircuttime.model.dto.absence.AbsenceDto;
+import com.example.haircuttime.model.dto.absence.CreateAbsenceDto;
 import com.example.haircuttime.repository.AbsenceRepository;
 import lombok.AllArgsConstructor;
 
@@ -26,11 +26,11 @@ public @interface AbsenceAnnotation {
 }
 
 @AllArgsConstructor
-class RangeValidator implements ConstraintValidator<AbsenceAnnotation, AbsenceDto> {
+class RangeValidator implements ConstraintValidator<AbsenceAnnotation, CreateAbsenceDto> {
 
     private final AbsenceRepository absenceRepository;
 
-    private boolean getAll(AbsenceDto absenceDto) {
+    private boolean getAll(CreateAbsenceDto absenceDto) {
         return absenceRepository.findAll().stream().anyMatch(e ->
                 e.getAbsenceStart().equals(absenceDto.getAbsenceStart())
                         && e.getAbsenceEnd().equals(absenceDto.getAbsenceEnd())
@@ -44,7 +44,7 @@ class RangeValidator implements ConstraintValidator<AbsenceAnnotation, AbsenceDt
     }
 
     @Override
-    public boolean isValid(AbsenceDto dto, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(CreateAbsenceDto dto, ConstraintValidatorContext constraintValidatorContext) {
         return !getAll(dto);
     }
 }
