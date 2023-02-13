@@ -1,6 +1,6 @@
 package com.example.haircuttime.CustomAnnotations;
 
-import com.example.haircuttime.model.dto.availability.AvailabilityDto;
+import com.example.haircuttime.model.dto.availability.CreateAvailabilityDto;
 import com.example.haircuttime.model.mapper.BarberMapper;
 import com.example.haircuttime.repository.AvailabilityRepository;
 import lombok.AllArgsConstructor;
@@ -27,12 +27,12 @@ public @interface AvailabilityAnnotation {
 }
 
 @AllArgsConstructor
-class RangeValidator2 implements ConstraintValidator<AvailabilityAnnotation, AvailabilityDto> {
+class RangeValidator2 implements ConstraintValidator<AvailabilityAnnotation, CreateAvailabilityDto> {
 
     private final AvailabilityRepository availabilityRepository;
     private final BarberMapper barberMapper;
 
-    private boolean getAll(AvailabilityDto availabilityDto) {
+    private boolean getAll(CreateAvailabilityDto availabilityDto) {
         return availabilityRepository.findAll().stream().anyMatch(e ->
                 e.getStartTime().equals(availabilityDto.getStartTime())
                         && e.getEndTime().equals(availabilityDto.getEndTime())
@@ -47,7 +47,7 @@ class RangeValidator2 implements ConstraintValidator<AvailabilityAnnotation, Ava
 
 
     @Override
-    public boolean isValid(AvailabilityDto dto, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(CreateAvailabilityDto dto, ConstraintValidatorContext constraintValidatorContext) {
         return !getAll(dto);
     }
 }

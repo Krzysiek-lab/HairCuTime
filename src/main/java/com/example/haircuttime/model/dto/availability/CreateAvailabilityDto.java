@@ -1,6 +1,7 @@
 package com.example.haircuttime.model.dto.availability;
 
 
+import com.example.haircuttime.CustomAnnotations.AvailabilityAnnotation;
 import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.entity.WorkDay;
 import lombok.AllArgsConstructor;
@@ -10,11 +11,13 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalTime;
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@AvailabilityAnnotation(message = "can't add second availability in the same time in given day")
 public class CreateAvailabilityDto {
 
     @NotNull
@@ -24,5 +27,14 @@ public class CreateAvailabilityDto {
     @NotNull
     @NotEmpty
     private BarberDto barberDto;
+
+    @NotNull
+    @NotEmpty
+    private LocalTime endTime;
+
+
+    @NotNull
+    @NotEmpty
+    private LocalTime startTime;
 
 }
