@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class AbsenceServiceImpl implements AbsenceService {
-
     private final AbsenceRepository absenceRepository;
+
     private final AbsenceMapper absenceMapper;
 
     @Override
@@ -48,8 +48,8 @@ public class AbsenceServiceImpl implements AbsenceService {
     }
 
     @Override
-    public Boolean removeAbsence(AbsenceDto absenceDto) {
-        Optional<Absence> absence = absenceRepository.findById(absenceDto.getId());
+    public Boolean removeAbsence(Long id) {
+        Optional<Absence> absence = absenceRepository.findById(id);
         if (absence.isPresent()) {
             absenceRepository.delete(absence.get());
             return true;
@@ -65,5 +65,18 @@ public class AbsenceServiceImpl implements AbsenceService {
                 .sorted(Comparator.comparing(Absence::getAbsenceStart))
                 .map(absenceMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateAbsence(Long id, AbsenceDto absence) {
+        absenceRepository.findById(id).ifPresent(e -> {
+            var abs = Absence.builder()
+                    .barber(absence.getBarber())
+                    .absenceStart(absence.getAbsenceStart())
+                    .absenceEnd(absence.getAbsenceEnd())
+                    .workDay(absence.getWorkDay())
+                    .build();
+            absenceRepository.save(abs);
+        });
     }
 }

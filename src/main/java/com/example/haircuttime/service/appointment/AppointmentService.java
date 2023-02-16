@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class AppointmentService {
+public class AppointmentService implements AppointmentServiceRep {
     private final AppointmentMapper appointmentMapper;
     private final AppointmentRepository appointmentRepository;
     private final ProductMapper productMapper;

@@ -14,7 +14,9 @@ public interface AbsenceService {
 
     AbsenceDto addAbsence(CreateAbsenceDto createAbsenceDto);
 
-    Boolean removeAbsence(AbsenceDto absenceDto);
+    Boolean removeAbsence(Long id);
 
     List<AbsenceDto> sortAbsences();
+
+    void updateAbsence(Long id, AbsenceDto absence);
 }

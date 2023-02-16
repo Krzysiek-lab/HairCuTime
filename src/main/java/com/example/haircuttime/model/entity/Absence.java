@@ -38,6 +38,4 @@ public class Absence {
     @NotNull
     @Column(name = "absence_end")
     private LocalTime absenceEnd;
-
-
 }

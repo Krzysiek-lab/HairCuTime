@@ -20,7 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 public class User implements UserDetails {
 
-
+    //TODO ZOBACZYC
     private Boolean locked = false;
     private Boolean enabled = false;
     @Id
@@ -48,15 +48,21 @@ public class User implements UserDetails {
 
 
     ////////////////
+    //TODO CZY POTRZEBNE JEST NADPISANIE EQUALS I HASHCOD???
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(roles.get(0).getName().toString());
-        return List.of(authority);
+        // mapa zamienic na simplegaranted
+        return roles.stream().map(e -> new SimpleGrantedAuthority(e.getName().toString())).toList();
     }
 
     @Override
     public String getUsername() {
         return login;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override
@@ -76,7 +82,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return enabled;
-    }
+        return !enabled;
+    }// zmienione z enabled na !enabled
 }
 
