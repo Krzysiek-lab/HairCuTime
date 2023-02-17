@@ -25,6 +25,8 @@ public class WorkYear {
     @ManyToOne
     @JsonBackReference
     private Barber barber;
+
+
 //    @Column(name = "barber_id")
    /* @ManyToOne
     @JsonBackReference

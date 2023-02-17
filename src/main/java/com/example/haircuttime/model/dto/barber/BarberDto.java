@@ -8,6 +8,8 @@ import lombok.Data;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Builder
@@ -17,18 +19,17 @@ public class BarberDto {
     //    @NotNull
 //    @NotEmpty
     private String name;
-    //    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private String surname;
-    //    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    //    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private List<Product> products;
-    //    @NotNull
-//    @NotEmpty
+    @NotNull
     private List<WorkYearDto> workYears;
 
 }

@@ -38,19 +38,18 @@ public class WorkYearMapper {
     }
 
     private List<WorkDayDto> getWorkDayDtoList(List<WorkDay> workDays) {
-
         return workDays.stream().map(workDayMapper::toDto).collect(Collectors.toList());
     }
 
     public WorkYear toNewEntity(CreateWorkYearDto createWorkYearDto) {
         return WorkYear.builder()
                 .year(createWorkYearDto.getYear())
-                //.workDayList(getWorkDayList(createWorkYearDto))
+                //.workDayList(createWorkYearDto.getWorkDayList()) //TUUUUUUUU
                 .build();
     }
 
-    //private List<WorkDay> getWorkDayList(CreateWorkYearDto createWorkYearDto) {
-    // return createWorkYearDto.getWorkDayList().stream().map(workDayMapper::toEntity).collect(Collectors.toList());
-    // }
+//    private List<WorkDay> getWorkDayList(CreateWorkYearDto createWorkYearDto) {
+//     return createWorkYearDto.getWorkDayList().stream().map(workDayMapper::toEntity).collect(Collectors.toList());
+//     }
 
 }

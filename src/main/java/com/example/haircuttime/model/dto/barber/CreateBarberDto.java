@@ -6,19 +6,20 @@ import lombok.Data;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Builder
 @Data
 public class CreateBarberDto {
-    //    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private String name;
-    //    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private String surname;
 
-    //    @NotNull
-//    @NotEmpty
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Gender gender;
 }

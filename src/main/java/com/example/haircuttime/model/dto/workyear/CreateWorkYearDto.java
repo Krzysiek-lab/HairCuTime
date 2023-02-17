@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -14,8 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 public class CreateWorkYearDto {
 
+    @NotNull
     private Long year;
+    @NotNull
     private Long barberId;
     private List<CreateWorkDayDto> workDayList;
-
 }
