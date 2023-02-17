@@ -2,10 +2,7 @@ package com.example.haircuttime.model.entity;
 
 
 import com.example.haircuttime.model.enums.Target;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,7 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "products")
-@Data
+@Setter
+@Getter
 @Builder
 public class Product {
 
@@ -27,7 +25,10 @@ public class Product {
     @Column(name = "product_name")
     private String productName;
 
+    @Column
     private String description;
+
+    @Column
     private BigDecimal price;
 
     @Column(name = "product_duration")

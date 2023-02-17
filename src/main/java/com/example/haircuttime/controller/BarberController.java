@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,13 +25,13 @@ public class BarberController {
         return barberService.findAll();
     }
 
-    @PostMapping("/barbers")
-    public BarberDto createBarber(@RequestBody CreateBarberDto barber) {
+    @PostMapping("/create/barbers")
+    public BarberDto createBarber(@RequestBody @Valid CreateBarberDto barber) {
         return barberService.save(barber);
     }
 
     @PutMapping("/barbers/{id}")
-    public ResponseEntity<Barber> updateBarber(@PathVariable("id") long id, @RequestBody Barber barber) {
+    public ResponseEntity<Barber> updateBarber(@PathVariable("id") long id, @RequestBody @Valid Barber barber) {
         return barberService.updateBarber(id, barber);
     }
 

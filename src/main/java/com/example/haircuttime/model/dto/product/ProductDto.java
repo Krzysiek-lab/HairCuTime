@@ -27,8 +27,6 @@ public class ProductDto {
     private BigDecimal price;
     @NotEmpty(message = "filed can not be empty")
     private Long serviceDuration;
-
-    //lista rozwijana
     Target targetCustomer;
 
     List<Barber> barbers;
