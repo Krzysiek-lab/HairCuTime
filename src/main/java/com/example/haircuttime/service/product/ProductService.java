@@ -1,7 +1,9 @@
 package com.example.haircuttime.service.product;
 
 import com.example.haircuttime.exception.exceptions.ResourceNotFoundException;
+import com.example.haircuttime.model.dto.product.ProductDto;
 import com.example.haircuttime.model.entity.Product;
+import com.example.haircuttime.model.mapper.ProductMapper;
 import com.example.haircuttime.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
     public List<Product> findAll() {
         return productRepository.findAll();
@@ -23,7 +26,7 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public ResponseEntity<Product> updateProduct(long id, Product product) {
+    public ResponseEntity<Product> updateProduct(long id, ProductDto product) {
         Product updateProduct = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product with id :" + id + " doesn't exist!"));
         updateProduct.setProductName(updateProduct.getProductName());

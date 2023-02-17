@@ -28,7 +28,7 @@ public class Product {
     @Column
     private String description;
 
-    @Column
+    @Column(precision = 10, scale = 2)
     private BigDecimal price;
 
     @Column(name = "product_duration")
