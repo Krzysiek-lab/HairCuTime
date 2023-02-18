@@ -2,26 +2,27 @@ package com.example.haircuttime.model.mapper;
 
 import com.example.haircuttime.model.dto.workdefinition.CreateWorkDefinitionDto;
 import com.example.haircuttime.model.dto.workdefinition.WorkDefinitionDto;
+import com.example.haircuttime.model.entity.WorkDefinition;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 
-@Data
+
 @Component
 public class WorkDefinitionMapper {
 
-    public com.example.haircuttime.model.entity.WorkDefinition toNewEntity(CreateWorkDefinitionDto createWorkDefinitionDto) {
-        return com.example.haircuttime.model.entity.WorkDefinition.builder()
+    public WorkDefinition toNewEntity(CreateWorkDefinitionDto createWorkDefinitionDto) {
+        return WorkDefinition.builder()
                 .name(createWorkDefinitionDto.getName())
                 .start(createWorkDefinitionDto.getStart())
                 .end(createWorkDefinitionDto.getEnd())
-                .workDuration(Duration.between(createWorkDefinitionDto.getStart(), createWorkDefinitionDto.getEnd()))
+                .workDuration(createWorkDefinitionDto.getDuration())
                 .build();
     }
 
-    public com.example.haircuttime.model.entity.WorkDefinition toEntity(WorkDefinitionDto workDefinition) {
-        return com.example.haircuttime.model.entity.WorkDefinition.builder()
+    public WorkDefinition toEntity(WorkDefinitionDto workDefinition) {
+        return WorkDefinition.builder()
                 .id(workDefinition.getId())
                 .name(workDefinition.getName())
                 .start(workDefinition.getStart())
@@ -30,7 +31,7 @@ public class WorkDefinitionMapper {
                 .build();
     }
 
-    public WorkDefinitionDto toDto(com.example.haircuttime.model.entity.WorkDefinition workDefinition) {
+    public WorkDefinitionDto toDto(WorkDefinition workDefinition) {
         return WorkDefinitionDto.builder()
                 .id(workDefinition.getId())
                 .name(workDefinition.getName())

@@ -25,18 +25,9 @@ public class WorkYear {
     @ManyToOne
     @JsonBackReference
     private Barber barber;
-//    @Column(name = "barber_id")
-   /* @ManyToOne
-    @JsonBackReference
-    private Barber barberId;*/
 
     @OneToMany(mappedBy = "workYear", orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<WorkDay> workDayList;
-
-    /*public Barber getBarberId() {
-        return barberId;
-    }*/
-
 
 }

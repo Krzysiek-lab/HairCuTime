@@ -35,7 +35,7 @@ public class User implements UserDetails {
     private String email;
     @Column(name = "phone_number")
     private String phoneNumber;
-    //@Column(name = "roles")
+
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<RoleEntity> roles;
 

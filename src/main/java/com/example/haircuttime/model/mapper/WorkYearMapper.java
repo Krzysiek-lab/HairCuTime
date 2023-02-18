@@ -30,31 +30,31 @@ public class WorkYearMapper {
     }
 
     private List<WorkDay> getWorkDayList(WorkYearDto workYearDto) {
-        return workYearDto.getWorkDayList().stream().map(workDayMapper::toEntity).collect(Collectors.toList());
+        return workYearDto.getWorkDayList()
+                .stream()
+                .map(workDayMapper::toEntity)
+                .collect(Collectors.toList());
     }
 
     public WorkYearDto toDto(WorkYear workYear) {
         return WorkYearDto.builder()
                 .id(workYear.getId())
                 .year(workYear.getYear())
-                .workDayList(getWorkDayDtoList(workYear.getWorkDayList()))
+                .workDayList(getWorkDayListDto(workYear))
                 .build();
-    }
-
-    private List<WorkDayDto> getWorkDayDtoList(List<WorkDay> workDays) {
-
-        return workDays.stream().map(workDayMapper::toDto).collect(Collectors.toList());
     }
 
     public WorkYear toNewEntity(CreateWorkYearDto createWorkYearDto) {
         return WorkYear.builder()
                 .year(createWorkYearDto.getYear())
-                //.workDayList(getWorkDayList(createWorkYearDto))
                 .build();
     }
 
-    //private List<WorkDay> getWorkDayList(CreateWorkYearDto createWorkYearDto) {
-    // return createWorkYearDto.getWorkDayList().stream().map(workDayMapper::toEntity).collect(Collectors.toList());
-    // }
+    private List<WorkDayDto> getWorkDayListDto(WorkYear workYear) {
+     return workYear.getWorkDayList()
+             .stream()
+             .map(workDayMapper::toDto)
+             .collect(Collectors.toList());
+     }
 
 }
