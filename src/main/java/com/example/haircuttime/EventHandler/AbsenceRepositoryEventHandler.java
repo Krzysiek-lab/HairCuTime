@@ -23,7 +23,6 @@ import java.util.List;
 @RepositoryEventHandler
 @CommonsLog
 @RequiredArgsConstructor
-@AllArgsConstructor
 public class AbsenceRepositoryEventHandler {
 
     private final RoleEntityRepository roleRepository;
@@ -69,7 +68,6 @@ public class AbsenceRepositoryEventHandler {
 
         RoleEntity role = RoleEntity.builder()
                 .name(Role.USER)
-                .users(new ArrayList<>(List.of(user)))
                 .build();
         RoleEntity roleForUser = roleRepository.save(role);
 

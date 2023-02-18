@@ -37,8 +37,4 @@ public class AbsenceDto {
     @NotNull(message = "cannot be null")
     //  @NotEmpty
     private WorkDayDto workDay;
-
-    @NotNull(message = "cannot be null")
-    // @NotEmpty
-    private BarberDto barber;
 }
