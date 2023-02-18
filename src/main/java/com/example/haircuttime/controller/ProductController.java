@@ -1,7 +1,9 @@
 package com.example.haircuttime.controller;
 
+import com.example.haircuttime.model.dto.product.CreateProductDto;
+import com.example.haircuttime.model.dto.product.ProductDto;
 import com.example.haircuttime.model.entity.Product;
-import com.example.haircuttime.service.product.ProductService;
+import com.example.haircuttime.service.product.ProductServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,27 +15,27 @@ import java.util.List;
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
 public class ProductController {
-    private final ProductService productService;
+    private final ProductServiceImpl productService;
 
 
     @GetMapping("/products")
-    public List<Product> getAllServices() {
+    public List<ProductDto> getAllProducts() {
         return productService.findAll();
     }
 
     @PostMapping("/products")
-    public void createService(@RequestBody Product product) {
-        productService.save(product);
+    public ProductDto createService(@RequestBody CreateProductDto createProductDto) {
+       return productService.save(createProductDto);
     }
 
     @PutMapping("/products/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable("id") long id, @RequestBody Product product) {
+    public ResponseEntity<Product> updateProduct(@PathVariable("id") Long id, @RequestBody Product product) {
         return productService.updateProduct(id, product);
     }
 
     @DeleteMapping("/products/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable("id") long id) {
+    public ResponseEntity<String> deleteProduct(@PathVariable("id") Long id) {
         productService.deleteProduct(id);
-        return new ResponseEntity<String>("Service was deleted.", HttpStatus.OK);
+        return new ResponseEntity<>("Service was deleted.", HttpStatus.OK);
     }
 }

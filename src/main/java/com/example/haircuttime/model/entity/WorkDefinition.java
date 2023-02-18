@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.Duration;
 import java.time.LocalTime;
-import java.util.List;
 
 @Entity
 @Table(name = "work_definition")
@@ -24,7 +23,7 @@ public class WorkDefinition {
     private LocalTime end;
     @Column(name = "work_duration")
     private Duration workDuration;
-    @OneToMany(mappedBy = "workDefinition")
-    private List<WorkDay> workDay;
+//    @OneToMany(mappedBy = "workDefinition")
+//    private List<WorkDay> workDay;
 }
 

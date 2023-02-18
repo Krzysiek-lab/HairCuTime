@@ -2,8 +2,7 @@ package com.example.haircuttime.model.dto.absence;
 
 import com.example.haircuttime.CustomAnnotations.AbsenceAnnotation;
 import com.example.haircuttime.model.dto.barber.BarberDto;
-import com.example.haircuttime.model.entity.Barber;
-import com.example.haircuttime.model.entity.WorkDay;
+import com.example.haircuttime.model.dto.workday.WorkDayDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +23,7 @@ public class AbsenceDto {
 
     @NotNull
     @NotEmpty
-    private BarberDto barberDto;
+    private BarberDto barber;
 
     @NotNull
     @NotEmpty
@@ -36,9 +35,5 @@ public class AbsenceDto {
 
     @NotNull
     @NotEmpty
-    private WorkDay workDay;
-
-    @NotNull
-    @NotEmpty
-    private Barber barber;
+    private WorkDayDto workDay;
 }

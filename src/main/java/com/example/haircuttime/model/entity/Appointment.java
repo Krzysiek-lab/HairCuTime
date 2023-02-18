@@ -1,9 +1,6 @@
 package com.example.haircuttime.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,7 +8,8 @@ import java.time.LocalDate;
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
 public class Appointment {
 
@@ -21,7 +19,7 @@ public class Appointment {
     private Long id;
 
     @ManyToOne
-    private User userId;
+    private User user;
 
     @Column
     private LocalDate from;

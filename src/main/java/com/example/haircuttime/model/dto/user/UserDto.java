@@ -1,5 +1,6 @@
 package com.example.haircuttime.model.dto.user;
 
+import com.example.haircuttime.model.dto.appointment.AppointmentDto;
 import com.example.haircuttime.model.entity.RoleEntity;
 import lombok.*;
 
@@ -33,5 +34,5 @@ public class UserDto {
     private String phoneNumber;
     private List<RoleEntity> roles;
 
-    // private List<AppointmentDto> appointmentDtos;
+    private List<AppointmentDto> appointments;
 }

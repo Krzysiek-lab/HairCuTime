@@ -1,11 +1,13 @@
 package com.example.haircuttime.model.dto.workdefinition;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.Duration;
 import java.time.LocalTime;
 
-@Data
+@Setter
+@Getter
 public class CreateWorkDefinitionDto {
 
     private String name;

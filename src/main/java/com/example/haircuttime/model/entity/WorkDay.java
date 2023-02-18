@@ -6,6 +6,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Setter
@@ -25,18 +27,15 @@ public class WorkDay {
     @Column(name = "day_in_year")
     private Long dayInYear;
 
-//    @Column(name = "work_year_id")
-//    private Long workYearId;
-
     @ManyToOne
     @JsonBackReference
     private WorkYear workYear;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "work_definition_id", referencedColumnName = "id")
     private WorkDefinition workDefinition;
-    /*@OneToMany(mappedBy = "id", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "id", cascade = CascadeType.PERSIST)
     private List<Availability> availabilities = new ArrayList<>();
     @OneToMany(mappedBy = "id", cascade = CascadeType.PERSIST)
-    private List<Absence> absences = new ArrayList<>();*/
+    private List<Absence> absences = new ArrayList<>();
 }
 

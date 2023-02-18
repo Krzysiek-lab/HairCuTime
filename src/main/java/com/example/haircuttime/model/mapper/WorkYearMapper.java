@@ -5,17 +5,21 @@ import com.example.haircuttime.model.dto.workyear.CreateWorkYearDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
 import com.example.haircuttime.model.entity.WorkDay;
 import com.example.haircuttime.model.entity.WorkYear;
-import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
+
 @Component
 public class WorkYearMapper {
 
     private final WorkDayMapper workDayMapper;
+
+    public WorkYearMapper(@Lazy WorkDayMapper workDayMapper) {
+        this.workDayMapper = workDayMapper;
+    }
 
     public WorkYear toEntity(WorkYearDto workYearDto) {
         return WorkYear.builder()
