@@ -23,7 +23,6 @@ public class Barber {
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
-
     @ManyToMany
     List<Product> products;
     @OneToMany(mappedBy = "barber")
