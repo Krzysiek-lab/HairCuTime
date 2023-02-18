@@ -3,7 +3,7 @@ package com.example.haircuttime.controller;
 import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.barber.CreateBarberDto;
 import com.example.haircuttime.model.entity.Barber;
-import com.example.haircuttime.service.barber.BarberService;
+import com.example.haircuttime.service.barber.BarberServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +18,10 @@ import java.util.List;
 
 public class BarberController {
 
-    private final BarberService barberService;
+    private final BarberServiceImpl barberService;
 
     @GetMapping("/barbers")
-    public List<Barber> getAllBarbers() {
+    public List<BarberDto> getAllBarbers() {
         return barberService.findAll();
     }
 

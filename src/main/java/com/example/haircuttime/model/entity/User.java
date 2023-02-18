@@ -1,9 +1,6 @@
 package com.example.haircuttime.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,13 +11,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class User implements UserDetails {
 
-    //TODO ZOBACZYC
     private Boolean locked = false;
     private Boolean enabled = false;
     @Id
@@ -39,7 +36,7 @@ public class User implements UserDetails {
     private String email;
     @Column(name = "phone_number")
     private String phoneNumber;
-    @Column(name = "roles")
+
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<RoleEntity> roles;
 

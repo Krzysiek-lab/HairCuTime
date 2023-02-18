@@ -21,13 +21,13 @@ public class AppointmentService implements AppointmentServiceRep {
     public void updateAppointment(long id, AppointmentDto appointmentDto) {
         var appointment = appointmentRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("No element with given id"));
-        appointment = appointmentMapper.mapper(appointmentDto);
+        appointment = appointmentMapper.toEntity(appointmentDto);
         appointmentRepository.save(appointment);
     }
 
 
     public void addAppointment(AppointmentDto appointmentDto) {
-        var appointment = appointmentMapper.mapper(appointmentDto);
+        var appointment = appointmentMapper.toEntity(appointmentDto);
         appointmentRepository.save(appointment);
     }
 
@@ -35,7 +35,7 @@ public class AppointmentService implements AppointmentServiceRep {
         var appointment = appointmentRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("No element with given id"));
 
-        var product = productRepository.save(productMapper.mapper((productDto)));
+        var product = productRepository.save(productMapper.toEntity((productDto)));
         appointment.setProduct(product);
         appointmentRepository.save(appointment);
     }
@@ -46,7 +46,6 @@ public class AppointmentService implements AppointmentServiceRep {
             var appointment = appointmentRepository.findById(id).get();
             var service = productRepository.findById(serviceId).get();
             appointment.setProduct(service);
-            service.getAppointments().add(appointment);
             appointmentRepository.save(appointment);
         } else {
             throw new ResourceNotFoundException("No element with given id");

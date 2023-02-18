@@ -1,16 +1,13 @@
 package com.example.haircuttime.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "comments")
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,11 +22,11 @@ public class Comment {
     @Column(name = "grade")
     private Long grade;
 
-    @ManyToMany
-//    @JoinTable(name = "comments_services",
-//            joinColumns = @JoinColumn(name = "comment_id"),
-//            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products;
+//    @ManyToMany
+////    @JoinTable(name = "comments_services",
+////            joinColumns = @JoinColumn(name = "comment_id"),
+////            inverseJoinColumns = @JoinColumn(name = "product_id"))
+//    private List<Product> products;
 
 
 }

@@ -1,5 +1,6 @@
 package com.example.haircuttime.model.dto.user;
 
+import com.example.haircuttime.model.dto.appointment.CreateAppointmentDto;
 import com.example.haircuttime.model.entity.RoleEntity;
 import lombok.*;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserCreateDto {
+public class CreateUserDto {
 
     private Long id;
     @Size(max = 64, message = "Size can't be bigger than 64 characters")
@@ -26,7 +27,7 @@ public class UserCreateDto {
     @Size(max = 64, message = "Size can't be bigger than 64 characters")
     @NotBlank(message = "Login is mandatory")
     private String login;
-    @Size(min = 8, max = 20, message = "Size can't be less than 8 and no longer than 20 characters")
+    @Size(min = 8,max = 20, message = "Size can't be less than 8 and no longer than 20 characters")
     @NotBlank(message = "Password is mandatory")
     private String password;
     @Size(max = 64, message = "Size can't be bigger than 64 characters")
@@ -34,10 +35,10 @@ public class UserCreateDto {
     @Email(message = "Please enter correct email address")
     private String email;
     @NotBlank(message = "Phone number is mandatory")
-    @Pattern(regexp = "^[0-9]{9}$", message = "Number is invalid")
+    @Pattern(regexp = "^[0-9]{9}$",message = "Number is invalid")
     private String phoneNumber;
 
     private List<RoleEntity> roles;
 
-    // private List<AppointmentCreateDto> createDtos;
+   private List<CreateAppointmentDto> appointmentsDto;
 }

@@ -1,7 +1,7 @@
 package com.example.haircuttime.model.dto.appointment;
 
-import com.example.haircuttime.model.entity.Product;
-import com.example.haircuttime.model.entity.User;
+import com.example.haircuttime.model.dto.product.ProductDto;
+import com.example.haircuttime.model.dto.user.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,15 +17,15 @@ import java.time.LocalDate;
 @Data
 public class AppointmentDto {
 
-    long id;
+    private Long id;
     @DateTimeFormat
     private LocalDate from;
 
     @NotNull
-    private User userId;
+    private UserDto user;
 
     @DateTimeFormat
     private LocalDate to;
 
-    private Product product;
+    private ProductDto product;
 }

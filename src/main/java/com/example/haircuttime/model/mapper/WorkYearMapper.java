@@ -5,17 +5,21 @@ import com.example.haircuttime.model.dto.workyear.CreateWorkYearDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
 import com.example.haircuttime.model.entity.WorkDay;
 import com.example.haircuttime.model.entity.WorkYear;
-import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
+
 @Component
 public class WorkYearMapper {
 
     private final WorkDayMapper workDayMapper;
+
+    public WorkYearMapper(@Lazy WorkDayMapper workDayMapper) {
+        this.workDayMapper = workDayMapper;
+    }
 
     public WorkYear toEntity(WorkYearDto workYearDto) {
         return WorkYear.builder()
@@ -26,30 +30,29 @@ public class WorkYearMapper {
     }
 
     private List<WorkDay> getWorkDayList(WorkYearDto workYearDto) {
-        return workYearDto.getWorkDayList().stream().map(workDayMapper::toEntity).collect(Collectors.toList());
+        return workYearDto.getWorkDayList()
+                .stream()
+                .map(workDayMapper::toEntity)
+                .collect(Collectors.toList());
     }
 
     public WorkYearDto toDto(WorkYear workYear) {
         return WorkYearDto.builder()
                 .id(workYear.getId())
                 .year(workYear.getYear())
-                .workDayList(getWorkDayDtoList(workYear.getWorkDayList()))
+                .workDayList(getWorkDayListDto(workYear))
                 .build();
     }
-
-    private List<WorkDayDto> getWorkDayDtoList(List<WorkDay> workDays) {
-        return workDays.stream().map(workDayMapper::toDto).collect(Collectors.toList());
-    }
-
     public WorkYear toNewEntity(CreateWorkYearDto createWorkYearDto) {
         return WorkYear.builder()
                 .year(createWorkYearDto.getYear())
-                //.workDayList(createWorkYearDto.getWorkDayList()) //TUUUUUUUU
                 .build();
     }
 
-//    private List<WorkDay> getWorkDayList(CreateWorkYearDto createWorkYearDto) {
-//     return createWorkYearDto.getWorkDayList().stream().map(workDayMapper::toEntity).collect(Collectors.toList());
-//     }
-
+    private List<WorkDayDto> getWorkDayListDto(WorkYear workYear) {
+     return workYear.getWorkDayList()
+             .stream()
+             .map(workDayMapper::toDto)
+             .collect(Collectors.toList());
+     }
 }

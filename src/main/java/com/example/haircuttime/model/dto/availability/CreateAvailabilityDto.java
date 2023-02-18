@@ -1,9 +1,11 @@
 package com.example.haircuttime.model.dto.availability;
 
 
+
 import com.example.haircuttime.CustomAnnotations.AvailabilityAnnotation;
 import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.entity.WorkDay;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,19 +24,17 @@ public class CreateAvailabilityDto {
 
     @NotNull
     @NotEmpty
-    private WorkDay workDay;
+    private Long workDayId;
 
     @NotNull
     @NotEmpty
-    private BarberDto barberDto;
-
-    @NotNull
-    @NotEmpty
-    private LocalTime endTime;
-
+    private Long barberId;
 
     @NotNull
     @NotEmpty
     private LocalTime startTime;
 
+    @NotNull
+    @NotEmpty
+    private LocalTime endTime;
 }

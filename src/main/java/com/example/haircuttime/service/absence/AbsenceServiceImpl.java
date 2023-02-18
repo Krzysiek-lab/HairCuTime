@@ -4,6 +4,8 @@ import com.example.haircuttime.model.dto.absence.AbsenceDto;
 import com.example.haircuttime.model.dto.absence.CreateAbsenceDto;
 import com.example.haircuttime.model.entity.Absence;
 import com.example.haircuttime.model.mapper.AbsenceMapper;
+import com.example.haircuttime.model.mapper.BarberMapper;
+import com.example.haircuttime.model.mapper.WorkDayMapper;
 import com.example.haircuttime.repository.AbsenceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,8 +19,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AbsenceServiceImpl implements AbsenceService {
     private final AbsenceRepository absenceRepository;
-
     private final AbsenceMapper absenceMapper;
+    private final BarberMapper barberMapper;
+    private final WorkDayMapper workDayMapper;
 
     @Override
     public AbsenceDto getAbsenceById(Long id) {
@@ -71,10 +74,10 @@ public class AbsenceServiceImpl implements AbsenceService {
     public void updateAbsence(Long id, AbsenceDto absence) {
         absenceRepository.findById(id).ifPresent(e -> {
             var abs = Absence.builder()
-                    .barber(absence.getBarber())
+                    .barber(barberMapper.toEntity(absence.getBarber()))
                     .absenceStart(absence.getAbsenceStart())
                     .absenceEnd(absence.getAbsenceEnd())
-                    .workDay(absence.getWorkDay())
+                    .workDay(workDayMapper.toEntity(absence.getWorkDay()))
                     .build();
             absenceRepository.save(abs);
         });

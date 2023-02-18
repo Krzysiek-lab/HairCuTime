@@ -4,13 +4,13 @@ import com.example.haircuttime.EventHandler.AbsenceRepositoryEventHandler;
 import com.example.haircuttime.repository.AvailabilityRepository;
 import com.example.haircuttime.repository.RoleEntityRepository;
 import com.example.haircuttime.repository.UserRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ConfigurationBeans {
 
     @Bean

@@ -3,7 +3,7 @@ package com.example.haircuttime.model.dto.availability;
 
 import com.example.haircuttime.CustomAnnotations.AvailabilityAnnotation;
 import com.example.haircuttime.model.dto.barber.BarberDto;
-import com.example.haircuttime.model.entity.WorkDay;
+import com.example.haircuttime.model.dto.workday.WorkDayDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,11 +26,11 @@ public class AvailabilityDto {
 
     @NotNull
     @NotEmpty
-    private WorkDay workDay;
+    private WorkDayDto workDay;
 
     @NotNull
     @NotEmpty
-    private BarberDto barberDto;
+    private BarberDto barber;
 
     @NotNull
     @NotEmpty

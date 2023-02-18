@@ -2,6 +2,7 @@ package com.example.haircuttime.EventHandler;
 
 
 import com.example.haircuttime.model.entity.Absence;
+import lombok.RequiredArgsConstructor;
 import com.example.haircuttime.model.entity.Availability;
 import com.example.haircuttime.model.entity.RoleEntity;
 import com.example.haircuttime.model.entity.User;
@@ -15,18 +16,14 @@ import org.springframework.data.rest.core.annotation.HandleAfterCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeDelete;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 @RepositoryEventHandler
 @CommonsLog
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AbsenceRepositoryEventHandler {
-
-    //ONCREATE
-    //HANDLER'EM ZE PRZY ZAPISYWANIU ABSENCJI AUTOMATYCZNIE ODEJMOWAC GODZINY DANEJ ABSENCJI  Z AVAILABILITY
-    //ONDELETE
-    //USUWANIE ABSENCJI CZYLI TYM SAMYM DODAWANIE AVAILABILITY
 
     private final RoleEntityRepository roleRepository;
     private final UserRepository userRepository;
@@ -62,11 +59,15 @@ public class AbsenceRepositoryEventHandler {
 
     @HandleAfterCreate
     public void handleUserBeforeCreate(User user) {
+        if (roleRepository.existsByName(Role.USER)) {
+            user.setRoles(List.of(roleRepository.findByName(Role.USER)));
+        } else {
+            user.setRoles(List.of(RoleEntity.builder().name(Role.USER).build()));
+        }
         log.info("assigning default role to new User entity");
 
         RoleEntity role = RoleEntity.builder()
                 .name(Role.USER)
-                .users(new ArrayList<>(List.of(user)))
                 .build();
         RoleEntity roleForUser = roleRepository.save(role);
 

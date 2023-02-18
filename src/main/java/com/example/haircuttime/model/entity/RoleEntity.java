@@ -1,17 +1,14 @@
 package com.example.haircuttime.model.entity;
 
 import com.example.haircuttime.model.enums.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "roles")
-@Data
+@Getter
+@Setter
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -26,7 +23,7 @@ public class RoleEntity {
     @Column(name = "name")
     private Role name;
 
-    @ManyToMany(mappedBy = "roles")
-    private List<User> users;
+//    @ManyToMany(mappedBy = "roles")
+//    private List<User> users;
 
 }
