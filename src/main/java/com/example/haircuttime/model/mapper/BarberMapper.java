@@ -1,10 +1,12 @@
 package com.example.haircuttime.model.mapper;
 
+import com.example.haircuttime.model.dto.absence.AbsenceDto;
+import com.example.haircuttime.model.dto.availability.AvailabilityDto;
 import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.barber.CreateBarberDto;
+import com.example.haircuttime.model.dto.product.ProductDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
-import com.example.haircuttime.model.entity.Barber;
-import com.example.haircuttime.model.entity.WorkYear;
+import com.example.haircuttime.model.entity.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -17,13 +19,21 @@ import java.util.stream.Collectors;
 public class BarberMapper {
     private final WorkYearMapper workYearMapper;
 
-    public Barber toNewEntity(CreateBarberDto createBarberDTO) {
+    private final ProductMapper productMapper;
+
+    private final AvailabilityMapper availabilityMapper;
+
+    private final AbsenceMapper absenceMapper;
+
+    public Barber toNewEntity(CreateBarberDto createBarberDto) {
         return Barber.builder()
-                .name(createBarberDTO.getName())
-                .surname(createBarberDTO.getSurname())
-                .gender(createBarberDTO.getGender())
+                .name(createBarberDto.getName())
+                .surname(createBarberDto.getSurname())
+                .gender(createBarberDto.getGender())
                 .products(new ArrayList<>())
                 .workYears(new ArrayList<>())
+                .availabilities(new ArrayList<>())
+                .absences(new ArrayList<>())
                 .build();
     }
 
@@ -33,8 +43,23 @@ public class BarberMapper {
                 .name(barberDto.getName())
                 .surname(barberDto.getSurname())
                 .gender(barberDto.getGender())
-                .products(barberDto.getProducts())
+                .products(getProducts(barberDto))
                 .workYears(getWorkYears(barberDto))
+                .absences(getAbsences(barberDto))
+                .availabilities(getAvailabilities(barberDto))
+                .build();
+    }
+
+    public BarberDto toDto(Barber barber) {
+        return BarberDto.builder()
+                .id(barber.getId())
+                .name(barber.getName())
+                .surname(barber.getSurname())
+                .gender(barber.getGender())
+                .products(getProductDto(barber))
+                .workYears(getWorkYearDto(barber))
+                .absences(getAbsenceDto(barber))
+                .availabilities(getAvailabilityDto(barber))
                 .build();
     }
 
@@ -45,21 +70,47 @@ public class BarberMapper {
                 .collect(Collectors.toList());
     }
 
-    public BarberDto toDto(Barber barber) {
-        return BarberDto.builder()
-                .id(barber.getId())
-                .name(barber.getName())
-                .surname(barber.getSurname())
-                .gender(barber.getGender())
-                .products(barber.getProducts())
-                .workYears(getWorkYearDtos(barber))
-                .build();
-    }
-
-    private List<WorkYearDto> getWorkYearDtos(Barber barber) {
+    private List<WorkYearDto> getWorkYearDto(Barber barber) {
         return barber.getWorkYears()
                 .stream()
                 .map(workYearMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    private List<Product> getProducts(BarberDto barberDto){
+        return barberDto.getProducts()
+                .stream()
+                .map(productMapper::toEntity)
+                .collect(Collectors.toList());
+    }
+    private List<ProductDto> getProductDto(Barber barber){
+        return barber.getProducts()
+                .stream()
+                .map(productMapper::toDto)
+                .collect(Collectors.toList());
+    }
+    private List<Absence> getAbsences(BarberDto barberDto){
+        return barberDto.getAbsences()
+                .stream()
+                .map(absenceMapper::toEntity)
+                .collect(Collectors.toList());
+    }
+    private List<AbsenceDto> getAbsenceDto(Barber barber){
+        return barber.getAbsences()
+                .stream()
+                .map(absenceMapper::toDto)
+                .collect(Collectors.toList());
+    }
+    private List<Availability> getAvailabilities(BarberDto barberDto){
+        return barberDto.getAvailabilities()
+                .stream()
+                .map(availabilityMapper::toEntity)
+                .collect(Collectors.toList());
+    }
+    private List<AvailabilityDto> getAvailabilityDto(Barber barber){
+        return barber.getAvailabilities()
+                .stream()
+                .map(availabilityMapper::toDto)
                 .collect(Collectors.toList());
     }
 }

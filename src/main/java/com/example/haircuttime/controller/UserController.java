@@ -1,6 +1,6 @@
 package com.example.haircuttime.controller;
 
-import com.example.haircuttime.model.dto.user.UserCreateDto;
+import com.example.haircuttime.model.dto.user.CreateUserDto;
 import com.example.haircuttime.model.dto.user.UserDto;
 import com.example.haircuttime.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 public class UserController {
 
     private final UserService userService;
@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public UserDto saveUser(@RequestBody @Valid UserCreateDto createDto) {
+    public UserDto saveUser(@RequestBody @Valid CreateUserDto createDto) {
         return userService.createUser(createDto);
     }
 

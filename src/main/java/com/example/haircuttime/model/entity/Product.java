@@ -2,46 +2,43 @@ package com.example.haircuttime.model.entity;
 
 
 import com.example.haircuttime.model.enums.Target;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "products")
-@Data
+@Getter
+@Setter
 @Builder
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id")
+    @Column(name="product_id")
     private Long productId;
-
-    @Column(name = "product_name")
+    
+    @Column(name="product_name")
     private String productName;
-
+    
     private String description;
     private BigDecimal price;
-
-    @Column(name = "product_duration")
-    private Long serviceDuration;
-
-    @Column(name = "target_cutsomer")
+    
+    @Column(name="product_duration")
+    private Long productDuration;
+    @Enumerated(EnumType.STRING)
+    @Column(name="target_cutsomer")
     Target targetCustomer;
+    
+//    @ManyToMany(mappedBy = "products")
+//    List<Barber> barbers;
 
-    @ManyToMany(mappedBy = "products")
-    List<Barber> barbers;
+//    @ManyToMany(mappedBy = "product")
+//    List<Comment> comments;
 
-    @ManyToMany(mappedBy = "products")
-    List<Comment> comments;
-
-    @OneToMany(mappedBy = "product")
-    List<Appointment> appointments;
+//    @OneToMany(mappedBy = "product")
+//    List<Appointment> appointments;
 }

@@ -1,28 +1,42 @@
 package com.example.haircuttime.model.mapper;
 
 import com.example.haircuttime.model.dto.appointment.AppointmentDto;
+import com.example.haircuttime.model.dto.appointment.CreateAppointmentDto;
 import com.example.haircuttime.model.entity.Appointment;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AppointmentMapper {
 
-    public AppointmentDto mapperDto(Appointment appointment) {
+    private final UserMapper userMapper;
+
+    private final ProductMapper productMapper;
+
+    public AppointmentDto toDto(Appointment appointment) {
         return AppointmentDto.builder()
-                .userId(appointment.getUserId())
+                .id(appointment.getId())
+                .user(userMapper.toDto(appointment.getUser()))
                 .to(appointment.getTo())
                 .from(appointment.getFrom())
-                .product(appointment.getProduct())
+                .product(productMapper.toDto(appointment.getProduct()))
                 .build();
     }
 
 
-    public Appointment mapper(AppointmentDto appointmentDto) {
+    public Appointment toEntity(AppointmentDto appointmentDto) {
         return Appointment.builder()
-                .userId(appointmentDto.getUserId())
+                .user(userMapper.toEntity(appointmentDto.getUser()))
                 .to(appointmentDto.getTo())
                 .from(appointmentDto.getFrom())
-                .product(appointmentDto.getProduct())
+                .product(productMapper.toEntity(appointmentDto.getProduct()))
+                .build();
+    }
+    public Appointment toNewEntity(CreateAppointmentDto createDto){
+        return Appointment.builder()
+                .from(createDto.getFrom())
+                .to(createDto.getTo())
                 .build();
     }
 }

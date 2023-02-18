@@ -1,14 +1,12 @@
 package com.example.haircuttime.service.user;
 
+import com.example.haircuttime.EventHandler.AbsenceRepositoryEventHandler;
 import com.example.haircuttime.exception.exceptions.UniqueValueException;
 import com.example.haircuttime.exception.messages.ExceptionMessages;
-import com.example.haircuttime.model.dto.user.UserCreateDto;
+import com.example.haircuttime.model.dto.user.CreateUserDto;
 import com.example.haircuttime.model.dto.user.UserDto;
-import com.example.haircuttime.model.entity.RoleEntity;
 import com.example.haircuttime.model.entity.User;
-import com.example.haircuttime.model.enums.Role;
 import com.example.haircuttime.model.mapper.UserMapper;
-import com.example.haircuttime.repository.RoleEntityRepository;
 import com.example.haircuttime.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,10 +24,9 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
-    private final RoleEntityRepository roleRepository;
     private static final String USER_NOT_FOUND = "user with login %s not found";
 
-
+    private final AbsenceRepositoryEventHandler repositoryEventHandler;
     private final UserMapper userMapper;
 
 
@@ -42,19 +39,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     @Transactional
-    // MOZE LEPIEJ BEDZIE UZYC REPOSITORYEVENTHANDLER'A???
-    public UserDto createUser(UserCreateDto createDto) {
+    public UserDto createUser(CreateUserDto createDto) {
         User user = userMapper.toNewEntity(createDto);
-        if (roleRepository.existsByName(Role.USER)) {
-            user.setRoles(List.of(roleRepository.findByName(Role.USER)));
-        } else {
-            user.setRoles(List.of(RoleEntity.builder().name(Role.USER).build()));
-        }
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new UniqueValueException(ExceptionMessages.EMAIL_IS_ALREADY_EXIST.getMessage());
         } else if (userRepository.existsByLogin(user.getLogin())) {
             throw new UniqueValueException(ExceptionMessages.LOGIN_IS_ALREADY_EXIST.getMessage());
         }
+        repositoryEventHandler.handleUserBeforeCreate(user);
         return userMapper.toDto(userRepository.save(user));
     }
 

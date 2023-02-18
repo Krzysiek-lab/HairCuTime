@@ -39,7 +39,6 @@ public class Security {
 //                .logout().permitAll()
 //                .and()
 //                .httpBasic();
-
         return httpSecurity.build();
     }
 

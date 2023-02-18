@@ -1,18 +1,16 @@
 package com.example.haircuttime.model.entity;
 
 import com.example.haircuttime.model.enums.Gender;
-import com.example.haircuttime.model.enums.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name="barbers")
 @Builder
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -23,7 +21,6 @@ public class Barber {
     private String name;
     private String surname;
     private Gender gender;
-    private Role role;
 
 //    @ManyToOne
 //    List<Comment> comments;
@@ -33,7 +30,7 @@ public class Barber {
     @OneToMany(mappedBy = "barber")
     private List<Absence> absences;
     @OneToMany(mappedBy = "barber")
-    private List<Availability> availabilityList;
+    private List<Availability> availabilities;
     @OneToMany(mappedBy = "barber", orphanRemoval = true)
     private List<WorkYear> workYears;
 }
