@@ -11,8 +11,9 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "products")
-@Getter
+
 @Setter
+@Getter
 @Builder
 public class Product {
 
@@ -25,6 +26,8 @@ public class Product {
     private String productName;
     
     private String description;
+
+    @Column(precision = 10, scale = 2)
     private BigDecimal price;
     
     @Column(name="product_duration")

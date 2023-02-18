@@ -43,7 +43,6 @@ public class WorkYearMapper {
                 .workDayList(getWorkDayListDto(workYear))
                 .build();
     }
-
     public WorkYear toNewEntity(CreateWorkYearDto createWorkYearDto) {
         return WorkYear.builder()
                 .year(createWorkYearDto.getYear())
@@ -56,5 +55,4 @@ public class WorkYearMapper {
              .map(workDayMapper::toDto)
              .collect(Collectors.toList());
      }
-
 }

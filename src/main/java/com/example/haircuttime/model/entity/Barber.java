@@ -1,6 +1,8 @@
 package com.example.haircuttime.model.entity;
 
 import com.example.haircuttime.model.enums.Gender;
+
+import com.example.haircuttime.model.enums.Role;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,8 +11,8 @@ import java.util.List;
 @Entity
 @Table(name="barbers")
 @Builder
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -20,6 +22,8 @@ public class Barber {
     private Long id;
     private String name;
     private String surname;
+
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
 //    @ManyToOne

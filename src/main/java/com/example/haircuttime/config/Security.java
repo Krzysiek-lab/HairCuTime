@@ -29,7 +29,7 @@ public class Security {
 //                .permitAll()
 //                .requestMatchers("")
 //                .permitAll()
-                .anyRequest().permitAll();
+                .anyRequest().permitAll();// pozniej usunac ten permitAll()
 //               .authenticated()
 //                .and()
 //                .formLogin()
