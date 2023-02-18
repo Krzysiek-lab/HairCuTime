@@ -74,6 +74,6 @@ public class AbsenceRepositoryEventHandler {
         List<RoleEntity> roleList = user.getRoles();
         roleList.add(roleForUser);
         user.setRoles(roleList);
-        userRepository.save(user);// czy trzeba??? bo to jest beforeCreate czy zmienic na beforeSave???
+        userRepository.save(user);
     }
 }

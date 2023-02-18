@@ -29,8 +29,11 @@ public class ProductDto {
     @DecimalMax("1000.00")// jaka najwyzsza cena
     @DecimalMin("10.00")// jaka najwyzsza cena
     private BigDecimal price;
-    @NotNull// zmiana z notEmpty
+    @NotNull
     private Long serviceDuration;
+
+    @NotNull
+    private Long productDuration;
     Target targetCustomer;
 
     List<Barber> barbers;

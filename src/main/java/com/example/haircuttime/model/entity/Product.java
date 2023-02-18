@@ -39,9 +39,6 @@ public class Product {
 //    @ManyToMany(mappedBy = "products")
 //    List<Barber> barbers;
 
-//    @ManyToMany(mappedBy = "product")
-//    List<Comment> comments;
-
 //    @OneToMany(mappedBy = "product")
 //    List<Appointment> appointments;
 }

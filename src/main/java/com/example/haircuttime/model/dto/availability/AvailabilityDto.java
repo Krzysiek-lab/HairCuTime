@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -21,23 +22,20 @@ import java.time.LocalTime;
 public class AvailabilityDto {
 
     @NotNull
-    @NotEmpty
     private Long id;
 
     @NotNull
-    @NotEmpty
     private WorkDayDto workDay;
 
     @NotNull
-    @NotEmpty
     private BarberDto barber;
 
+    @DateTimeFormat
     @NotNull
-    @NotEmpty
     private LocalTime startTime;
 
+    @DateTimeFormat
     @NotNull
-    @NotEmpty
     private LocalTime endTime;
 
 }

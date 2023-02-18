@@ -45,7 +45,6 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // mapa zamienic na simplegaranted
         return roles.stream().map(e -> new SimpleGrantedAuthority(e.getName().toString())).toList();
     }
 
@@ -77,6 +76,6 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return !enabled;
-    }// zmienione z enabled na !enabled
+    }
 }
 

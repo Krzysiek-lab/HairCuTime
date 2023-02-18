@@ -27,5 +27,6 @@ public class AppointmentDto {
     @DateTimeFormat
     private LocalDate to;
 
+    @NotNull
     private ProductDto product;
 }

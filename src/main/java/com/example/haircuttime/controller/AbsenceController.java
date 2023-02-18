@@ -1,5 +1,6 @@
 package com.example.haircuttime.controller;
 
+import com.example.haircuttime.EventHandler.AbsenceRepositoryEventHandler;
 import com.example.haircuttime.model.dto.absence.AbsenceDto;
 import com.example.haircuttime.model.dto.absence.CreateAbsenceDto;
 import com.example.haircuttime.model.entity.Absence;
@@ -21,6 +22,7 @@ public class AbsenceController {
 
     private final AbsenceServiceImpl absenceService;
     private final AbsenceRepository absenceRepository;
+    private final AbsenceRepositoryEventHandler absenceRepositoryEventHandler;
 
     @GetMapping("/absences")
     public List<Absence> getAllAbsences() {
@@ -57,6 +59,7 @@ public class AbsenceController {
 
     @DeleteMapping("/delete/absence/{id}")
     public ResponseEntity<String> deleteAbsence(@PathVariable("id") long id) {
+        absenceRepositoryEventHandler.handleAbsenceBeforeDelete(absenceRepository.getReferenceById(id));
         absenceService.removeAbsence(id);
         return new ResponseEntity<>("Absence was deleted.", HttpStatus.OK);
     }
