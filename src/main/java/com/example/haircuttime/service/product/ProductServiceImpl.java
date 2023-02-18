@@ -31,22 +31,18 @@ public class ProductServiceImpl implements ProductService{
         return productMapper.toDto(productRepository.save(productMapper.toNewEntity(createProductDto)));
     }
 
-    public ResponseEntity<Product> updateProduct(Long id, Product product) {
-        Product updateProduct = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product with id :" + id + " doesn't exist!"));
-        updateProduct.setProductName(updateProduct.getProductName());
-        updateProduct.setDescription(updateProduct.getDescription());
-        updateProduct.setPrice(updateProduct.getPrice());
-        updateProduct.setProductDuration(product.getProductDuration());
-
-        productRepository.save(updateProduct);
-        return ResponseEntity.ok(updateProduct);
-
-    }
-
     public void deleteProduct(Long id) {
         Product deleteProduct = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product with id :" + id + " doesn't exist!"));
         productRepository.delete(deleteProduct);
     }
+    public void updateProduct(Long id, ProductDto product) {
+        Product updateProduct = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product with id :" + id + " doesn't exist!"));
+        updateProduct.setProductName(updateProduct.getProductName());
+        updateProduct.setDescription(updateProduct.getDescription());
+        updateProduct.setPrice(updateProduct.getPrice());
+        updateProduct.setProductDuration(product.getServiceDuration());
+    }
+
 }

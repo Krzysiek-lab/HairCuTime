@@ -43,9 +43,6 @@ public class User implements UserDetails {
     @OneToMany
     private List<Appointment> appointments;
 
-
-    ////////////////
-    //TODO CZY POTRZEBNE JEST NADPISANIE EQUALS I HASHCOD???
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // mapa zamienic na simplegaranted

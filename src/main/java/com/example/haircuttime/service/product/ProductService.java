@@ -22,7 +22,7 @@ public interface ProductService {
 
     ProductDto save(CreateProductDto createProductDto);
 
-    ResponseEntity<Product> updateProduct(Long id, Product product);
+    void updateProduct(Long id, ProductDto product);
 
     void deleteProduct(Long id);
 }
