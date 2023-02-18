@@ -30,11 +30,8 @@ public class BarberDto {
     @NotEmpty
     @Enumerated(EnumType.STRING)
     private Gender gender;
-
-    @NotEmpty
     @NotNull
     private List<ProductDto> products;
-
     private List<WorkYearDto> workYears;
     private List<AbsenceDto> absences;
     private List<AvailabilityDto> availabilities;
