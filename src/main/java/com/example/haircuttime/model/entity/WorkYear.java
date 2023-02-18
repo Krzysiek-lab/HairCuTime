@@ -29,5 +29,4 @@ public class WorkYear {
     @OneToMany(mappedBy = "workYear", orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<WorkDay> workDayList;
-
 }
