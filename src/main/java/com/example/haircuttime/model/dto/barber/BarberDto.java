@@ -20,8 +20,8 @@ import java.util.List;
 @Setter
 public class BarberDto {
     private Long id;
-    //    @NotNull
-//    @NotEmpty
+    @NotNull
+    @NotEmpty
     private String name;
     @NotNull
     @NotEmpty
@@ -31,7 +31,6 @@ public class BarberDto {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @NotEmpty
     @NotNull
     private List<ProductDto> products;
 

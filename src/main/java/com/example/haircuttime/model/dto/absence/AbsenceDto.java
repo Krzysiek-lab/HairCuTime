@@ -6,6 +6,7 @@ import com.example.haircuttime.model.dto.workday.WorkDayDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
@@ -17,24 +18,21 @@ import java.time.LocalTime;
 public class AbsenceDto {
 
     @NotNull(message = "cannot be null")
-    // @NotEmpty
     private Long id;
 
 
     @NotNull(message = "cannot be null")
-    //@NotEmpty
     private BarberDto barber;
 
 
     @NotNull(message = "cannot be null")
-    //  @NotEmpty
+    @DateTimeFormat
     private LocalTime absenceStart;
 
     @NotNull(message = "cannot be null")
-    // @NotEmpty
+    @DateTimeFormat
     private LocalTime absenceEnd;
 
     @NotNull(message = "cannot be null")
-    //  @NotEmpty
     private WorkDayDto workDay;
 }
