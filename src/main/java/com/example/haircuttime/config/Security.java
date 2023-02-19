@@ -29,17 +29,16 @@ public class Security {
 //                .permitAll()
 //                .requestMatchers("")
 //                .permitAll()
-//                .anyRequest()
-//                .authenticated()
-                .and()
-                .formLogin()
+                .anyRequest().permitAll();
+//               .authenticated()
+//                .and()
+//                .formLogin()
 //                .defaultSuccessUrl("http://localhost:3000")
-//                .failureUrl("/http://localhost:3000:/home")
-                .and()
-                .logout().permitAll()
-                .and()
-                .httpBasic();
-
+//                .failureUrl("/http://localhost:3000:")
+//                .and()
+//                .logout().permitAll()
+//                .and()
+//                .httpBasic();
         return httpSecurity.build();
     }
 
