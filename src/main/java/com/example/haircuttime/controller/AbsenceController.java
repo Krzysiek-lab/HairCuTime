@@ -1,8 +1,10 @@
 package com.example.haircuttime.controller;
 
+import com.example.haircuttime.EventHandler.AbsenceRepositoryEventHandler;
 import com.example.haircuttime.model.dto.absence.AbsenceDto;
 import com.example.haircuttime.model.dto.absence.CreateAbsenceDto;
 import com.example.haircuttime.model.entity.Absence;
+import com.example.haircuttime.model.mapper.AbsenceMapper;
 import com.example.haircuttime.repository.AbsenceRepository;
 import com.example.haircuttime.service.absence.AbsenceServiceImpl;
 import lombok.AllArgsConstructor;
@@ -21,6 +23,10 @@ public class AbsenceController {
 
     private final AbsenceServiceImpl absenceService;
     private final AbsenceRepository absenceRepository;
+
+    private final AbsenceMapper absenceMapper;
+
+    private final AbsenceRepositoryEventHandler absenceRepositoryEventHandler;
 
     @GetMapping("/absences")
     public List<Absence> getAllAbsences() {
@@ -45,6 +51,7 @@ public class AbsenceController {
 
     @PostMapping("/absence")
     public AbsenceDto createAbsence(@RequestBody @Valid CreateAbsenceDto absenceDto) {
+        absenceRepositoryEventHandler.handleAbsenceBeforeCreate(absenceMapper.toNewEntity(absenceDto));
         return absenceService.addAbsence(absenceDto);
     }
 
@@ -57,6 +64,7 @@ public class AbsenceController {
 
     @DeleteMapping("/delete/absence/{id}")
     public ResponseEntity<String> deleteAbsence(@PathVariable("id") long id) {
+        absenceRepositoryEventHandler.handleAbsenceBeforeDelete(absenceRepository.getReferenceById(id));
         absenceService.removeAbsence(id);
         return new ResponseEntity<>("Absence was deleted.", HttpStatus.OK);
     }

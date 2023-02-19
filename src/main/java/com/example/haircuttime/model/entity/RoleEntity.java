@@ -22,8 +22,4 @@ public class RoleEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "name")
     private Role name;
-
-//    @ManyToMany(mappedBy = "roles")
-//    private List<User> users;
-
 }

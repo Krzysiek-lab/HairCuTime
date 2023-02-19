@@ -1,6 +1,8 @@
 package com.example.haircuttime.config;
 
 import com.example.haircuttime.EventHandler.AbsenceRepositoryEventHandler;
+import com.example.haircuttime.model.entity.Barber;
+import com.example.haircuttime.repository.AvailabilityRepository;
 import com.example.haircuttime.repository.RoleEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +21,8 @@ public class ConfigurationBeans {
     }
 
     @Bean
-    public AbsenceRepositoryEventHandler absenceRepositoryEventHandler() {
-        return new AbsenceRepositoryEventHandler(roleRepository);
+    public AbsenceRepositoryEventHandler absenceRepositoryEventHandler(RoleEntityRepository roleRepository, AvailabilityRepository availabilityRepository) {
+        return new AbsenceRepositoryEventHandler(roleRepository, availabilityRepository);
     }
+
 }

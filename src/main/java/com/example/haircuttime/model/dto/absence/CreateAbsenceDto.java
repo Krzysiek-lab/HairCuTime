@@ -12,19 +12,19 @@ import java.time.LocalTime;
 @Getter
 @Setter
 public class CreateAbsenceDto {
-    @NotNull
-    @NotEmpty
+    //@NotNull
+   // @NotEmpty
     private Long barberId;
 
-    @NotNull
-    @NotEmpty
+   // @NotNull
+    //@NotEmpty
     private Long workDayId;
 
-    @NotNull
-    @NotEmpty
+    //@NotNull
+   //@NotEmpty
     private LocalTime absenceStart;
 
-    @NotNull
-    @NotEmpty
+   // @NotNull
+    //@NotEmpty
     private LocalTime absenceEnd;
 }

@@ -3,6 +3,7 @@ package com.example.haircuttime.model.mapper;
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
 import com.example.haircuttime.model.dto.workyear.CreateWorkYearDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
+import com.example.haircuttime.model.entity.Barber;
 import com.example.haircuttime.model.entity.WorkDay;
 import com.example.haircuttime.model.entity.WorkYear;
 import org.springframework.context.annotation.Lazy;
@@ -14,12 +15,15 @@ import java.util.stream.Collectors;
 
 @Component
 public class WorkYearMapper {
-
     private final WorkDayMapper workDayMapper;
 
-    public WorkYearMapper(@Lazy WorkDayMapper workDayMapper) {
+    private final BarberMapper barberMapper;
+
+    public WorkYearMapper(@Lazy WorkDayMapper workDayMapper,@Lazy BarberMapper barberMapper) {
         this.workDayMapper = workDayMapper;
+        this.barberMapper = barberMapper;
     }
+
 
     public WorkYear toEntity(WorkYearDto workYearDto) {
         return WorkYear.builder()
@@ -40,6 +44,7 @@ public class WorkYearMapper {
         return WorkYearDto.builder()
                 .id(workYear.getId())
                 .year(workYear.getYear())
+                .barber(barberMapper.toDto(workYear.getBarber()))
                 .workDayList(getWorkDayListDto(workYear))
                 .build();
     }
@@ -56,5 +61,4 @@ public class WorkYearMapper {
              .map(workDayMapper::toDto)
              .collect(Collectors.toList());
      }
-
 }

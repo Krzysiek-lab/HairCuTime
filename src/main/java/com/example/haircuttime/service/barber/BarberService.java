@@ -15,6 +15,9 @@ public interface BarberService {
 
     ResponseEntity<Barber> updateBarber(Long id, Barber barber);
 
+    BarberDto addProductToBarber(BarberDto barberDto, Long id);
+    BarberDto removeProductFromBarber(BarberDto barberDto, Long id);
+
     void deleteBarber(Long id);
 
 

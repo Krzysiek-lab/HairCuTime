@@ -21,19 +21,19 @@ public class AbsenceDto {
     @NotEmpty
     private Long id;
 
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private BarberDto barber;
 
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    ///@NotEmpty
     private LocalTime absenceStart;
 
-    @NotNull
-    @NotEmpty
+    //@NotNull
+   // @NotEmpty
     private LocalTime absenceEnd;
 
-    @NotNull
-    @NotEmpty
+    //@NotNull
+    //@NotEmpty
     private WorkDayDto workDay;
 }

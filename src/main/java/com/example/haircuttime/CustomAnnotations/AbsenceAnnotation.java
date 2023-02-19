@@ -1,6 +1,8 @@
 package com.example.haircuttime.CustomAnnotations;
 
 import com.example.haircuttime.model.dto.absence.AbsenceDto;
+import com.example.haircuttime.model.mapper.BarberMapper;
+import com.example.haircuttime.model.mapper.WorkDayMapper;
 import com.example.haircuttime.repository.AbsenceRepository;
 import lombok.AllArgsConstructor;
 
@@ -30,12 +32,16 @@ class RangeValidator implements ConstraintValidator<AbsenceAnnotation, AbsenceDt
 
     private final AbsenceRepository absenceRepository;
 
+    private final BarberMapper barberMapper;
+
+    private final WorkDayMapper workDayMapper;
+
     private boolean getAll(AbsenceDto absenceDto) {
         return absenceRepository.findAll().stream().anyMatch(e ->
                 e.getAbsenceStart().equals(absenceDto.getAbsenceStart())
                         && e.getAbsenceEnd().equals(absenceDto.getAbsenceEnd())
-                        && e.getBarber().equals(absenceDto.getBarber())
-                        && e.getWorkDay().equals(absenceDto.getWorkDay()));
+                        && e.getBarber().equals(barberMapper.toEntity(absenceDto.getBarber()))
+                        && e.getWorkDay().equals(workDayMapper.toEntity(absenceDto.getWorkDay())));
     }
 
 

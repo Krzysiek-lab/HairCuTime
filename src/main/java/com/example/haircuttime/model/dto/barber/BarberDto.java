@@ -5,6 +5,7 @@ import com.example.haircuttime.model.dto.availability.AvailabilityDto;
 import com.example.haircuttime.model.dto.product.ProductDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
 import com.example.haircuttime.model.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class BarberDto {
     private String surname;
     private Gender gender;
     private List<ProductDto> products;
+
     private List<WorkYearDto> workYears;
     private List<AbsenceDto> absences;
     private List<AvailabilityDto> availabilities;

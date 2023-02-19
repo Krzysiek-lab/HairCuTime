@@ -6,6 +6,7 @@ import com.example.haircuttime.model.dto.workdefinition.WorkDefinitionDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
 import lombok.*;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -17,13 +18,13 @@ import java.util.List;
 @AllArgsConstructor
 public class WorkDayDto {
     @NotNull
-    @NotEmpty
     private Long id;
     @NotNull
-    @NotEmpty
+
     private Long dayInYear;
     @NotNull
     @NotEmpty
+    @Max(365)
     private WorkYearDto workYear;
     @NotNull
     @NotEmpty

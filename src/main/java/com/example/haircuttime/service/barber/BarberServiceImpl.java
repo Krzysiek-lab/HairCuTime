@@ -6,10 +6,13 @@ import com.example.haircuttime.model.dto.barber.CreateBarberDto;
 import com.example.haircuttime.model.entity.Barber;
 import com.example.haircuttime.model.mapper.BarberMapper;
 import com.example.haircuttime.repository.BarberRepository;
+import com.example.haircuttime.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +22,8 @@ public class BarberServiceImpl implements BarberService{
 
     private final BarberRepository barberRepository;
     private final BarberMapper barberMapper;
+
+    private final ProductRepository productRepository;
 
     public List<BarberDto> findAll() {
         return barberRepository.findAll().stream()
@@ -40,6 +45,26 @@ public class BarberServiceImpl implements BarberService{
 
         return ResponseEntity.ok(updateBarber);
 
+    }
+
+    @Override
+    @Transactional
+    public BarberDto addProductToBarber(BarberDto barberDto,Long id) {
+        return barberRepository.findById(barberDto.getId()).map(barber -> {
+            barber.getProducts().add(productRepository.findById(id)
+                    .orElseThrow(EntityNotFoundException::new));
+            return barberMapper.toDto(barber);
+        }).orElseThrow(EntityNotFoundException::new);
+    }
+
+    @Override
+    @Transactional
+    public BarberDto removeProductFromBarber(BarberDto barberDto, Long id) {
+        return barberRepository.findById(barberDto.getId()).map(barber -> {
+            barber.getProducts().remove(productRepository.findById(id)
+                    .orElseThrow(EntityNotFoundException::new));
+            return barberMapper.toDto(barber);
+        }).orElseThrow(EntityNotFoundException::new);
     }
 
 

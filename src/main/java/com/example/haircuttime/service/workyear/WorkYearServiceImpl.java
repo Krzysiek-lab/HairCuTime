@@ -58,7 +58,11 @@ public class WorkYearServiceImpl implements WorkYearService {
                     return workDay;
                 }).toList();
         workYear.setWorkDayList(new ArrayList<>(workDayRepository.saveAllAndFlush(workDays)));
-
+        workYear.setBarber(barberRepository.getReferenceById(createWorkYearDto.getBarberId()));
+        var addWorkYear = barberRepository.getReferenceById(createWorkYearDto.getBarberId());
+        addWorkYear.getWorkYears().add(workYear);
+        barberRepository.save(addWorkYear);
         return workYearMapper.toDto(workYearRepository.save(workYear));
+
     }
 }

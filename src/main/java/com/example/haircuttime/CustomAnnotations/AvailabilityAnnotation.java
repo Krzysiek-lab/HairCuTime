@@ -43,7 +43,6 @@ class RangeValidator2 implements ConstraintValidator<AvailabilityAnnotation, Ava
                         && e.getWorkDay().equals(workDayMapper.toEntity(availabilityDto.getWorkDay())));
     }
 
-
     @Override
     public void initialize(AvailabilityAnnotation date) {
     }

@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -30,15 +31,12 @@ public class Product {
     @Column(name="product_duration")
     private Long productDuration;
     @Enumerated(EnumType.STRING)
-    @Column(name="target_cutsomer")
+    @Column(name="target_customer")
     Target targetCustomer;
     
-//    @ManyToMany(mappedBy = "products")
-//    List<Barber> barbers;
+    @ManyToMany(mappedBy = "products")
+    List<Barber> barbers;
 
-//    @ManyToMany(mappedBy = "product")
-//    List<Comment> comments;
-
-//    @OneToMany(mappedBy = "product")
-//    List<Appointment> appointments;
+    @OneToMany(mappedBy = "product")
+    List<Appointment> appointments;
 }

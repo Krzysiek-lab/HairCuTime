@@ -22,20 +22,18 @@ public class Availability {
     private Long id;
 
     @ManyToOne
-    @NotNull
     @JoinColumn(name = "work_day_id")
     private WorkDay workDay;
 
     @ManyToOne
-    @NotNull
     @JoinColumn(name = "barber_id")
     private Barber barber;
 
-    @NotNull
+
     @Column(name = "start_time")
     private LocalTime startTime;
 
-    @NotNull
+
     @Column(name = "end_time")
     private LocalTime endTime;
 }

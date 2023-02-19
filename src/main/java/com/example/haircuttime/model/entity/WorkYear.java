@@ -1,6 +1,8 @@
 package com.example.haircuttime.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -20,14 +22,9 @@ public class WorkYear {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
-    @NotNull
     private Long year;
     @ManyToOne
-    @JsonBackReference
     private Barber barber;
-
     @OneToMany(mappedBy = "workYear", orphanRemoval = true, cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<WorkDay> workDayList;
-
 }

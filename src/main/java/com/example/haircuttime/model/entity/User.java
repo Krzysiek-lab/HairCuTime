@@ -42,8 +42,6 @@ public class User implements UserDetails {
     @OneToMany
     private List<Appointment> appointments;
 
-
-    ////////////////
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(roles.get(0).getName().toString());
