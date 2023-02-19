@@ -1,8 +1,7 @@
 package com.example.haircuttime.CustomAnnotations;
 
-import com.example.haircuttime.model.dto.absence.AbsenceDto;
-import com.example.haircuttime.model.mapper.BarberMapper;
-import com.example.haircuttime.model.mapper.WorkDayMapper;
+
+import com.example.haircuttime.model.dto.absence.CreateAbsenceDto;
 import com.example.haircuttime.repository.AbsenceRepository;
 import lombok.AllArgsConstructor;
 
@@ -28,29 +27,24 @@ public @interface AbsenceAnnotation {
 }
 
 @AllArgsConstructor
-class RangeValidator implements ConstraintValidator<AbsenceAnnotation, AbsenceDto> {
+class RangeValidator implements ConstraintValidator<AbsenceAnnotation, CreateAbsenceDto> {
 
     private final AbsenceRepository absenceRepository;
 
-    private final BarberMapper barberMapper;
-
-    private final WorkDayMapper workDayMapper;
-
-    private boolean getAll(AbsenceDto absenceDto) {
+    private boolean getAll(CreateAbsenceDto absenceDto) {
         return absenceRepository.findAll().stream().anyMatch(e ->
                 e.getAbsenceStart().equals(absenceDto.getAbsenceStart())
                         && e.getAbsenceEnd().equals(absenceDto.getAbsenceEnd())
-                        && e.getBarber().equals(barberMapper.toEntity(absenceDto.getBarber()))
-                        && e.getWorkDay().equals(workDayMapper.toEntity(absenceDto.getWorkDay())));
+                        && e.getBarber().getId().equals(absenceDto.getBarberId())
+                        && e.getWorkDay().getId().equals(absenceDto.getWorkDayId()));
     }
-
 
     @Override
     public void initialize(AbsenceAnnotation date) {
     }
 
     @Override
-    public boolean isValid(AbsenceDto dto, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(CreateAbsenceDto dto, ConstraintValidatorContext constraintValidatorContext) {
         return !getAll(dto);
     }
 }
