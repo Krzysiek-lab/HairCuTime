@@ -1,6 +1,7 @@
 package com.example.haircuttime.controller;
 
 import com.example.haircuttime.model.dto.appointment.AppointmentDto;
+import com.example.haircuttime.model.dto.appointment.CreateAppointmentDto;
 import com.example.haircuttime.model.dto.product.ProductDto;
 import com.example.haircuttime.model.entity.Appointment;
 import com.example.haircuttime.model.mapper.AppointmentMapper;
@@ -17,12 +18,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+
 import java.util.List;
 
 @RequiredArgsConstructor
 @Data
 @CrossOrigin(origins = "http://localhost:3000")
-@Controller
+@RestController
 public class AppointmentController {
 
 
@@ -56,11 +58,8 @@ public class AppointmentController {
 
 
     @PostMapping("/addAppointment")
-    public String addAppointment(@RequestBody @Valid AppointmentDto appointmentDto, BindingResult bindingResult) {
-        if (!bindingResult.hasErrors()) {
-            appointmentService.addAppointment(appointmentDto);
-        }
-        return "redirect:/allAppointments";
+    public void addAppointment(@RequestBody @Valid CreateAppointmentDto createAppointmentDto) {
+         appointmentService.addAppointment(createAppointmentDto);
     }
 
     @PostMapping("/addNewProductToAnAppointment")

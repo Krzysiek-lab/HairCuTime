@@ -1,5 +1,8 @@
 package com.example.haircuttime.model.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,6 +20,8 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = {"appointments"})
+@EqualsAndHashCode(exclude = {"appointments"})
 public class User implements UserDetails {
     private Boolean locked = false;
     private Boolean enabled = false;
@@ -41,6 +46,8 @@ public class User implements UserDetails {
     private List<RoleEntity> roles;
 
     @OneToMany
+    @JsonManagedReference
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Appointment> appointments;
 
     @Override

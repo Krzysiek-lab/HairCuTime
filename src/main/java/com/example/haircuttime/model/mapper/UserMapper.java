@@ -16,7 +16,7 @@ public class UserMapper {
 
       private final AppointmentMapper appointmentMapper;
 
-    public UserMapper( @Lazy AppointmentMapper appointmentMapper) {
+    public UserMapper(@Lazy AppointmentMapper appointmentMapper) {
         this.appointmentMapper = appointmentMapper;
     }
 
@@ -47,8 +47,11 @@ public class UserMapper {
                 .login(createDto.getLogin())
                 .name(createDto.getName())
                 .surname(createDto.getSurname())
-                .email(createDto.getEmail()).
-                phoneNumber(createDto.getPhoneNumber())
+                .email(createDto.getEmail())
+                .phoneNumber(createDto.getPhoneNumber())
+                .appointments(createDto.getAppointments().stream().map(
+                        appointmentMapper::toNewEntity
+                ).collect(Collectors.toList()))
                 .build();
     }
 

@@ -38,5 +38,5 @@ public class CreateUserDto {
 
     private List<RoleEntity> roles;
 
-   private List<CreateAppointmentDto> appointmentsDto;
+   private List<CreateAppointmentDto> appointments;
 }

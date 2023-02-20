@@ -2,13 +2,21 @@ package com.example.haircuttime.service.appointment;
 
 import com.example.haircuttime.exception.exceptions.ResourceNotFoundException;
 import com.example.haircuttime.model.dto.appointment.AppointmentDto;
+import com.example.haircuttime.model.dto.appointment.CreateAppointmentDto;
 import com.example.haircuttime.model.dto.product.ProductDto;
+import com.example.haircuttime.model.entity.Appointment;
+import com.example.haircuttime.model.entity.User;
 import com.example.haircuttime.model.mapper.AppointmentMapper;
 import com.example.haircuttime.model.mapper.ProductMapper;
 import com.example.haircuttime.repository.AppointmentRepository;
 import com.example.haircuttime.repository.ProductRepository;
+import com.example.haircuttime.repository.UserRepository;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -17,6 +25,7 @@ public class AppointmentService implements AppointmentServiceRep {
     private final AppointmentRepository appointmentRepository;
     private final ProductMapper productMapper;
     private final ProductRepository productRepository;
+    private final UserRepository userRepository;
 
     public void updateAppointment(long id, AppointmentDto appointmentDto) {
         var appointment = appointmentRepository.findById(id).orElseThrow(() ->
@@ -26,9 +35,15 @@ public class AppointmentService implements AppointmentServiceRep {
     }
 
 
-    public void addAppointment(AppointmentDto appointmentDto) {
-        var appointment = appointmentMapper.toEntity(appointmentDto);
-        appointmentRepository.save(appointment);
+    public void addAppointment(CreateAppointmentDto appointmentDto) {
+        Appointment appointment = appointmentMapper.toNewEntity(appointmentDto);
+        appointment.setProduct(productRepository.findById(appointmentDto.getProductId())
+                .orElseThrow(EntityExistsException::new));
+        User user = userRepository.getReferenceById(appointmentDto.getUserId());
+        //appointment.setUser(user);
+        appointmentMapper.toDto(appointmentRepository.save(appointment));
+       user.getAppointments().add(appointment);
+       userRepository.save(user);
     }
 
     public void addProductToAppointment(long id, ProductDto productDto) {
