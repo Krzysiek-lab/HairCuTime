@@ -9,6 +9,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Builder
@@ -16,9 +20,18 @@ import java.util.List;
 @Setter
 public class BarberDto {
     private Long id;
+    @NotNull
+    @NotEmpty
     private String name;
+    @NotNull
+    @NotEmpty
     private String surname;
+    @NotNull
+    @NotEmpty
+    @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @NotNull
     private List<ProductDto> products;
 
     private List<WorkYearDto> workYears;

@@ -24,6 +24,7 @@ public class AbsenceController {
 
     private final AbsenceServiceImpl absenceService;
     private final AbsenceRepository absenceRepository;
+    private final AbsenceRepositoryEventHandler absenceRepositoryEventHandler;
 
     private final AbsenceMapper absenceMapper;
 

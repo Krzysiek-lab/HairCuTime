@@ -8,10 +8,10 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name="barbers")
+@Table(name = "barbers")
 @Builder
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -21,12 +21,12 @@ public class Barber {
     private Long id;
     private String name;
     private String surname;
+
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-//    @ManyToOne
-//    List<Comment> comments;
-
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
     @ManyToMany
     List<Product> products;
     @OneToMany(mappedBy = "barber")

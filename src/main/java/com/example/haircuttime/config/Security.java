@@ -22,6 +22,7 @@ public class Security {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
+
                 .authorizeHttpRequests((request) -> request
                         .requestMatchers("/user/**", "/absence/**", "/barber/**", "/products/**",
                                 "/appointment/**", "/workday/**", "/workyear/**", "/workdefinition/**")

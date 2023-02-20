@@ -30,6 +30,7 @@ public class Availability {
     private Barber barber;
 
 
+
     @Column(name = "start_time")
     private LocalTime startTime;
 

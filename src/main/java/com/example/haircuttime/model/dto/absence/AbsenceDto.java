@@ -7,6 +7,7 @@ import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import java.time.LocalTime;
@@ -17,23 +18,22 @@ import java.time.LocalTime;
 @AbsenceAnnotation(message = "This Barber already has absence in given time")
 public class AbsenceDto {
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "cannot be null")
     private Long id;
 
-    //@NotNull
-    //@NotEmpty
+
+    @NotNull(message = "cannot be null")
     private BarberDto barber;
 
-    //@NotNull
-    ///@NotEmpty
+
+    @NotNull(message = "cannot be null")
+    @DateTimeFormat
     private LocalTime absenceStart;
 
-    //@NotNull
-   // @NotEmpty
+    @NotNull(message = "cannot be null")
+    @DateTimeFormat
     private LocalTime absenceEnd;
 
-    //@NotNull
-    //@NotEmpty
+    @NotNull(message = "cannot be null")
     private WorkDayDto workDay;
 }

@@ -13,8 +13,9 @@ import java.util.List;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "products")
-@Getter
+
 @Setter
+@Getter
 @Builder
 public class Product {
 
@@ -27,6 +28,8 @@ public class Product {
     private String productName;
     
     private String description;
+
+    @Column(precision = 10, scale = 2)
     private BigDecimal price;
     
     @Column(name="product_duration")
@@ -35,6 +38,7 @@ public class Product {
     @Column(name="target_customer")
     Target targetCustomer;
     
+
     @ManyToMany(mappedBy = "products")
     List<Barber> barbers;
 

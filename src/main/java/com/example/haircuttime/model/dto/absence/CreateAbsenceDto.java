@@ -13,19 +13,16 @@ import java.time.LocalTime;
 @Setter
 @AbsenceAnnotation(message = "This Barber already has absence in given time")
 public class CreateAbsenceDto {
-    //@NotNull
-   // @NotEmpty
+
+    @NotNull
     private Long barberId;
 
-   // @NotNull
-    //@NotEmpty
+    @NotNull
     private Long workDayId;
 
-    //@NotNull
-   //@NotEmpty
+    @NotNull
     private LocalTime absenceStart;
 
-   // @NotNull
-    //@NotEmpty
+    @NotNull
     private LocalTime absenceEnd;
 }

@@ -10,7 +10,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+
 import jakarta.validation.constraints.*;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -23,12 +25,14 @@ public class ProductDto {
     private String productName;
     @NotEmpty(message = "filed can not be empty")
     private String description;
-    @NotEmpty(message = "filed can not be empty")
+    @DecimalMax("1000.00")// jaka najwyzsza cena
+    @DecimalMin("10.00")// jaka najwyzsza cena
     private BigDecimal price;
-    @NotEmpty(message = "filed can not be empty")
+    @NotNull
     private Long serviceDuration;
 
-    //lista rozwijana
+    @NotNull
+    private Long productDuration;
     Target targetCustomer;
 
     List<Barber> barbers;

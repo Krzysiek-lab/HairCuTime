@@ -4,6 +4,7 @@ import com.example.haircuttime.model.dto.workday.CreateWorkDayDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
@@ -13,9 +14,13 @@ import java.util.List;
 @AllArgsConstructor
 public class CreateWorkYearDto {
 
+    @NotNull
     private Long year;
+
     @JsonIgnore
+
+    @NotNull
+
     private Long barberId;
     private List<CreateWorkDayDto> workDayList;
-
 }

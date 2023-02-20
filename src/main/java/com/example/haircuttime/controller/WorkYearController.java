@@ -6,6 +6,7 @@ import com.example.haircuttime.service.workyear.WorkYearServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,14 +16,14 @@ public class WorkYearController {
 
     private final WorkYearServiceImpl workYearService;
 
-    @GetMapping
+    @GetMapping("allWorkYears")
     public List<WorkYearDto> getAllWorkYears() {
         return workYearService.getAllWorkYears();
     }
 
     @PostMapping("/add")
     public WorkYearDto addWorkYear(
-            @RequestBody CreateWorkYearDto createWorkYearDto) {
+            @RequestBody @Valid CreateWorkYearDto createWorkYearDto) {
         return workYearService.addWorkYear(createWorkYearDto);
     }
 }
