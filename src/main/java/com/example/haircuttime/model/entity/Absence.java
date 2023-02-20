@@ -1,12 +1,12 @@
 package com.example.haircuttime.model.entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+
 import java.time.LocalTime;
 
 @Getter
@@ -23,7 +23,6 @@ public class Absence {
     private Long id;
 
     @ManyToOne
-    @NotNull
     @JoinColumn(name = "barber_id")
     private Barber barber;
 
@@ -31,11 +30,11 @@ public class Absence {
     @JoinColumn(name = "work_day_id")
     private WorkDay workDay;
 
-    @NotNull
+
     @Column(name = "absence_start")
     private LocalTime absenceStart;
 
-    @NotNull
+
     @Column(name = "absence_end")
     private LocalTime absenceEnd;
 }

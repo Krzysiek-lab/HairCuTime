@@ -3,10 +3,11 @@ package com.example.haircuttime.controller;
 import com.example.haircuttime.model.dto.user.CreateUserDto;
 import com.example.haircuttime.model.dto.user.UserDto;
 import com.example.haircuttime.service.user.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+
 import java.util.List;
 
 @RestController

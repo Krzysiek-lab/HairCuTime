@@ -2,10 +2,12 @@ package com.example.haircuttime.model.entity;
 
 
 import com.example.haircuttime.model.enums.Target;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
+
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -33,12 +35,13 @@ public class Product {
     @Column(name="product_duration")
     private Long productDuration;
     @Enumerated(EnumType.STRING)
-    @Column(name="target_cutsomer")
+    @Column(name="target_customer")
     Target targetCustomer;
     
-//    @ManyToMany(mappedBy = "products")
-//    List<Barber> barbers;
 
-//    @OneToMany(mappedBy = "product")
-//    List<Appointment> appointments;
+    @ManyToMany(mappedBy = "products")
+    List<Barber> barbers;
+
+    @OneToMany(mappedBy = "product")
+    List<Appointment> appointments;
 }

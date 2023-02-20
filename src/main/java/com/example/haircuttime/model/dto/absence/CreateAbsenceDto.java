@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
 @Builder
@@ -15,6 +13,7 @@ import java.time.LocalTime;
 @Setter
 @AbsenceAnnotation(message = "This Barber already has absence in given time")
 public class CreateAbsenceDto {
+
     @NotNull
     private Long barberId;
 

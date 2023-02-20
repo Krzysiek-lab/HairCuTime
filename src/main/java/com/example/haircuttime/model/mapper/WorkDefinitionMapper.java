@@ -3,10 +3,7 @@ package com.example.haircuttime.model.mapper;
 import com.example.haircuttime.model.dto.workdefinition.CreateWorkDefinitionDto;
 import com.example.haircuttime.model.dto.workdefinition.WorkDefinitionDto;
 import com.example.haircuttime.model.entity.WorkDefinition;
-import lombok.Data;
 import org.springframework.stereotype.Component;
-
-import java.time.Duration;
 
 
 @Component

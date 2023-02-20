@@ -13,7 +13,7 @@ import com.example.haircuttime.repository.WorkYearRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,25 +43,26 @@ public class WorkYearServiceImpl implements WorkYearService {
 
     @Override
     public WorkYearDto addWorkYear(CreateWorkYearDto createWorkYearDto) {
-        WorkYear workYear = workYearMapper.toNewEntity(createWorkYearDto);// dodane
-        if (barberRepository.findById(createWorkYearDto.getBarberId()).isPresent()) { // if dodany
-            workYear = workYearMapper.toNewEntity(createWorkYearDto);
-            workYear.setBarber(barberRepository.findById(createWorkYearDto.getBarberId())
-                    .orElseThrow(EntityNotFoundException::new));
-
-            List<WorkDay> workDays = createWorkYearDto.getWorkDayList().stream()
-                    .map(createWorkDayDto -> {
-                        WorkDay workDay = workDayMapper.toNewEntity(createWorkDayDto);
-                        workDay.setWorkYear(workYearRepository.findById(createWorkDayDto
-                                        .getWorkYearId())
-                                .orElseThrow(EntityNotFoundException::new));
-                        workDay.setWorkDefinition(workDefinitionRepository.findById(createWorkDayDto
-                                        .getWorkDefinitionId())
-                                .orElseThrow(EntityNotFoundException::new));
-                        return workDay;
-                    }).toList();
-            workYear.setWorkDayList(new ArrayList<>(workDayRepository.saveAllAndFlush(workDays)));
-        }
+        WorkYear workYear = workYearMapper.toNewEntity(createWorkYearDto);
+        workYear.setBarber(barberRepository.findById(createWorkYearDto.getBarberId())
+                .orElseThrow(EntityNotFoundException::new));
+        List<WorkDay> workDays = createWorkYearDto.getWorkDayList().stream()
+                .map(createWorkDayDto -> {
+                    WorkDay workDay = workDayMapper.toNewEntity(createWorkDayDto);
+                    workDay.setWorkYear(workYearRepository.findById(createWorkDayDto
+                                    .getWorkYearId())
+                            .orElseThrow(EntityNotFoundException::new));
+                    workDay.setWorkDefinition(workDefinitionRepository.findById(createWorkDayDto
+                                    .getWorkDefinitionId())
+                            .orElseThrow(EntityNotFoundException::new));
+                    return workDay;
+                }).toList();
+        workYear.setWorkDayList(new ArrayList<>(workDayRepository.saveAllAndFlush(workDays)));
+        workYear.setBarber(barberRepository.getReferenceById(createWorkYearDto.getBarberId()));
+        var addWorkYear = barberRepository.getReferenceById(createWorkYearDto.getBarberId());
+        addWorkYear.getWorkYears().add(workYear);
+        barberRepository.save(addWorkYear);
         return workYearMapper.toDto(workYearRepository.save(workYear));
+
     }
 }

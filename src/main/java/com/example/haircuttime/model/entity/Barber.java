@@ -1,9 +1,10 @@
 package com.example.haircuttime.model.entity;
 
 import com.example.haircuttime.model.enums.Gender;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
+
 import java.util.List;
 
 @Entity
@@ -23,12 +24,16 @@ public class Barber {
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
     @ManyToMany
     List<Product> products;
     @OneToMany(mappedBy = "barber")
     private List<Absence> absences;
     @OneToMany(mappedBy = "barber")
     private List<Availability> availabilities;
+
     @OneToMany(mappedBy = "barber", orphanRemoval = true)
     private List<WorkYear> workYears;
 }

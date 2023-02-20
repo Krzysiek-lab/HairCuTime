@@ -4,14 +4,16 @@ import com.example.haircuttime.EventHandler.AbsenceRepositoryEventHandler;
 import com.example.haircuttime.model.dto.absence.AbsenceDto;
 import com.example.haircuttime.model.dto.absence.CreateAbsenceDto;
 import com.example.haircuttime.model.entity.Absence;
+import com.example.haircuttime.model.mapper.AbsenceMapper;
 import com.example.haircuttime.repository.AbsenceRepository;
 import com.example.haircuttime.service.absence.AbsenceServiceImpl;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+
 import java.util.List;
 
 @RestController
@@ -22,6 +24,10 @@ public class AbsenceController {
 
     private final AbsenceServiceImpl absenceService;
     private final AbsenceRepository absenceRepository;
+    private final AbsenceRepositoryEventHandler absenceRepositoryEventHandler;
+
+    private final AbsenceMapper absenceMapper;
+
     private final AbsenceRepositoryEventHandler absenceRepositoryEventHandler;
 
     @GetMapping("/absences")
@@ -47,6 +53,7 @@ public class AbsenceController {
 
     @PostMapping("/absence")
     public AbsenceDto createAbsence(@RequestBody @Valid CreateAbsenceDto absenceDto) {
+        absenceRepositoryEventHandler.handleAbsenceBeforeCreate(absenceMapper.toNewEntity(absenceDto));
         return absenceService.addAbsence(absenceDto);
     }
 

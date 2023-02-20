@@ -1,8 +1,9 @@
 package com.example.haircuttime.model.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
+
 
 @Entity
 @Table(name = "comments")

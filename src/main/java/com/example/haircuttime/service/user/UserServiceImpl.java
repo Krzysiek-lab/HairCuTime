@@ -8,14 +8,15 @@ import com.example.haircuttime.model.dto.user.UserDto;
 import com.example.haircuttime.model.entity.User;
 import com.example.haircuttime.model.mapper.UserMapper;
 import com.example.haircuttime.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

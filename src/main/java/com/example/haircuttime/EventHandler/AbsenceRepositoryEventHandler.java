@@ -2,22 +2,19 @@ package com.example.haircuttime.EventHandler;
 
 
 import com.example.haircuttime.model.entity.Absence;
-import lombok.RequiredArgsConstructor;
 import com.example.haircuttime.model.entity.Availability;
 import com.example.haircuttime.model.entity.RoleEntity;
 import com.example.haircuttime.model.entity.User;
 import com.example.haircuttime.model.enums.Role;
 import com.example.haircuttime.repository.AvailabilityRepository;
 import com.example.haircuttime.repository.RoleEntityRepository;
-import com.example.haircuttime.repository.UserRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
+import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeDelete;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 @RepositoryEventHandler
@@ -26,7 +23,7 @@ import java.util.List;
 public class AbsenceRepositoryEventHandler {
 
     private final RoleEntityRepository roleRepository;
-    private final UserRepository userRepository;
+
     private final AvailabilityRepository availabilityRepository;
 
     @HandleAfterCreate
@@ -57,7 +54,7 @@ public class AbsenceRepositoryEventHandler {
         availabilityRepository.save(availability);
     }
 
-    @HandleAfterCreate
+    @HandleBeforeCreate
     public void handleUserBeforeCreate(User user) {
         if (roleRepository.existsByName(Role.USER)) {
             user.setRoles(List.of(roleRepository.findByName(Role.USER)));
@@ -65,15 +62,5 @@ public class AbsenceRepositoryEventHandler {
             user.setRoles(List.of(RoleEntity.builder().name(Role.USER).build()));
         }
         log.info("assigning default role to new User entity");
-
-        RoleEntity role = RoleEntity.builder()
-                .name(Role.USER)
-                .build();
-        RoleEntity roleForUser = roleRepository.save(role);
-
-        List<RoleEntity> roleList = user.getRoles();
-        roleList.add(roleForUser);
-        user.setRoles(roleList);
-        userRepository.save(user);
     }
 }
