@@ -23,7 +23,7 @@ public class Security {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .authorizeRequests((request) -> request
+                .authorizeHttpRequests((request) -> request
                         .requestMatchers("/user/**", "/absence/**", "/barber/**", "/products/**",
                                 "/appointment/**", "/workday/**", "/workyear/**", "/workdefinition/**")
                         .hasAuthority("ADMIN")
