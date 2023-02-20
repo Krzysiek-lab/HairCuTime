@@ -8,7 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotNull;
+
+import jakarta.validation.constraints.*;
+
 import java.time.LocalTime;
 
 @Getter

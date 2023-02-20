@@ -2,8 +2,8 @@ package com.example.haircuttime.model.dto.comment;
 
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+
 
 @Getter
 @Setter

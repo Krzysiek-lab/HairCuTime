@@ -2,10 +2,10 @@ package com.example.haircuttime.model.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.Max;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +14,6 @@ import java.util.List;
 @Getter
 @Table(name = "work_day")
 @Builder
-@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
 public class WorkDay {
@@ -22,8 +21,7 @@ public class WorkDay {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Max(365)
-    @NonNull
+
     @Column(name = "day_in_year")
     private Long dayInYear;
 

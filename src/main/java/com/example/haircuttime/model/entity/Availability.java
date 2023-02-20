@@ -1,10 +1,10 @@
 package com.example.haircuttime.model.entity;
 
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+
 import java.time.LocalTime;
 
 @Entity
@@ -29,8 +29,11 @@ public class Availability {
     @JoinColumn(name = "barber_id")
     private Barber barber;
 
+
+
     @Column(name = "start_time")
     private LocalTime startTime;
+
 
     @Column(name = "end_time")
     private LocalTime endTime;

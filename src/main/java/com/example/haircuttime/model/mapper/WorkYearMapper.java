@@ -14,12 +14,15 @@ import java.util.stream.Collectors;
 
 @Component
 public class WorkYearMapper {
-
     private final WorkDayMapper workDayMapper;
 
-    public WorkYearMapper(@Lazy WorkDayMapper workDayMapper) {
+    private final BarberMapper barberMapper;
+
+    public WorkYearMapper(@Lazy WorkDayMapper workDayMapper,@Lazy BarberMapper barberMapper) {
         this.workDayMapper = workDayMapper;
+        this.barberMapper = barberMapper;
     }
+
 
     public WorkYear toEntity(WorkYearDto workYearDto) {
         return WorkYear.builder()
@@ -40,6 +43,7 @@ public class WorkYearMapper {
         return WorkYearDto.builder()
                 .id(workYear.getId())
                 .year(workYear.getYear())
+                .barber(barberMapper.toDto(workYear.getBarber()))
                 .workDayList(getWorkDayListDto(workYear))
                 .build();
     }

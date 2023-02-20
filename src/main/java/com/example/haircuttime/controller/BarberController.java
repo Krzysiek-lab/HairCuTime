@@ -14,13 +14,14 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("barber")
 @CrossOrigin(origins = "http://localhost:3000")
 
 public class BarberController {
 
     private final BarberServiceImpl barberService;
 
-    @GetMapping("/barbers")
+    @GetMapping("/all")
     public List<BarberDto> getAllBarbers() {
         return barberService.findAll();
     }
@@ -30,14 +31,23 @@ public class BarberController {
         return barberService.save(barber);
     }
 
-    @PutMapping("/barbers/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Barber> updateBarber(@PathVariable("id") long id, @RequestBody @Valid Barber barber) {
         return barberService.updateBarber(id, barber);
     }
 
-    @DeleteMapping("/barbers/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteBarber(@PathVariable("id") long id) {
         barberService.deleteBarber(id);
         return new ResponseEntity<String>("Barber was deleted.", HttpStatus.OK);
+    }
+
+    @PostMapping("/add-product/{id}")
+    public BarberDto addProduct(@RequestBody BarberDto barberDto, @PathVariable Long id) {
+        return barberService.addProductToBarber(barberDto, id);
+    }
+    @PostMapping("/remove-product/{id}")
+    public BarberDto removeProduct(@RequestBody BarberDto barberDto, @PathVariable Long id) {
+        return barberService.removeProductFromBarber(barberDto, id);
     }
 }

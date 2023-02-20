@@ -1,9 +1,10 @@
 package com.example.haircuttime.model.entity;
 
 import com.example.haircuttime.model.enums.Role;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
+
 
 @Entity
 @Table(name = "roles")
@@ -22,8 +23,4 @@ public class RoleEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "name")
     private Role name;
-
-//    @ManyToMany(mappedBy = "roles")
-//    private List<User> users;
-
 }
