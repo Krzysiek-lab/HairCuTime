@@ -28,8 +28,6 @@ public class AbsenceController {
 
     private final AbsenceMapper absenceMapper;
 
-    private final AbsenceRepositoryEventHandler absenceRepositoryEventHandler;
-
     @GetMapping("/absences")
     public List<Absence> getAllAbsences() {
         return absenceRepository.findAll();
@@ -56,7 +54,6 @@ public class AbsenceController {
         absenceRepositoryEventHandler.handleAbsenceBeforeCreate(absenceMapper.toNewEntity(absenceDto));
         return absenceService.addAbsence(absenceDto);
     }
-
 
     @PutMapping("/update/absence/{id}")
     public ResponseEntity<String> updateAbsence(@PathVariable("id") long id, @RequestBody @Valid AbsenceDto absence) {

@@ -1,14 +1,14 @@
 package com.example.haircuttime.model.dto.product;
 
 import com.example.haircuttime.model.enums.Target;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Builder
@@ -23,8 +23,8 @@ public class CreateProductDto {
     @NotNull
     @NotEmpty
     private String description;
-    @DecimalMax("1000.00")// jaka najwyzsza cena
-    @DecimalMin("10.00")// jaka najwyzsza cena
+    @DecimalMax("1000.00")
+    @DecimalMin("10.00")
     private BigDecimal price;
 
     @NotNull
