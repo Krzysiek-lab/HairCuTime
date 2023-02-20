@@ -4,9 +4,8 @@ import com.example.haircuttime.model.dto.absence.CreateAbsenceDto;
 import com.example.haircuttime.model.dto.availability.CreateAvailabilityDto;
 import lombok.*;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
+
 import java.util.List;
 
 @Builder

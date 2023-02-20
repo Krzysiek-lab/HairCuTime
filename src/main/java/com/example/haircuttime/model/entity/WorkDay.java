@@ -2,10 +2,10 @@ package com.example.haircuttime.model.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.Max;
+
 import java.util.ArrayList;
 import java.util.List;
 

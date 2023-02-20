@@ -1,7 +1,6 @@
 package com.example.haircuttime.config;
 
 import com.example.haircuttime.service.user.UserServiceImpl;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

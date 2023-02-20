@@ -1,7 +1,6 @@
 package com.example.haircuttime.config;
 
 import com.example.haircuttime.EventHandler.AbsenceRepositoryEventHandler;
-import com.example.haircuttime.model.entity.Barber;
 import com.example.haircuttime.repository.AvailabilityRepository;
 import com.example.haircuttime.repository.RoleEntityRepository;
 import lombok.RequiredArgsConstructor;

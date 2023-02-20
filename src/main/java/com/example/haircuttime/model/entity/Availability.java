@@ -1,10 +1,10 @@
 package com.example.haircuttime.model.entity;
 
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+
 import java.time.LocalTime;
 
 @Entity

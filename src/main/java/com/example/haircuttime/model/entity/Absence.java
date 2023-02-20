@@ -1,12 +1,12 @@
 package com.example.haircuttime.model.entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+
 import java.time.LocalTime;
 
 @Getter

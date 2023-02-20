@@ -7,12 +7,13 @@ import com.example.haircuttime.model.entity.Barber;
 import com.example.haircuttime.model.mapper.BarberMapper;
 import com.example.haircuttime.repository.BarberRepository;
 import com.example.haircuttime.repository.ProductRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

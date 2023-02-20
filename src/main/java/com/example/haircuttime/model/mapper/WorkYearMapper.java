@@ -3,7 +3,6 @@ package com.example.haircuttime.model.mapper;
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
 import com.example.haircuttime.model.dto.workyear.CreateWorkYearDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
-import com.example.haircuttime.model.entity.Barber;
 import com.example.haircuttime.model.entity.WorkDay;
 import com.example.haircuttime.model.entity.WorkYear;
 import org.springframework.context.annotation.Lazy;

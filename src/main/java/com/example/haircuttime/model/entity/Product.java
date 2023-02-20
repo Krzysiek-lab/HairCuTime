@@ -2,9 +2,10 @@ package com.example.haircuttime.model.entity;
 
 
 import com.example.haircuttime.model.enums.Target;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.List;
 

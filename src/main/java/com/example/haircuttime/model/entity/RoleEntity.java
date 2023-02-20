@@ -1,9 +1,10 @@
 package com.example.haircuttime.model.entity;
 
 import com.example.haircuttime.model.enums.Role;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
+
 
 @Entity
 @Table(name = "roles")

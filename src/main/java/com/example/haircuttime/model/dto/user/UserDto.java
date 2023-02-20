@@ -2,13 +2,11 @@ package com.example.haircuttime.model.dto.user;
 
 import com.example.haircuttime.model.dto.appointment.AppointmentDto;
 import com.example.haircuttime.model.entity.RoleEntity;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+
 import java.util.List;
 
 @Getter
