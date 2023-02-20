@@ -5,7 +5,7 @@ import com.example.haircuttime.model.dto.workday.WorkDayDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 

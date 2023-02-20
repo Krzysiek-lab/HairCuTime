@@ -28,7 +28,6 @@ public class AbsenceController {
 
     private final AbsenceMapper absenceMapper;
 
-    private final AbsenceRepositoryEventHandler absenceRepositoryEventHandler;
 
     @GetMapping("/absences")
     public List<Absence> getAllAbsences() {

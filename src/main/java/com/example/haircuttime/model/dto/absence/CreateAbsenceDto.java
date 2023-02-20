@@ -2,6 +2,7 @@ package com.example.haircuttime.model.dto.absence;
 
 
 import com.example.haircuttime.CustomAnnotations.AbsenceAnnotation;
+import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
