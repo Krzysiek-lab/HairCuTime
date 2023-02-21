@@ -3,10 +3,10 @@ package com.example.haircuttime.service.comment;
 import com.example.haircuttime.model.dto.comment.CommentDto;
 import com.example.haircuttime.model.mapper.CommentMapper;
 import com.example.haircuttime.repository.CommentRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -4,12 +4,12 @@ import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.barber.CreateBarberDto;
 import com.example.haircuttime.model.entity.Barber;
 import com.example.haircuttime.service.barber.BarberServiceImpl;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -39,7 +39,7 @@ public class BarberController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteBarber(@PathVariable("id") long id) {
         barberService.deleteBarber(id);
-        return new ResponseEntity<String>("Barber was deleted.", HttpStatus.OK);
+        return new ResponseEntity<>("Barber was deleted.", HttpStatus.OK);
     }
 
     @PostMapping("/add-product/{id}")

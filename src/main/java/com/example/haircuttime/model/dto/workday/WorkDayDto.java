@@ -4,9 +4,10 @@ import com.example.haircuttime.model.dto.absence.AbsenceDto;
 import com.example.haircuttime.model.dto.availability.AvailabilityDto;
 import com.example.haircuttime.model.dto.workdefinition.WorkDefinitionDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
-
-import jakarta.validation.constraints.*;
 
 import java.util.List;
 

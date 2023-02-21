@@ -2,10 +2,10 @@ package com.example.haircuttime.controller;
 
 import com.example.haircuttime.model.dto.comment.CommentDto;
 import com.example.haircuttime.service.comment.CommentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController

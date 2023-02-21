@@ -5,7 +5,6 @@ import com.example.haircuttime.model.enums.Target;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 import java.math.BigDecimal;
 import java.util.List;
 

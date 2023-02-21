@@ -1,12 +1,11 @@
 package com.example.haircuttime.model.dto.workdefinition;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import jakarta.persistence.*;
 
 import java.time.Duration;
 import java.time.LocalTime;
@@ -30,6 +29,5 @@ public class WorkDefinitionDto {
     @DateTimeFormat
     private LocalTime end;
 
-    @Enumerated(EnumType.STRING)
     private Duration workDuration;
 }

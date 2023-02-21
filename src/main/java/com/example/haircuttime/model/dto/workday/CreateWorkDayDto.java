@@ -2,9 +2,9 @@ package com.example.haircuttime.model.dto.workday;
 
 import com.example.haircuttime.model.dto.absence.CreateAbsenceDto;
 import com.example.haircuttime.model.dto.availability.CreateAvailabilityDto;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
-
-import jakarta.validation.constraints.*;
 
 import java.util.List;
 

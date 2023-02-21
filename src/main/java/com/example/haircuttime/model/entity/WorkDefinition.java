@@ -3,7 +3,6 @@ package com.example.haircuttime.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.List;

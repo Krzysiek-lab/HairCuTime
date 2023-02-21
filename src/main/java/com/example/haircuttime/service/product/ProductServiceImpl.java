@@ -7,7 +7,6 @@ import com.example.haircuttime.model.entity.Product;
 import com.example.haircuttime.model.mapper.ProductMapper;
 import com.example.haircuttime.repository.ProductRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

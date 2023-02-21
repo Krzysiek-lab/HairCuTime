@@ -7,10 +7,10 @@ import com.example.haircuttime.model.mapper.WorkDayMapper;
 import com.example.haircuttime.repository.WorkDayRepository;
 import com.example.haircuttime.repository.WorkDefinitionRepository;
 import com.example.haircuttime.repository.WorkYearRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,7 +40,6 @@ public class WorkDayServiceImpl implements WorkDayService {
                 .orElseThrow(EntityNotFoundException::new));
         workDay.setWorkDefinition(workDefinitionRepository.findById(createWorkDayDto.getWorkDefinitionId())
                 .orElseThrow(EntityNotFoundException::new));
-
         return workDayMapper.toDto(workDayRepository.save(workDay));
     }
 }

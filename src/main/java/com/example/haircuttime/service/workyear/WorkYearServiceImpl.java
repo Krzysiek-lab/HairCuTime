@@ -10,10 +10,10 @@ import com.example.haircuttime.repository.BarberRepository;
 import com.example.haircuttime.repository.WorkDayRepository;
 import com.example.haircuttime.repository.WorkDefinitionRepository;
 import com.example.haircuttime.repository.WorkYearRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import jakarta.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

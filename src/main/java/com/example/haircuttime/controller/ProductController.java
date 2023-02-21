@@ -4,12 +4,12 @@ package com.example.haircuttime.controller;
 import com.example.haircuttime.model.dto.product.CreateProductDto;
 import com.example.haircuttime.model.dto.product.ProductDto;
 import com.example.haircuttime.service.product.ProductService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController

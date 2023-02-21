@@ -2,9 +2,11 @@ package com.example.haircuttime.model.dto.user;
 
 import com.example.haircuttime.model.dto.appointment.CreateAppointmentDto;
 import com.example.haircuttime.model.entity.RoleEntity;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.*;
-
-import jakarta.validation.constraints.*;
 
 import java.util.List;
 

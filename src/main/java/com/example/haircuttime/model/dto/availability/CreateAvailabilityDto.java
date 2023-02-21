@@ -2,14 +2,12 @@ package com.example.haircuttime.model.dto.availability;
 
 
 import com.example.haircuttime.CustomAnnotations.AvailabilityAnnotation;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-
-
-import jakarta.validation.constraints.*;
 
 import java.time.LocalTime;
 

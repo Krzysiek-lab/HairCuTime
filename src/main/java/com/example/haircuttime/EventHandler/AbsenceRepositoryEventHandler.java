@@ -29,7 +29,6 @@ public class AbsenceRepositoryEventHandler {
     @HandleAfterCreate
     public void handleAbsenceBeforeCreate(Absence absence) {
         log.info("creating Absence entity");
-
         var availability = availabilityRepository.findAll().stream()
                 .filter(e -> e.getStartTime().equals(
                         absence.getAbsenceStart())
@@ -37,14 +36,12 @@ public class AbsenceRepositoryEventHandler {
                         && e.getBarber().equals(absence.getBarber())
                         && e.getWorkDay().equals(absence.getWorkDay()))
                 .toList();
-
         availabilityRepository.delete(availability.get(0));
     }
 
     @HandleBeforeDelete
     public void handleAbsenceBeforeDelete(Absence absence) {
         log.info("deleting Absence entity");
-
         var availability = Availability.builder()
                 .barber(absence.getBarber())
                 .workDay(absence.getWorkDay())
@@ -56,11 +53,11 @@ public class AbsenceRepositoryEventHandler {
 
     @HandleBeforeCreate
     public void handleUserBeforeCreate(User user) {
+        log.info("assigning default role to new User entity");
         if (roleRepository.existsByName(Role.USER)) {
             user.setRoles(List.of(roleRepository.findByName(Role.USER)));
         } else {
             user.setRoles(List.of(RoleEntity.builder().name(Role.USER).build()));
         }
-        log.info("assigning default role to new User entity");
     }
 }

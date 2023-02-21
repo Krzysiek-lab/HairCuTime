@@ -1,11 +1,13 @@
 package com.example.haircuttime.model.dto.product;
 
 import com.example.haircuttime.model.enums.Target;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-
-import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 

@@ -5,13 +5,14 @@ import com.example.haircuttime.model.entity.Appointment;
 import com.example.haircuttime.model.entity.Barber;
 import com.example.haircuttime.model.entity.Comment;
 import com.example.haircuttime.model.enums.Target;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-
-
-import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 import java.util.List;

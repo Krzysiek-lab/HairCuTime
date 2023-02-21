@@ -4,8 +4,6 @@ package com.example.haircuttime.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
-
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
@@ -23,11 +21,10 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @Column
-    private LocalDate from;
+
 
     @Column
-    private LocalDate to;
+    private Long serviceLength;
 
     @ManyToOne
     private Product product;
