@@ -2,6 +2,7 @@ package com.example.haircuttime.model.dto.workyear;
 
 import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
+import com.example.haircuttime.model.entity.Barber;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -21,12 +22,9 @@ public class WorkYearDto {
     @NotNull
     private Long year;
 
-    @JsonIgnore
-
-
     @NotNull
-
-    private BarberDto barber;
+    @JsonIgnore
+    private Barber barber;
 
     private List<WorkDayDto> workDayList = new ArrayList<>();
 }

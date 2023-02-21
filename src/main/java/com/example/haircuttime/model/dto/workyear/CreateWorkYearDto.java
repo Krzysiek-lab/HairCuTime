@@ -17,10 +17,8 @@ public class CreateWorkYearDto {
     @NotNull
     private Long year;
 
-    @JsonIgnore
 
     @NotNull
-
     private Long barberId;
     private List<CreateWorkDayDto> workDayList;
 }

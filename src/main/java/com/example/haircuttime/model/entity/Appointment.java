@@ -1,12 +1,8 @@
 package com.example.haircuttime.model.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
-
 
 import java.time.LocalDate;
 
@@ -16,8 +12,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Builder
-@ToString(exclude = {"user"})
-@EqualsAndHashCode(exclude = {"user"})
+
 public class Appointment {
 
     @Id
@@ -25,9 +20,8 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-//    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     @Column
     private LocalDate from;

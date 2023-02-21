@@ -28,6 +28,7 @@ public class WorkYearMapper {
         return WorkYear.builder()
                 .id(workYearDto.getId())
                 .year(workYearDto.getYear())
+                .barber(workYearDto.getBarber())
                 .workDayList(getWorkDayList(workYearDto))
                 .build();
     }
@@ -43,7 +44,7 @@ public class WorkYearMapper {
         return WorkYearDto.builder()
                 .id(workYear.getId())
                 .year(workYear.getYear())
-                .barber(barberMapper.toDto(workYear.getBarber()))
+                .barber(workYear.getBarber())
                 .workDayList(getWorkDayListDto(workYear))
                 .build();
     }

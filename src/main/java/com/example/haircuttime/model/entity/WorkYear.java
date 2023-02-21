@@ -1,5 +1,7 @@
 package com.example.haircuttime.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,8 +21,10 @@ public class WorkYear {
     @Column(name = "id", nullable = false)
     private Long id;
     private Long year;
+
+    @JsonIgnore
     @ManyToOne
     private Barber barber;
-    @OneToMany(mappedBy = "workYear", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany
     private List<WorkDay> workDayList;
 }

@@ -26,7 +26,7 @@ public class BarberController {
         return barberService.findAll();
     }
 
-    @PostMapping("/create/barbers")
+    @PostMapping("/create")
     public BarberDto createBarber(@RequestBody @Valid CreateBarberDto barber) {
         return barberService.save(barber);
     }
