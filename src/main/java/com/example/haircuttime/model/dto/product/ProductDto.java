@@ -22,6 +22,8 @@ import java.util.List;
 @Data
 @Builder
 public class ProductDto {
+
+    private Long id;
     @NotEmpty(message = "filed can not be empty")
     private String productName;
     @NotEmpty(message = "filed can not be empty")
