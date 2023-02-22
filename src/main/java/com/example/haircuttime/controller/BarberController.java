@@ -46,6 +46,7 @@ public class BarberController {
     public BarberDto addProduct(@RequestBody BarberDto barberDto, @PathVariable Long id) {
         return barberService.addProductToBarber(barberDto, id);
     }
+
     @PostMapping("/remove-product/{id}")
     public BarberDto removeProduct(@RequestBody BarberDto barberDto, @PathVariable Long id) {
         return barberService.removeProductFromBarber(barberDto, id);
