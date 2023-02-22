@@ -1,5 +1,6 @@
 package com.example.haircuttime.controller;
 
+import com.example.haircuttime.exception.exceptions.ResourceNotFoundException;
 import com.example.haircuttime.model.dto.appointment.AppointmentDto;
 import com.example.haircuttime.model.dto.appointment.CreateAppointmentDto;
 import com.example.haircuttime.model.dto.product.ProductDto;
@@ -22,6 +23,7 @@ import java.util.List;
 @Data
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@RequestMapping("appointment")
 public class AppointmentController {
 
 
@@ -64,8 +66,12 @@ public class AppointmentController {
     @PostMapping("/addExistingProductToAnAppointment")
     public String addExistingProductToAnAppointment(@RequestParam long id, @RequestParam long serviceId) {
         appointmentService.addExistingProductToAppointment(id, serviceId);
-        return "redirect:/allAppointments";
+        return "redirect:/appointmentById" + id;
     }
 
-
+    @GetMapping("/appointmentById/{id}")
+    public Appointment appointmentById(@PathVariable long id) {
+        return appointmentRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("No such appointment"));
+    }
 }
