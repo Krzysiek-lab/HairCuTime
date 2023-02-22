@@ -6,6 +6,7 @@ import com.example.haircuttime.model.dto.product.ProductDto;
 
 import java.util.List;
 
+
 public interface AppointmentService {
 
     List<AppointmentDto> getAllAppointment();

@@ -11,6 +11,8 @@ import com.example.haircuttime.service.appointment.AppointmentServiceImpl;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,21 +38,33 @@ public class AppointmentController {
         return appointmentService.getAllAppointment();
     }
 
-    @PostMapping("/create")
-    public void addAppointment(@RequestBody @Valid CreateAppointmentDto createAppointmentDto) {
-        appointmentService.addAppointment(createAppointmentDto);
+
+
+
+
+    @DeleteMapping("/deleteAppointment")
+    public ResponseEntity<String> deleteAppointment(@RequestParam long id) {
+        appointmentRepository.deleteById(id);
+        return new ResponseEntity<>("Appointment was deleted.", HttpStatus.OK);
     }
+
+
+    @PostMapping("/create")
+    public AppointmentDto addAppointment(@RequestBody @Valid CreateAppointmentDto createAppointmentDto) {
+       return appointmentService.addAppointment(createAppointmentDto);
+    }
+
+
 
     @PutMapping("/update")
     public AppointmentDto updateAppointment(@RequestBody @Valid AppointmentDto appointmentDto) {
-        return  appointmentService.updateAppointment(appointmentDto);
+        return appointmentService.updateAppointment(appointmentDto);
     }
 
     @DeleteMapping("/delete/{id}")
     public void deleteAppointment(@PathVariable Long id) {
         appointmentService.deleteAppointmentById(id);
     }
-
 
 
     @PostMapping("/add-new-product")
@@ -66,8 +80,7 @@ public class AppointmentController {
     @PostMapping("/add-product")
     public String addExistingProductToAnAppointment(@RequestParam long id, @RequestParam long serviceId) {
         appointmentService.addExistingProductToAppointment(id, serviceId);
-        return "redirect:/allAppointments";
+        return "redirect:/appointmentById" + id;
     }
-
 
 }
