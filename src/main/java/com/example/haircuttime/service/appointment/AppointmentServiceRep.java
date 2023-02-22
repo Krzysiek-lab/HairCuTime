@@ -3,10 +3,11 @@ package com.example.haircuttime.service.appointment;
 import com.example.haircuttime.model.dto.appointment.AppointmentDto;
 import com.example.haircuttime.model.dto.appointment.CreateAppointmentDto;
 import com.example.haircuttime.model.dto.product.ProductDto;
+import com.example.haircuttime.model.entity.Appointment;
 
 public interface AppointmentServiceRep {
 
-    void updateAppointment(long id, AppointmentDto appointmentDto);
+    Appointment updateAppointment(long id, AppointmentDto appointmentDto);
 
     void addAppointment(CreateAppointmentDto appointmentDto);
 
