@@ -17,12 +17,12 @@ public class WorkDayController {
     private final WorkDayService workDayService;
 
 
-    @GetMapping
+    @GetMapping("/get")
     public List<WorkDayDto> getAllWorkDays() {
         return workDayService.getAllWorkDays();
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public WorkDayDto addWorkDay(
             @RequestBody CreateWorkDayDto createWorkDayDto) {
         return workDayService.addWorkDay(createWorkDayDto);

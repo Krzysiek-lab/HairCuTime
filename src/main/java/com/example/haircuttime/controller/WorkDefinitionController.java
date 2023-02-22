@@ -14,12 +14,12 @@ import java.util.List;
 public class WorkDefinitionController {
     private final WorkDefinitionServiceImpl workDefinitionService;
 
-    @GetMapping
+    @GetMapping("/get")
     public List<WorkDefinitionDto> getAllDefinitions() {
         return workDefinitionService.getAllWorkDefinitions();
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public WorkDefinitionDto addDefinition(
             @RequestBody CreateWorkDefinitionDto createWorkDefinitionDto) {
         return workDefinitionService.addWorkDefinition(createWorkDefinitionDto);

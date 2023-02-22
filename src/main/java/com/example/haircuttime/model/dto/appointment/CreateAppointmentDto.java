@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class CreateAppointmentDto {
-
+    @NotNull
     private Long userId;
 
     @NotNull

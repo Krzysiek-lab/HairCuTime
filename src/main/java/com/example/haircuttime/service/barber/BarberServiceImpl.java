@@ -22,7 +22,6 @@ public class BarberServiceImpl implements BarberService{
 
     private final BarberRepository barberRepository;
     private final BarberMapper barberMapper;
-
     private final ProductRepository productRepository;
 
     public List<BarberDto> findAll() {

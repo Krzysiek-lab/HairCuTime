@@ -16,12 +16,12 @@ public class WorkYearController {
 
     private final WorkYearServiceImpl workYearService;
 
-    @GetMapping("allWorkYears")
+    @GetMapping("/get")
     public List<WorkYearDto> getAllWorkYears() {
         return workYearService.getAllWorkYears();
     }
 
-    @PostMapping("/add")
+    @PostMapping("/create")
     public WorkYearDto addWorkYear(
             @RequestBody @Valid CreateWorkYearDto createWorkYearDto) {
         return workYearService.addWorkYear(createWorkYearDto);

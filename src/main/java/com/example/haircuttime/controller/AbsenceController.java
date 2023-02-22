@@ -8,7 +8,7 @@ import com.example.haircuttime.model.mapper.AbsenceMapper;
 import com.example.haircuttime.repository.AbsenceRepository;
 import com.example.haircuttime.service.absence.AbsenceServiceImpl;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
+@RequestMapping("absence")
 @CrossOrigin(origins = "http://localhost:3000")
-
 public class AbsenceController {
 
     private final AbsenceServiceImpl absenceService;
@@ -28,41 +28,41 @@ public class AbsenceController {
     private final AbsenceMapper absenceMapper;
 
 
-    @GetMapping("/absences")
+    @GetMapping("/get")
     public List<Absence> getAllAbsences() {
         return absenceRepository.findAll();
     }
 
-    @GetMapping("/absencesById")
+    @GetMapping("/get/id")
     public AbsenceDto getAbsencesById(@RequestParam Long id) {
         return absenceService.getAbsenceById(id);
     }
 
-    @GetMapping("/absencesByBarber")
+    @GetMapping("/get/barber")
     public List<AbsenceDto> getAbsencesByBarber(@RequestParam Long id) {
         return absenceService.getAbsenceByBarber(id);
     }
 
 
-    @GetMapping("/absencesByWorkDay")
+    @GetMapping("/absence/get/workday")
     public List<AbsenceDto> getAbsencesByWorkDay(@RequestParam Long id) {
         return absenceService.getAbsenceByWorkDay(id);
     }
 
-    @PostMapping("/absence")
+    @PostMapping("/create")
     public AbsenceDto createAbsence(@RequestBody @Valid CreateAbsenceDto absenceDto) {
         absenceRepositoryEventHandler.handleAbsenceBeforeCreate(absenceMapper.toNewEntity(absenceDto));
         return absenceService.addAbsence(absenceDto);
     }
 
 
-    @PutMapping("/update/absence/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<String> updateAbsence(@PathVariable("id") long id, @RequestBody @Valid AbsenceDto absence) {
         absenceService.updateAbsence(id, absence);
         return new ResponseEntity<>("Absence was updated.", HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/absence/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteAbsence(@PathVariable("id") long id) {
         absenceRepositoryEventHandler.handleAbsenceBeforeDelete(absenceRepository.getReferenceById(id));
         absenceService.removeAbsence(id);
