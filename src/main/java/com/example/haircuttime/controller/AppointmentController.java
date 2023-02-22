@@ -1,26 +1,31 @@
 package com.example.haircuttime.controller;
 
+import com.example.haircuttime.exception.exceptions.ResourceNotFoundException;
 import com.example.haircuttime.model.dto.appointment.AppointmentDto;
 import com.example.haircuttime.model.dto.appointment.CreateAppointmentDto;
 import com.example.haircuttime.model.dto.product.ProductDto;
+import com.example.haircuttime.model.entity.Appointment;
 import com.example.haircuttime.model.mapper.AppointmentMapper;
 import com.example.haircuttime.model.mapper.ProductMapper;
 import com.example.haircuttime.repository.AppointmentRepository;
 import com.example.haircuttime.repository.ProductRepository;
-import com.example.haircuttime.service.appointment.AppointmentServiceImpl;
+import com.example.haircuttime.service.appointment.AppointmentService;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.BindingResult;
+import lombok.Setter;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@Getter
 @RequiredArgsConstructor
-@RequestMapping("appointment")
+@Setter
+@Getter
 @CrossOrigin(origins = "http://localhost:3000")
+@RestController
+@RequestMapping("appointment")
 public class AppointmentController {
 
 
@@ -28,12 +33,23 @@ public class AppointmentController {
     private final AppointmentMapper appointmentMapper;
     private final ProductMapper productMapper;
     private final ProductRepository productRepository;
-    private final AppointmentServiceImpl appointmentService;
+    private final AppointmentService appointmentService;
 
 
-    @GetMapping("/get")
-    public List<AppointmentDto> getAllAppointments() {
-        return appointmentService.getAllAppointment();
+    @GetMapping("/all")
+    public ResponseEntity<List<AppointmentDto>> getAllAppointments() {
+        return new ResponseEntity<>(appointmentService.getAllAppointment(), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteAppointment(@PathVariable long id) {
+        appointmentRepository.deleteById(id);
+        return new ResponseEntity<>("Appointment was deleted.", HttpStatus.OK);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<AppointmentDto> updateAppointment(@RequestBody @Valid AppointmentDto appointmentDto) {
+        return new ResponseEntity<>(appointmentService.updateAppointment(appointmentDto), HttpStatus.OK);
     }
 
     @PostMapping("/create")
@@ -41,33 +57,20 @@ public class AppointmentController {
         appointmentService.addAppointment(createAppointmentDto);
     }
 
-    @PutMapping("/update")
-    public AppointmentDto updateAppointment(@RequestBody @Valid AppointmentDto appointmentDto) {
-        return  appointmentService.updateAppointment(appointmentDto);
+    @PostMapping("/newProduct")
+    public void addNewProductToAnAppointment(@RequestParam long id, @RequestBody @Valid ProductDto productDto) {
+        appointmentService.addProductToAppointment(id, productDto);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteAppointment(@PathVariable Long id) {
-        appointmentService.deleteAppointmentById(id);
-    }
-
-
-
-    @PostMapping("/add-new-product")
-    public String addNewProductToAnAppointment(@RequestParam long id, @RequestBody @Valid ProductDto productDto,
-                                               BindingResult bindingResult) {
-        if (!bindingResult.hasErrors()) {
-            appointmentService.addProductToAppointment(id, productDto);
-        }
-        return "redirect:/allAppointments";
-    }
-
-
-    @PostMapping("/add-product")
+    @PostMapping("/existingProduct")
     public String addExistingProductToAnAppointment(@RequestParam long id, @RequestParam long serviceId) {
         appointmentService.addExistingProductToAppointment(id, serviceId);
-        return "redirect:/allAppointments";
+        return "redirect:/appointmentById" + id;
     }
 
-
+    @GetMapping("/get/{id}")
+    public Appointment appointmentById(@PathVariable long id) {
+        return appointmentRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("No such appointment"));
+    }
 }

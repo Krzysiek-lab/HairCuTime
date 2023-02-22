@@ -36,7 +36,6 @@ public class Product {
     @Enumerated(EnumType.STRING)
     @Column(name="target_customer")
     Target targetCustomer;
-    
 
     @ManyToMany(mappedBy = "products")
     List<Barber> barbers;

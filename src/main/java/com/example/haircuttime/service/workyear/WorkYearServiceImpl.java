@@ -59,6 +59,5 @@ public class WorkYearServiceImpl implements WorkYearService {
                 }).toList();
         workYear.setWorkDayList(new ArrayList<>(workDayRepository.saveAllAndFlush(workDays)));
         return workYearMapper.toDto(workYearRepository.save(workYear));
-
     }
 }
