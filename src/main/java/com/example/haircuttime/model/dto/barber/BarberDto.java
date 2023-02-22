@@ -32,7 +32,6 @@ public class BarberDto {
     private Gender gender;
     @NotNull
     private List<ProductDto> products;
-
     private List<WorkYearDto> workYears;
     private List<AbsenceDto> absences;
     private List<AvailabilityDto> availabilities;

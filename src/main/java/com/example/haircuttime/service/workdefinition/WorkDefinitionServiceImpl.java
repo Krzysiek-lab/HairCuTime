@@ -2,6 +2,7 @@ package com.example.haircuttime.service.workdefinition;
 
 import com.example.haircuttime.model.dto.workdefinition.CreateWorkDefinitionDto;
 import com.example.haircuttime.model.dto.workdefinition.WorkDefinitionDto;
+import com.example.haircuttime.model.entity.WorkDefinition;
 import com.example.haircuttime.model.mapper.WorkDefinitionMapper;
 import com.example.haircuttime.repository.WorkDefinitionRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +27,10 @@ public class WorkDefinitionServiceImpl implements WorkDefinitionService {
 
     @Override
     public WorkDefinitionDto addWorkDefinition(CreateWorkDefinitionDto createWorkDefinitionDto) {
+        WorkDefinition workDefinition = workDefinitionMapper.toNewEntity(createWorkDefinitionDto);
         return workDefinitionMapper.toDto(workDefinitionRepository
                 .save(workDefinitionMapper
                         .toNewEntity(createWorkDefinitionDto)));
     }
+
 }

@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.Duration;
 import java.time.LocalTime;
 
 @Getter
@@ -28,6 +27,4 @@ public class WorkDefinitionDto {
     @NotNull
     @DateTimeFormat
     private LocalTime end;
-
-    private Duration workDuration;
 }

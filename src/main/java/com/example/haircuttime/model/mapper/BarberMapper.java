@@ -5,10 +5,8 @@ import com.example.haircuttime.model.dto.availability.AvailabilityDto;
 import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.barber.CreateBarberDto;
 import com.example.haircuttime.model.dto.product.ProductDto;
-import com.example.haircuttime.model.entity.Absence;
-import com.example.haircuttime.model.entity.Availability;
-import com.example.haircuttime.model.entity.Barber;
-import com.example.haircuttime.model.entity.Product;
+import com.example.haircuttime.model.dto.workyear.WorkYearDto;
+import com.example.haircuttime.model.entity.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +31,7 @@ public class BarberMapper {
                 .surname(createBarberDto.getSurname())
                 .gender(createBarberDto.getGender())
                 .products(new ArrayList<>())
-                //.workYears(new ArrayList<>())
+                .workYears(new ArrayList<>())
                 .availabilities(new ArrayList<>())
                 .absences(new ArrayList<>())
                 .build();
@@ -46,7 +44,7 @@ public class BarberMapper {
                 .surname(barberDto.getSurname())
                 .gender(barberDto.getGender())
                 .products(getProducts(barberDto))
-                //.workYears(getWorkYears(barberDto))
+                .workYears(getWorkYears(barberDto))
                 .absences(getAbsences(barberDto))
                 .availabilities(getAvailabilities(barberDto))
                 .build();
@@ -60,7 +58,7 @@ public class BarberMapper {
                     .surname(barber.getSurname())
                     .gender(barber.getGender())
                     .products(getProductDto(barber))
-                    .workYears(new ArrayList<>())//zmiana odkomentowane
+                    .workYears(new ArrayList<>())
                     .absences(getAbsenceDto(barber))
                     .availabilities(getAvailabilityDto(barber))
                     .build();
@@ -71,7 +69,7 @@ public class BarberMapper {
                     .surname(barber.getSurname())
                     .gender(barber.getGender())
                     .products(getProductDto(barber))
-                    .workYears(new ArrayList<>(List.of(workYearMapper.toDto(barber.getWorkYears().get(0)))))//zmiana odkomentowane
+                    .workYears(new ArrayList<>(List.of(workYearMapper.toDto(barber.getWorkYears().get(0)))))
                     .absences(getAbsenceDto(barber))
                     .availabilities(getAvailabilityDto(barber))
                     .build();
@@ -80,19 +78,19 @@ public class BarberMapper {
 
     }
 
-//    private List<WorkYear> getWorkYears(BarberDto barberDto) {
-//        return barberDto.getWorkYears()
-//                .stream()
-//                .map(workYearMapper::toEntity)
-//                .collect(Collectors.toList());
-//    }
+    private List<WorkYear> getWorkYears(BarberDto barberDto) {
+        return barberDto.getWorkYears()
+                .stream()
+                .map(workYearMapper::toEntity)
+                .collect(Collectors.toList());
+    }
 
-//    private List<WorkYearDto> getWorkYearDto(Barber barber) {
-//        return barber.getWorkYears()
-//                .stream()
-//                .map(workYearMapper::toDto)
-//                .collect(Collectors.toList());
-//    }
+    private List<WorkYearDto> getWorkYearDto(Barber barber) {
+        return barber.getWorkYears()
+                .stream()
+                .map(workYearMapper::toDto)
+                .collect(Collectors.toList());
+    }
 
     private List<Product> getProducts(BarberDto barberDto) {
         return barberDto.getProducts()

@@ -7,6 +7,7 @@ import com.example.haircuttime.model.dto.workday.WorkDayDto;
 import com.example.haircuttime.model.entity.Absence;
 import com.example.haircuttime.model.entity.Availability;
 import com.example.haircuttime.model.entity.WorkDay;
+import com.example.haircuttime.repository.WorkDefinitionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,8 @@ public class WorkDayMapper {
     private final AvailabilityMapper availabilityMapper;
 
     private final AbsenceMapper absenceMapper;
+    private final WorkDefinitionRepository workDefinitionRepository;
+    private final WorkDefinitionMapper workDefinitionMapper;
 
 
     public WorkDay toEntity(WorkDayDto workDayDto) {
@@ -30,6 +33,7 @@ public class WorkDayMapper {
                 .id(workDayDto.getId())
                 .dayInYear(workDayDto.getDayInYear())
                 .workYear(workYearMapper.toEntity(workDayDto.getWorkYear()))
+                .workDefinition(workDefinitionMapper.toEntity(workDayDto.getWorkDefinition()))
                 .availabilities(getAvailabilities(workDayDto))
                 .absences(getAbsences(workDayDto))
                 .build();
@@ -39,6 +43,8 @@ public class WorkDayMapper {
         return WorkDayDto.builder()
                 .id(workDay.getId())
                 .dayInYear(workDay.getDayInYear())
+                .workYear(workYearMapper.toDto(workDay.getWorkYear()))
+                .workDefinition(workDefinitionMapper.toDto(workDay.getWorkDefinition()))
                 .availabilities(getAvailabilityDto(workDay))
                 .absences(getAbsenceDto(workDay))
                 .build();
@@ -57,17 +63,20 @@ public class WorkDayMapper {
                 .map(availabilityMapper::toEntity)
                 .collect(Collectors.toList());
     }
-    private List<AvailabilityDto> getAvailabilityDto(WorkDay workDay){
+
+    private List<AvailabilityDto> getAvailabilityDto(WorkDay workDay) {
         return workDay.getAvailabilities().stream()
                 .map(availabilityMapper::toDto)
                 .collect(Collectors.toList());
     }
-    private List<Absence> getAbsences(WorkDayDto workDayDto){
+
+    private List<Absence> getAbsences(WorkDayDto workDayDto) {
         return workDayDto.getAbsences().stream()
                 .map(absenceMapper::toEntity)
                 .collect(Collectors.toList());
     }
-    private List<AbsenceDto> getAbsenceDto(WorkDay workDay){
+
+    private List<AbsenceDto> getAbsenceDto(WorkDay workDay) {
         return workDay.getAbsences().stream()
                 .map(absenceMapper::toDto)
                 .collect(Collectors.toList());

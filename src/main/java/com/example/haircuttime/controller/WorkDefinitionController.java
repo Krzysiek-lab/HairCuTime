@@ -20,8 +20,7 @@ public class WorkDefinitionController {
     }
 
     @PostMapping("/create")
-    public WorkDefinitionDto addDefinition(
-            @RequestBody CreateWorkDefinitionDto createWorkDefinitionDto) {
+    public WorkDefinitionDto addDefinition(@RequestBody CreateWorkDefinitionDto createWorkDefinitionDto) {
         return workDefinitionService.addWorkDefinition(createWorkDefinitionDto);
     }
 }

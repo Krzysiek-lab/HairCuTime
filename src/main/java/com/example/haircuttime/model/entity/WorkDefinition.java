@@ -3,7 +3,6 @@ package com.example.haircuttime.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.Duration;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -22,8 +21,6 @@ public class WorkDefinition {
     private String name;
     private LocalTime start;
     private LocalTime end;
-    @Column(name = "work_duration")
-    private Duration workDuration;
     @OneToMany(mappedBy = "workDefinition")
     private List<WorkDay> workDay;
 }
