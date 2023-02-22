@@ -24,11 +24,11 @@ public class AppointmentService implements AppointmentServiceRep {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
-    public void updateAppointment(long id, AppointmentDto appointmentDto) {
+    public Appointment updateAppointment(long id, AppointmentDto appointmentDto) {
         var appointment = appointmentRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("No element with given id"));
         appointment = appointmentMapper.toEntity(appointmentDto);
-        appointmentRepository.save(appointment);
+       return appointmentRepository.save(appointment);
     }
 
 
