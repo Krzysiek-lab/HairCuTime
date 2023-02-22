@@ -23,12 +23,15 @@ import java.util.List;
 public class AbsenceRepositoryEventHandler {
 
     private final RoleEntityRepository roleRepository;
-
     private final AvailabilityRepository availabilityRepository;
 
     @HandleAfterCreate
     public void handleAbsenceBeforeCreate(Absence absence) {
         log.info("creating Absence entity");
+        var all = availabilityRepository.findAll();
+        if (all.isEmpty()) {
+            return;
+        }
         var availability = availabilityRepository.findAll().stream()
                 .filter(e -> e.getStartTime().equals(
                         absence.getAbsenceStart())
