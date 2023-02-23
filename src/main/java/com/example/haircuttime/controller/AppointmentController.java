@@ -36,7 +36,7 @@ public class AppointmentController {
     private final AppointmentService appointmentService;
 
 
-    @GetMapping("/all")
+    @GetMapping("/get")
     public ResponseEntity<List<AppointmentDto>> getAllAppointments() {
         return new ResponseEntity<>(appointmentService.getAllAppointment(), HttpStatus.OK);
     }
@@ -53,8 +53,8 @@ public class AppointmentController {
     }
 
     @PostMapping("/create")
-    public void addAppointment(@RequestBody @Valid CreateAppointmentDto createAppointmentDto) {
-        appointmentService.addAppointment(createAppointmentDto);
+    public ResponseEntity<AppointmentDto> addAppointment(@RequestBody @Valid CreateAppointmentDto createAppointmentDto) {
+        return new ResponseEntity<>(appointmentService.addAppointment(createAppointmentDto), HttpStatus.OK);
     }
 
     @PostMapping("/newProduct")
@@ -69,8 +69,8 @@ public class AppointmentController {
     }
 
     @GetMapping("/get/{id}")
-    public Appointment appointmentById(@PathVariable long id) {
-        return appointmentRepository.findById(id).orElseThrow(() ->
-                new ResourceNotFoundException("No such appointment"));
+    public ResponseEntity<Appointment> appointmentById(@PathVariable long id) {
+        return new ResponseEntity<>(appointmentRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("No such appointment")), HttpStatus.OK);
     }
 }

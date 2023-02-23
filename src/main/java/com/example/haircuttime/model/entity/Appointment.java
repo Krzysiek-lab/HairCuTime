@@ -22,7 +22,7 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    private LocalDate date;
+    private LocalDate date;//TODO CZY USUNAC???
 
     private Long serviceLength;
 

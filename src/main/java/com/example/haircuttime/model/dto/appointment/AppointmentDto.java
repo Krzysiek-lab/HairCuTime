@@ -3,15 +3,13 @@ package com.example.haircuttime.model.dto.appointment;
 import com.example.haircuttime.model.dto.product.ProductDto;
 import com.example.haircuttime.model.dto.user.UserDto;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Data
+@Getter
+@Setter
 public class AppointmentDto {
 
     private Long id;

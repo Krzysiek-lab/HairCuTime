@@ -12,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "products")
-
 @Setter
 @Getter
 @Builder

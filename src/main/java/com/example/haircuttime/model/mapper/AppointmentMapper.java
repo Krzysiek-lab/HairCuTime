@@ -3,6 +3,7 @@ package com.example.haircuttime.model.mapper;
 import com.example.haircuttime.model.dto.appointment.AppointmentDto;
 import com.example.haircuttime.model.dto.appointment.CreateAppointmentDto;
 import com.example.haircuttime.model.entity.Appointment;
+import com.example.haircuttime.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +12,13 @@ import org.springframework.stereotype.Service;
 public class AppointmentMapper {
 
     private final ProductMapper productMapper;
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     public AppointmentDto toDto(Appointment appointment) {
         return AppointmentDto.builder()
                 .id(appointment.getId())
-                //.user(userMapper.toDto(appointment.getUser()))
+                .user(userMapper.toDto(appointment.getUser()))//odkomentowane
                 .serviceLength(appointment.getServiceLength())
                 .product(productMapper.toDto(appointment.getProduct()))
                 .build();
@@ -31,7 +34,9 @@ public class AppointmentMapper {
     }
 
     public Appointment toNewEntity(CreateAppointmentDto createDto) {
+        var user = userRepository.getReferenceById(createDto.getUserId());//dodane
         return Appointment.builder()
+                .user(user)//dodane
                 .serviceLength(createDto.getServiceLength())
                 .build();
     }

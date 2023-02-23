@@ -42,6 +42,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .orElseThrow(EntityNotFoundException::new);
         appointment.setUser(userRepository.findById(createDto.getUserId())
                 .orElseThrow(EntityExistsException::new));
+
         appointment.setServiceLength(product.getProductDuration());
         appointment.setProduct(product);
         return appointmentMapper.toDto(appointmentRepository.save(appointment));
