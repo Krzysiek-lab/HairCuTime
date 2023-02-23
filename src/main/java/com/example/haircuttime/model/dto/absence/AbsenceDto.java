@@ -20,10 +20,8 @@ public class AbsenceDto {
     @NotNull(message = "cannot be null")
     private Long id;
 
-
-    @NotNull(message = "cannot be null")
-    private BarberDto barber;
-
+//    @NotNull(message = "cannot be null")
+//    private BarberDto barber;
 
     @NotNull(message = "cannot be null")
     @DateTimeFormat
@@ -33,6 +31,6 @@ public class AbsenceDto {
     @DateTimeFormat
     private LocalTime absenceEnd;
 
-    @NotNull(message = "cannot be null")
-    private WorkDayDto workDay;
+//    @NotNull(message = "cannot be null")
+//    private WorkDayDto workDay;
 }

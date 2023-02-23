@@ -27,7 +27,7 @@ public class AbsenceRepositoryEventHandler {
 
     @HandleAfterCreate
     public void handleAbsenceBeforeCreate(Absence absence) {
-        log.info("creating Absence entity");
+        //log.info("creating Absence entity");
         var all = availabilityRepository.findAll();
         if (all.isEmpty()) {
             return;
@@ -44,7 +44,7 @@ public class AbsenceRepositoryEventHandler {
 
     @HandleBeforeDelete
     public void handleAbsenceBeforeDelete(Absence absence) {
-        log.info("deleting Absence entity");
+        //log.info("deleting Absence entity");
         var availability = Availability.builder()
                 .barber(absence.getBarber())
                 .workDay(absence.getWorkDay())
@@ -56,7 +56,7 @@ public class AbsenceRepositoryEventHandler {
 
     @HandleBeforeCreate
     public void handleUserBeforeCreate(User user) {
-        log.info("assigning default role to new User entity");
+        //log.info("assigning default role to new User entity");
         if (roleRepository.existsByName(Role.USER)) {
             user.setRoles(List.of(roleRepository.findByName(Role.USER)));
         } else {

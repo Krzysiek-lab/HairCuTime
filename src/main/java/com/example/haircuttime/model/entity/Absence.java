@@ -1,14 +1,13 @@
 package com.example.haircuttime.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalTime;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "absences")
 @Builder
@@ -22,17 +21,15 @@ public class Absence {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "barber_id")
+    @JsonIgnoreProperties("absences")
     private Barber barber;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "work_day_id")
     private WorkDay workDay;
 
-
     @Column(name = "absence_start")
     private LocalTime absenceStart;
-
 
     @Column(name = "absence_end")
     private LocalTime absenceEnd;

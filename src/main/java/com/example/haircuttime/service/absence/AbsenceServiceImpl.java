@@ -74,10 +74,10 @@ public class AbsenceServiceImpl implements AbsenceService {
     public void updateAbsence(Long id, AbsenceDto absence) {
         absenceRepository.findById(id).ifPresent(e -> {
             var abs = Absence.builder()
-                    .barber(barberMapper.toEntity(absence.getBarber()))
+                    //.barber(barberMapper.toEntity(absence.getBarber()))
                     .absenceStart(absence.getAbsenceStart())
                     .absenceEnd(absence.getAbsenceEnd())
-                    .workDay(workDayMapper.toEntity(absence.getWorkDay()))
+                    //.workDay(workDayMapper.toEntity(absence.getWorkDay()))
                     .build();
             absenceRepository.save(abs);
         });

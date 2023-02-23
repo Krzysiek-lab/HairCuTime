@@ -24,7 +24,6 @@ public class WorkDayMapper {
     private final AvailabilityMapper availabilityMapper;
 
     private final AbsenceMapper absenceMapper;
-    private final WorkDefinitionRepository workDefinitionRepository;
     private final WorkDefinitionMapper workDefinitionMapper;
 
 

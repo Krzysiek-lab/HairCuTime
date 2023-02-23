@@ -1,8 +1,11 @@
 package com.example.haircuttime.model.entity;
 
 import com.example.haircuttime.model.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 
 import java.util.List;
 
@@ -26,7 +29,11 @@ public class Barber {
 
     @ManyToMany
     List<Product> products;
-    @OneToMany(mappedBy = "barber")
+
+
+    @OneToMany(mappedBy = "barber", fetch = FetchType.LAZY)
+    @JsonIgnore
+    @JsonIgnoreProperties("barber")
     private List<Absence> absences;
     @OneToMany(mappedBy = "barber")
     private List<Availability> availabilities;

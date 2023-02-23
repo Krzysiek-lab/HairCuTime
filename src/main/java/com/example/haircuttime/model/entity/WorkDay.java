@@ -20,10 +20,8 @@ public class WorkDay {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
     @Column(name = "day_in_year")
     private Long dayInYear;
-
     @ManyToOne
     @JsonBackReference
     private WorkYear workYear;
