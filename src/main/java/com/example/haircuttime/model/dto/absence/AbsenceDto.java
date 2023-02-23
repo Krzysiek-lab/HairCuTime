@@ -1,6 +1,5 @@
 package com.example.haircuttime.model.dto.absence;
 
-import com.example.haircuttime.CustomAnnotations.AbsenceAnnotation;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +11,6 @@ import java.time.LocalTime;
 @Builder
 @Getter
 @Setter
-@AbsenceAnnotation(message = "This Barber already has absence in given time")
 public class AbsenceDto {
 
     @NotNull(message = "cannot be null")

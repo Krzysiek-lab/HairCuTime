@@ -32,17 +32,17 @@ public class AbsenceController {
         return absenceRepository.findAll().stream().map(absenceMapper::toDto).collect(Collectors.toList());
     }
 
-    @GetMapping("/get/id")
+    @GetMapping("/get/")
     public AbsenceDto getAbsencesById(@RequestParam Long id) {
         return absenceService.getAbsenceById(id);
     }
 
-    @GetMapping("/get/barber")
+    @GetMapping("/get/barber/")
     public List<AbsenceDto> getAbsencesByBarber(@RequestParam Long id) {
         return absenceService.getAbsenceByBarber(id);
     }
 
-    @GetMapping("/absence/get/workday")
+    @GetMapping("/get/workday/")
     public List<AbsenceDto> getAbsencesByWorkDay(@RequestParam Long id) {
         return absenceService.getAbsenceByWorkDay(id);
     }
@@ -55,7 +55,7 @@ public class AbsenceController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateAbsence(@PathVariable("id") long id, @RequestBody @Valid AbsenceDto absence) {
+    public ResponseEntity<String> updateAbsence(@PathVariable("id") long id, @RequestBody @Valid CreateAbsenceDto absence) {
         absenceService.updateAbsence(id, absence);
         return new ResponseEntity<>("Absence was updated.", HttpStatus.OK);
     }

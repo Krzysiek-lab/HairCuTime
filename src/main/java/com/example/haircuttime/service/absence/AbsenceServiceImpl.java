@@ -7,6 +7,8 @@ import com.example.haircuttime.model.mapper.AbsenceMapper;
 import com.example.haircuttime.model.mapper.BarberMapper;
 import com.example.haircuttime.model.mapper.WorkDayMapper;
 import com.example.haircuttime.repository.AbsenceRepository;
+import com.example.haircuttime.repository.BarberRepository;
+import com.example.haircuttime.repository.WorkDayRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AbsenceServiceImpl implements AbsenceService {
     private final AbsenceRepository absenceRepository;
+    private final BarberRepository barberRepository;
     private final AbsenceMapper absenceMapper;
+    private final WorkDayRepository workDayRepository;
     private final BarberMapper barberMapper;
     private final WorkDayMapper workDayMapper;
 
@@ -71,13 +75,16 @@ public class AbsenceServiceImpl implements AbsenceService {
     }
 
     @Override
-    public void updateAbsence(Long id, AbsenceDto absence) {
+    public void updateAbsence(Long id, CreateAbsenceDto absence) {
+        var barber = barberRepository.getReferenceById(absence.getBarberId());//dodane
+        var workDay = workDayRepository.getReferenceById(absence.getWorkDayId());//dodane
         absenceRepository.findById(id).ifPresent(e -> {
             var abs = Absence.builder()
-                    //.barber(barberMapper.toEntity(absence.getBarber()))
+                    .id(id)//dodane
+                    .barber(barber)//dodane
+                    .workDay(workDay)//dodane
                     .absenceStart(absence.getAbsenceStart())
                     .absenceEnd(absence.getAbsenceEnd())
-                    //.workDay(workDayMapper.toEntity(absence.getWorkDay()))
                     .build();
             absenceRepository.save(abs);
         });
