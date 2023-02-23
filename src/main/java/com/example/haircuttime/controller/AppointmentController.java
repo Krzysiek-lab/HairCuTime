@@ -36,7 +36,7 @@ public class AppointmentController {
     private final AppointmentService appointmentService;
 
 
-    @GetMapping("/all")
+    @GetMapping("/get")
     public ResponseEntity<List<AppointmentDto>> getAllAppointments() {
         return new ResponseEntity<>(appointmentService.getAllAppointment(), HttpStatus.OK);
     }

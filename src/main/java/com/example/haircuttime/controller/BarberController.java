@@ -21,7 +21,7 @@ public class BarberController {
 
     private final BarberServiceImpl barberService;
 
-    @GetMapping("/all")
+    @GetMapping("/get")
     public List<BarberDto> getAllBarbers() {
         return barberService.findAll();
     }

@@ -19,8 +19,6 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
-    
-
 
     @PostMapping("/create")
     public ProductDto createProduct(@RequestBody @Valid CreateProductDto productDto) {
@@ -31,8 +29,6 @@ public class ProductController {
     public void updateProduct(@PathVariable("id") Long id, @RequestBody @Valid ProductDto product){
      productService.updateProduct(id, product);
     } 
-   
-
 
     @GetMapping("/get")
     public List<ProductDto> getAllProducts() {
