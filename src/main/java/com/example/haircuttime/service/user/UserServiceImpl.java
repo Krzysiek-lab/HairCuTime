@@ -11,11 +11,14 @@ import com.example.haircuttime.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,12 +73,25 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
 
-    ///////////
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         return userRepository.findByLogin(login).orElseThrow(() -> new UsernameNotFoundException(
                 String.format(USER_NOT_FOUND, login)
         ));
     }
-    ////////////
+    @Override
+    public UserDto getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String login = auth.getName();
+        List<UserDto> users = userRepository.findAll().stream()
+                .map(userMapper::toDto).collect(Collectors.toList());
+        return findCurrentUser(login, users);
+    }
+    public UserDto findCurrentUser(String login, List<UserDto> users) {
+        List<UserDto> currentUser = new ArrayList<>();
+        users.stream()
+                .filter(e -> e.getLogin().equals(login))
+                .forEach(currentUser::add);
+        return currentUser.get(0);
+    }
 }
