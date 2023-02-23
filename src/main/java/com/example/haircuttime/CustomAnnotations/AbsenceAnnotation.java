@@ -35,7 +35,9 @@ class RangeValidator implements ConstraintValidator<AbsenceAnnotation, CreateAbs
         return absenceRepository.findAll().stream().anyMatch(e ->
                 e.getAbsenceStart().equals(absenceDto.getAbsenceStart())
                         && e.getAbsenceEnd().equals(absenceDto.getAbsenceEnd())
+                        && e.getBarber() != null
                         && e.getBarber().getId().equals(absenceDto.getBarberId())
+                        && e.getWorkDay() != null
                         && e.getWorkDay().getId().equals(absenceDto.getWorkDayId()));
     }
 

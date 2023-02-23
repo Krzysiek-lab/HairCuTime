@@ -34,7 +34,9 @@ class RangeValidator2 implements ConstraintValidator<AvailabilityAnnotation, Cre
         return availabilityRepository.findAll().stream().anyMatch(e ->
                 e.getStartTime().equals(availabilityDto.getStartTime())
                         && e.getEndTime().equals(availabilityDto.getEndTime())
+                        && e.getBarber() != null
                         && e.getBarber().getId().equals(availabilityDto.getBarberId())
+                        && e.getWorkDay() != null
                         && e.getWorkDay().getId().equals(availabilityDto.getWorkDayId()));
     }
 

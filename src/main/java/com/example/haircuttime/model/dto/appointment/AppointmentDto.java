@@ -5,6 +5,7 @@ import com.example.haircuttime.model.dto.user.UserDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 

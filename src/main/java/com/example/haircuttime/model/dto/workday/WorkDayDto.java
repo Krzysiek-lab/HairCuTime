@@ -4,7 +4,6 @@ import com.example.haircuttime.model.dto.absence.AbsenceDto;
 import com.example.haircuttime.model.dto.availability.AvailabilityDto;
 import com.example.haircuttime.model.dto.workdefinition.WorkDefinitionDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
-import com.example.haircuttime.model.entity.WorkYear;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;

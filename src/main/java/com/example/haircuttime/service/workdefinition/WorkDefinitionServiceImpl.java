@@ -8,7 +8,6 @@ import com.example.haircuttime.repository.WorkDefinitionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.xml.datatype.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 

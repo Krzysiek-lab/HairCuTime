@@ -1,8 +1,6 @@
 package com.example.haircuttime.model.dto.absence;
 
 import com.example.haircuttime.CustomAnnotations.AbsenceAnnotation;
-import com.example.haircuttime.model.dto.barber.BarberDto;
-import com.example.haircuttime.model.dto.workday.WorkDayDto;
 import com.example.haircuttime.model.entity.Barber;
 import com.example.haircuttime.model.entity.WorkDay;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,11 +21,9 @@ public class AbsenceDto {
     @NotNull(message = "cannot be null")
     private Long id;
 
-
     @NotNull(message = "cannot be null")
     @JsonIgnore
     private Barber barber;
-
 
     @NotNull(message = "cannot be null")
     @DateTimeFormat
