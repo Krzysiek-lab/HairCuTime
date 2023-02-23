@@ -33,9 +33,6 @@ public class ProductDto {
     private BigDecimal price;
     @NotNull
     private Long serviceDuration;
-
-    @NotNull
-    private Long productDuration;
     Target targetCustomer;
 
     List<Barber> barbers;

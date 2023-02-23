@@ -10,13 +10,9 @@ public interface AppointmentService {
 
     List<AppointmentDto> getAllAppointment();
 
-    AppointmentDto updateAppointment(AppointmentDto appointmentDto);
+    AppointmentDto updateAppointment(CreateAppointmentDto appointmentDto,long id);
 
     AppointmentDto addAppointment(CreateAppointmentDto appointmentDto);
-
-    void addProductToAppointment(Long id, ProductDto productDto);
-
-    void addExistingProductToAppointment(Long id, Long serviceId);
 
     void deleteAppointmentById(Long id);
 }

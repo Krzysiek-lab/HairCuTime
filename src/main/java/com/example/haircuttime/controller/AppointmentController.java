@@ -3,7 +3,6 @@ package com.example.haircuttime.controller;
 import com.example.haircuttime.exception.exceptions.ResourceNotFoundException;
 import com.example.haircuttime.model.dto.appointment.AppointmentDto;
 import com.example.haircuttime.model.dto.appointment.CreateAppointmentDto;
-import com.example.haircuttime.model.dto.product.ProductDto;
 import com.example.haircuttime.model.entity.Appointment;
 import com.example.haircuttime.model.mapper.AppointmentMapper;
 import com.example.haircuttime.model.mapper.ProductMapper;
@@ -47,25 +46,15 @@ public class AppointmentController {
         return new ResponseEntity<>("Appointment was deleted.", HttpStatus.OK);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<AppointmentDto> updateAppointment(@RequestBody @Valid AppointmentDto appointmentDto) {
-        return new ResponseEntity<>(appointmentService.updateAppointment(appointmentDto), HttpStatus.OK);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<AppointmentDto> updateAppointment(@RequestBody @Valid CreateAppointmentDto appointmentDto
+            , @PathVariable long id) {
+        return new ResponseEntity<>(appointmentService.updateAppointment(appointmentDto, id), HttpStatus.OK);
     }
 
     @PostMapping("/create")
     public ResponseEntity<AppointmentDto> addAppointment(@RequestBody @Valid CreateAppointmentDto createAppointmentDto) {
         return new ResponseEntity<>(appointmentService.addAppointment(createAppointmentDto), HttpStatus.OK);
-    }
-
-    @PostMapping("/newProduct")
-    public void addNewProductToAnAppointment(@RequestParam long id, @RequestBody @Valid ProductDto productDto) {
-        appointmentService.addProductToAppointment(id, productDto);
-    }
-
-    @PostMapping("/existingProduct")
-    public String addExistingProductToAnAppointment(@RequestParam long id, @RequestParam long serviceId) {
-        appointmentService.addExistingProductToAppointment(id, serviceId);
-        return "redirect:/appointmentById" + id;
     }
 
     @GetMapping("/get/{id}")
