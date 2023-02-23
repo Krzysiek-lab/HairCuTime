@@ -6,6 +6,7 @@ import com.example.haircuttime.model.dto.user.UserDto;
 import com.example.haircuttime.model.entity.Appointment;
 import com.example.haircuttime.model.entity.User;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -15,10 +16,12 @@ import java.util.stream.Collectors;
 @Component
 public class UserMapper {
 
-      private final AppointmentMapper appointmentMapper;
+    private final AppointmentMapper appointmentMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserMapper(@Lazy AppointmentMapper appointmentMapper) {
+    public UserMapper(@Lazy AppointmentMapper appointmentMapper, PasswordEncoder passwordEncoder) {
         this.appointmentMapper = appointmentMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public UserDto toDto(User user) {
@@ -29,10 +32,13 @@ public class UserMapper {
                 .email(user.getEmail())
                 .phoneNumber(user.getPhoneNumber())
                 .roles(user.getRoles())
+                .login(user.getLogin())
+                .password(passwordEncoder.encode(user.getPassword()))
                 .appointments(getAppointmentsDto(user))
                 .build();
     }
-    public User toEntity(UserDto userDto){
+
+    public User toEntity(UserDto userDto) {
         return User.builder()
                 .id(userDto.getId())
                 .login(userDto.getEmail())
@@ -43,10 +49,11 @@ public class UserMapper {
                 .appointments(getAppointments(userDto))
                 .build();
     }
+
     public User toNewEntity(CreateUserDto createDto) {
         return User.builder()
                 .login(createDto.getLogin())
-                .password(createDto.getPassword())
+                .password(passwordEncoder.encode(createDto.getPassword()))
                 .name(createDto.getName())
                 .surname(createDto.getSurname())
                 .email(createDto.getEmail())
@@ -55,12 +62,13 @@ public class UserMapper {
                 .build();
     }
 
-   private List<AppointmentDto> getAppointmentsDto(User user) {
+    private List<AppointmentDto> getAppointmentsDto(User user) {
         return user.getAppointments().stream()
                 .map(appointmentMapper::toDto)
                 .collect(Collectors.toList());
     }
-    private List<Appointment> getAppointments(UserDto userDto){
+
+    private List<Appointment> getAppointments(UserDto userDto) {
         return userDto.getAppointments().stream()
                 .map(appointmentMapper::toEntity)
                 .collect(Collectors.toList());

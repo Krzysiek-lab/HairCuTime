@@ -24,6 +24,17 @@ public class UserDto {
     @Size(max = 64, message = "Size can't be bigger than 64 characters")
     @NotBlank(message = "Surname is mandatory")
     private String surname;
+
+
+    ///
+    @Size(max = 64, message = "Size can't be bigger than 64 characters")
+    @NotBlank(message = "Login is mandatory")
+    private String login;
+
+    @Size(max = 64, message = "Size can't be bigger than 64 characters")
+    @NotBlank(message = "Password is mandatory")
+    private String password;
+    ///
     @Size(max = 64, message = "Size can't be bigger than 64 characters")
     @NotBlank(message = "Email is mandatory")
     @Email(message = "Please enter correct email address")
