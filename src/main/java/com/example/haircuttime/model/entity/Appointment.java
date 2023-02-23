@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "appointments")
@@ -23,7 +24,7 @@ public class Appointment {
     private User user;
 
     private LocalDate date;
-
+    private LocalTime time;
     private Long serviceLength;
 
     @ManyToOne

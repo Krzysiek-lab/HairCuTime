@@ -15,7 +15,8 @@ public class AppointmentMapper {
     public AppointmentDto toDto(Appointment appointment) {
         return AppointmentDto.builder()
                 .id(appointment.getId())
-                //.user(userMapper.toDto(appointment.getUser()))
+                .date(appointment.getDate())
+                .time(appointment.getTime())
                 .serviceLength(appointment.getServiceLength())
                 .product(productMapper.toDto(appointment.getProduct()))
                 .build();
@@ -24,7 +25,9 @@ public class AppointmentMapper {
 
     public Appointment toEntity(AppointmentDto appointmentDto) {
         return Appointment.builder()
-                //.user(userMapper.toEntity(appointmentDto.getUser()))
+                .id(appointmentDto.getId())
+                .date(appointmentDto.getDate())
+                .time(appointmentDto.getTime())
                 .serviceLength(appointmentDto.getServiceLength())
                 .product(productMapper.toEntity(appointmentDto.getProduct()))
                 .build();
@@ -32,7 +35,8 @@ public class AppointmentMapper {
 
     public Appointment toNewEntity(CreateAppointmentDto createDto) {
         return Appointment.builder()
-                .serviceLength(createDto.getServiceLength())
+                .date(createDto.getDate())
+                .time(createDto.getTime())
                 .build();
     }
 }

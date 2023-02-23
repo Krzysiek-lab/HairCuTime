@@ -29,5 +29,4 @@ public class WorkDefinitionDto {
     @DateTimeFormat
     private LocalTime end;
 
-    private Duration workDuration;
 }

@@ -20,8 +20,8 @@ public class AbsenceMapper {
 
     public Absence toEntity(AbsenceDto absenceDto) {
         return Absence.builder()
-                .barber(barberMapper.toEntity(absenceDto.getBarber()))
-                .workDay(workDayMapper.toEntity(absenceDto.getWorkDay()))
+                .barber(absenceDto.getBarber())
+                .workDay(absenceDto.getWorkDay())
                 .absenceStart(absenceDto.getAbsenceStart())
                 .absenceEnd(absenceDto.getAbsenceEnd())
                 .build();
@@ -30,8 +30,8 @@ public class AbsenceMapper {
     public AbsenceDto toDto(Absence absence) {
         return AbsenceDto.builder()
                 .id(absence.getId())
-                .workDay(workDayMapper.toDto(absence.getWorkDay()))
-                .barber(barberMapper.toDto(absence.getBarber()))
+                .workDay(absence.getWorkDay())
+                .barber(absence.getBarber())
                 .absenceStart(absence.getAbsenceStart())
                 .absenceEnd(absence.getAbsenceEnd())
                 .build();

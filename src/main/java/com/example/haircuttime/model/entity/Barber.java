@@ -13,7 +13,6 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Barber {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +29,6 @@ public class Barber {
     private List<Absence> absences;
     @OneToMany(mappedBy = "barber")
     private List<Availability> availabilities;
-
 
     @OneToMany(mappedBy = "barber", orphanRemoval = true)
     private List<WorkYear> workYears;

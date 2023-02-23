@@ -8,6 +8,7 @@ import com.example.haircuttime.model.entity.User;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,13 +46,12 @@ public class UserMapper {
     public User toNewEntity(CreateUserDto createDto) {
         return User.builder()
                 .login(createDto.getLogin())
+                .password(createDto.getPassword())
                 .name(createDto.getName())
                 .surname(createDto.getSurname())
                 .email(createDto.getEmail())
                 .phoneNumber(createDto.getPhoneNumber())
-                .appointments(createDto.getAppointments().stream().map(
-                        appointmentMapper::toNewEntity
-                ).collect(Collectors.toList()))
+                .appointments(new ArrayList<>())
                 .build();
     }
 

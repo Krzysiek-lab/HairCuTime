@@ -15,8 +15,6 @@ public class CreateWorkYearDto {
 
     @NotNull
     private Long year;
-
-
     @NotNull
     private Long barberId;
     private List<CreateWorkDayDto> workDayList;

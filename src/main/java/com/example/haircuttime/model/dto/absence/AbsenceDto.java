@@ -3,6 +3,9 @@ package com.example.haircuttime.model.dto.absence;
 import com.example.haircuttime.CustomAnnotations.AbsenceAnnotation;
 import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
+import com.example.haircuttime.model.entity.Barber;
+import com.example.haircuttime.model.entity.WorkDay;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +25,8 @@ public class AbsenceDto {
 
 
     @NotNull(message = "cannot be null")
-    private BarberDto barber;
+    @JsonIgnore
+    private Barber barber;
 
 
     @NotNull(message = "cannot be null")
@@ -34,5 +38,5 @@ public class AbsenceDto {
     private LocalTime absenceEnd;
 
     @NotNull(message = "cannot be null")
-    private WorkDayDto workDay;
+    private WorkDay workDay;
 }

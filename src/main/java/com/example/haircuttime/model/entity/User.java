@@ -19,11 +19,10 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-//@ToString(exclude = {"appointments"})
-//@EqualsAndHashCode(exclude = {"appointments"})
+
 public class User implements UserDetails {
     private Boolean locked = false;
-    private Boolean enabled = false;
+    private Boolean enabled = true;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, name = "id")
@@ -44,9 +43,7 @@ public class User implements UserDetails {
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<RoleEntity> roles;
 
-    @OneToMany
-    @JsonManagedReference
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "user")
     private List<Appointment> appointments;
 
     @Override
@@ -62,7 +59,7 @@ return roles.stream().map(e -> new SimpleGrantedAuthority(e.getName().toString()
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return false;
     }
 
     @Override
@@ -72,12 +69,12 @@ return roles.stream().map(e -> new SimpleGrantedAuthority(e.getName().toString()
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isEnabled() {
-      return !enabled;
+      return enabled;
 
     }
 }

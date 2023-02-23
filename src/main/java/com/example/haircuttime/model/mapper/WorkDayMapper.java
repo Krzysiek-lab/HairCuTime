@@ -18,18 +18,20 @@ import java.util.stream.Collectors;
 @Component
 public class WorkDayMapper {
 
-    private final WorkYearMapper workYearMapper;
 
     private final AvailabilityMapper availabilityMapper;
 
     private final AbsenceMapper absenceMapper;
+
+    private final WorkDefinitionMapper workDefinitionMapper;
 
 
     public WorkDay toEntity(WorkDayDto workDayDto) {
         return WorkDay.builder()
                 .id(workDayDto.getId())
                 .dayInYear(workDayDto.getDayInYear())
-                .workYear(workYearMapper.toEntity(workDayDto.getWorkYear()))
+
+                .workDefinition(workDefinitionMapper.toEntity(workDayDto.getWorkDefinition()))
                 .availabilities(getAvailabilities(workDayDto))
                 .absences(getAbsences(workDayDto))
                 .build();
@@ -39,6 +41,7 @@ public class WorkDayMapper {
         return WorkDayDto.builder()
                 .id(workDay.getId())
                 .dayInYear(workDay.getDayInYear())
+                .workDefinition(workDefinitionMapper.toDto(workDay.getWorkDefinition()))
                 .availabilities(getAvailabilityDto(workDay))
                 .absences(getAbsenceDto(workDay))
                 .build();

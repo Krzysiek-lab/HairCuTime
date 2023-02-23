@@ -23,23 +23,22 @@ public class Security {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
 
-                .authorizeHttpRequests((request) -> request
-//                        .requestMatchers("/user/**", "/absence/**", "/barber/**", "/products/**",
+                .authorizeHttpRequests((request) -> request.requestMatchers("/**").permitAll())
+//                       .requestMatchers("/user/**", "/absence/**", "/barber/**", "/products/**",
 //                                "/appointment/**", "/workday/**", "/workyear/**", "/workdefinition/**")
-//                        .hasAuthority("ADMIN")
-//                        .requestMatchers("/absence", "/absenceByBarber", "/update/absence/{id}").hasAuthority("PERSONNEL")
-//                        .requestMatchers("/user/add", "/user/delete/{id}", "/user/update",
-//                                "/products", "/barber/all", "/addAppointment",
-//                                "/deleteAppointment", "/updateAppointment").hasAuthority("USER")
-                        .anyRequest().permitAll()
-                )
+//                      .hasAuthority("ADMIN")
+//                        .requestMatchers("/absence/create", "/absence/get/barber").hasAuthority("PERSONNEL")
+//                        .requestMatchers("/user/create", "/user/delete/{id}", "/user/update",
+//                               "/products/get", "/barber/all", "/appointment/**").hasAuthority("USER")
+//                        .anyRequest().permitAll()
+//                )
 //                .formLogin()
-//                .defaultSuccessUrl("http://localhost:3000")
+//               .defaultSuccessUrl("http://localhost:3000")
 //                .failureUrl("/http://localhost:3000:")
 //                .and()
-//                .logout().permitAll()
-//                .and()
-               .csrf().disable()
+//               .logout().permitAll()
+ //            .and()
+             .csrf().disable()
                 .httpBasic();
         return httpSecurity.build();
     }

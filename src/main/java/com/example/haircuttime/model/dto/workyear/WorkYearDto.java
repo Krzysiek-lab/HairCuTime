@@ -1,5 +1,6 @@
 package com.example.haircuttime.model.dto.workyear;
 
+import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.workday.WorkDayDto;
 import com.example.haircuttime.model.entity.Barber;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,7 +24,7 @@ public class WorkYearDto {
 
     @NotNull
     @JsonIgnore
-    private Barber barber;
+    private BarberDto barber;
 
     private List<WorkDayDto> workDayList = new ArrayList<>();
 }

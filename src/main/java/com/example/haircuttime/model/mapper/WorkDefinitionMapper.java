@@ -24,7 +24,6 @@ public class WorkDefinitionMapper {
                 .name(workDefinition.getName())
                 .start(workDefinition.getStart())
                 .end(workDefinition.getEnd())
-                .workDuration(workDefinition.getWorkDuration())
                 .build();
     }
 
@@ -34,7 +33,6 @@ public class WorkDefinitionMapper {
                 .name(workDefinition.getName())
                 .start(workDefinition.getStart())
                 .end(workDefinition.getEnd())
-                .workDuration(workDefinition.getWorkDuration())
                 .build();
     }
 }
