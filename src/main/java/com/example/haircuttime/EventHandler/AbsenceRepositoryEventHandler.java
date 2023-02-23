@@ -29,6 +29,9 @@ public class AbsenceRepositoryEventHandler {
     @HandleAfterCreate
     public void handleAbsenceBeforeCreate(Absence absence) {
         log.info("creating Absence entity");
+        if (availabilityRepository.findAll().isEmpty()) {
+            return;
+        }
         var availability = availabilityRepository.findAll().stream()
                 .filter(e -> e.getStartTime().equals(
                         absence.getAbsenceStart())
