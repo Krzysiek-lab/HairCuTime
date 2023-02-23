@@ -16,7 +16,7 @@ public class ProductMapper {
                 .productName(product.getProductName())
                 .description(product.getDescription())
                 .price(product.getPrice())
-                .serviceDuration(product.getProductDuration())
+                .productDuration(product.getProductDuration())
                 .targetCustomer(product.getTargetCustomer())
                 .build();
     }
@@ -27,7 +27,7 @@ public class ProductMapper {
                 .productName(productDto.getProductName())
                 .description(productDto.getDescription())
                 .price(productDto.getPrice())
-                .productDuration(productDto.getServiceDuration())
+                .productDuration(productDto.getProductDuration())
                 .targetCustomer(productDto.getTargetCustomer())
                 .build();
     }

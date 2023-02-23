@@ -41,7 +41,6 @@ public class ProductServiceImpl implements ProductService{
         updateProduct.setProductName(updateProduct.getProductName());
         updateProduct.setDescription(updateProduct.getDescription());
         updateProduct.setPrice(updateProduct.getPrice());
-        updateProduct.setProductDuration(product.getServiceDuration());
+        updateProduct.setProductDuration(product.getProductDuration());
     }
-
 }
