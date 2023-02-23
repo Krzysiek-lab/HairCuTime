@@ -32,14 +32,14 @@ public class AbsenceRepositoryEventHandler {
         if (availabilityRepository.findAll().isEmpty()) {
             return;
         }
-        var availability = availabilityRepository.findAll().stream()
+        availabilityRepository.deleteAll(availabilityRepository.findAll().stream()
                 .filter(e -> e.getStartTime().equals(
                         absence.getAbsenceStart())
                         && e.getEndTime().equals(absence.getAbsenceEnd())
                         && e.getBarber().equals(absence.getBarber())
                         && e.getWorkDay().equals(absence.getWorkDay()))
-                .toList();
-        availabilityRepository.delete(availability.get(0));
+                .toList());
+        ;
     }
 
     @HandleBeforeDelete
