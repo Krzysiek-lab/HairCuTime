@@ -14,7 +14,6 @@ public class WorkDefinitionMapper {
                 .name(createWorkDefinitionDto.getName())
                 .start(createWorkDefinitionDto.getStart())
                 .end(createWorkDefinitionDto.getEnd())
-                .workDuration(createWorkDefinitionDto.getDuration())
                 .build();
     }
 
