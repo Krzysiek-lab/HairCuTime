@@ -5,7 +5,6 @@ import com.example.haircuttime.model.dto.availability.AvailabilityDto;
 import com.example.haircuttime.model.dto.product.ProductDto;
 import com.example.haircuttime.model.dto.workyear.WorkYearDto;
 import com.example.haircuttime.model.enums.Gender;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotEmpty;
@@ -13,7 +12,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import net.minidev.json.annotate.JsonIgnore;
 
 import java.util.List;
 

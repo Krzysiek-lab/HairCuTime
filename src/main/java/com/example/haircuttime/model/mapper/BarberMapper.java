@@ -51,7 +51,7 @@ public class BarberMapper {
     }
 
     public BarberDto toDto(Barber barber) {
-        if (barber.getWorkYears() == null) {
+        if (barber.getWorkYears() == null || barber.getWorkYears().isEmpty()) {
             return BarberDto.builder()
                     .id(barber.getId())
                     .name(barber.getName())
@@ -74,8 +74,6 @@ public class BarberMapper {
                     .availabilities(getAvailabilityDto(barber))
                     .build();
         }
-
-
     }
 
     private List<WorkYear> getWorkYears(BarberDto barberDto) {

@@ -7,7 +7,6 @@ import com.example.haircuttime.model.dto.workday.WorkDayDto;
 import com.example.haircuttime.model.entity.Absence;
 import com.example.haircuttime.model.entity.Availability;
 import com.example.haircuttime.model.entity.WorkDay;
-import com.example.haircuttime.repository.WorkDefinitionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
