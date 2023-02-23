@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentMapper appointmentMapper;
     private final AppointmentRepository appointmentRepository;
-    private final ProductMapper productMapper;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 

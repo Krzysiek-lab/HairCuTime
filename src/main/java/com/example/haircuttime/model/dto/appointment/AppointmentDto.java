@@ -5,6 +5,9 @@ import com.example.haircuttime.model.dto.user.UserDto;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -16,6 +19,11 @@ public class AppointmentDto {
 
     @NotNull
     private UserDto user;
+
+    @NotNull
+    private LocalDate date;
+    @NotNull
+    private LocalTime time;
 
     @NotNull
     private Long serviceLength;

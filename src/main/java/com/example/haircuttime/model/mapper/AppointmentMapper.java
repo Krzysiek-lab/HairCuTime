@@ -21,6 +21,8 @@ public class AppointmentMapper {
                 .user(userMapper.toDto(appointment.getUser()))//odkomentowane
                 .serviceLength(appointment.getServiceLength())
                 .product(productMapper.toDto(appointment.getProduct()))
+                .date(appointment.getDate())//dodane
+                .time(appointment.getTime())//dodane
                 .build();
     }
 
@@ -36,6 +38,8 @@ public class AppointmentMapper {
     public Appointment toNewEntity(CreateAppointmentDto createDto) {
         var user = userRepository.getReferenceById(createDto.getUserId());//dodane
         return Appointment.builder()
+                .date(createDto.getDate())
+                .time(createDto.getTime())
                 .user(user)//dodane
                 .serviceLength(createDto.getServiceLength())
                 .build();

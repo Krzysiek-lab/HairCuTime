@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "appointments")
@@ -22,7 +23,8 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    private LocalDate date;//TODO CZY USUNAC???
+    private LocalDate date;
+    private LocalTime time;
 
     private Long serviceLength;
 

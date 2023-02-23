@@ -8,13 +8,14 @@ import com.example.haircuttime.model.entity.User;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class UserMapper {
 
-      private final AppointmentMapper appointmentMapper;
+    private final AppointmentMapper appointmentMapper;
 
     public UserMapper(@Lazy AppointmentMapper appointmentMapper) {
         this.appointmentMapper = appointmentMapper;
@@ -31,7 +32,8 @@ public class UserMapper {
                 .appointments(getAppointmentsDto(user))
                 .build();
     }
-    public User toEntity(UserDto userDto){
+
+    public User toEntity(UserDto userDto) {
         return User.builder()
                 .id(userDto.getId())
                 .login(userDto.getEmail())
@@ -42,6 +44,7 @@ public class UserMapper {
                 .appointments(getAppointments(userDto))
                 .build();
     }
+
     public User toNewEntity(CreateUserDto createDto) {
         return User.builder()
                 .login(createDto.getLogin())
@@ -49,18 +52,17 @@ public class UserMapper {
                 .surname(createDto.getSurname())
                 .email(createDto.getEmail())
                 .phoneNumber(createDto.getPhoneNumber())
-                .appointments(createDto.getAppointments().stream().map(
-                        appointmentMapper::toNewEntity
-                ).collect(Collectors.toList()))
+                .appointments(new ArrayList<>())
                 .build();
     }
 
-   private List<AppointmentDto> getAppointmentsDto(User user) {
+    private List<AppointmentDto> getAppointmentsDto(User user) {
         return user.getAppointments().stream()
                 .map(appointmentMapper::toDto)
                 .collect(Collectors.toList());
     }
-    private List<Appointment> getAppointments(UserDto userDto){
+
+    private List<Appointment> getAppointments(UserDto userDto) {
         return userDto.getAppointments().stream()
                 .map(appointmentMapper::toEntity)
                 .collect(Collectors.toList());
