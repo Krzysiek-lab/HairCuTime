@@ -39,6 +39,7 @@ public class BarberServiceImpl implements BarberService{
                 .orElseThrow(() -> new ResourceNotFoundException("Barber with id: " + id + " doesn't exist!"));
         updateBarber.setName(barber.getName());
         updateBarber.setSurname(barber.getSurname());
+        updateBarber.setGender(barber.getGender());
         barberRepository.save(updateBarber);
         return ResponseEntity.ok(updateBarber);
 

@@ -3,6 +3,7 @@ package com.example.haircuttime.controller;
 import com.example.haircuttime.model.dto.barber.BarberDto;
 import com.example.haircuttime.model.dto.barber.CreateBarberDto;
 import com.example.haircuttime.model.entity.Barber;
+import com.example.haircuttime.repository.BarberRepository;
 import com.example.haircuttime.service.barber.BarberServiceImpl;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -11,19 +12,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("barber")
 @CrossOrigin(origins = "http://localhost:3000")
-
 public class BarberController {
 
     private final BarberServiceImpl barberService;
+    private final BarberRepository barberRepository;
 
     @GetMapping("/get")
     public List<BarberDto> getAllBarbers() {
         return barberService.findAll();
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Optional<Barber>> getBarberById(@PathVariable("id") long id) {
+        return new ResponseEntity<>(barberRepository.findById(id),HttpStatus.OK);
     }
 
     @PostMapping("/create")

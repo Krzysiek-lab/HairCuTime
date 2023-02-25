@@ -3,6 +3,7 @@ package com.example.haircuttime.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -24,6 +25,7 @@ public class Appointment {
     private User user;
 
     private LocalDate date;
+    @DateTimeFormat(iso= DateTimeFormat.ISO.TIME)
     private LocalTime time;
     private Long serviceLength;
 
