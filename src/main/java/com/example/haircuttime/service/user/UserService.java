@@ -17,4 +17,6 @@ public interface UserService {
 
     UserDto getCurrentUser();
 
+    UserDto getLoggedInUser();
+
 }

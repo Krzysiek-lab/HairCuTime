@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("user")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     private final UserService userService;
@@ -36,5 +36,12 @@ public class UserController {
     public void deleteUser(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
     }
+    @GetMapping("/current")
+    public UserDto getLoggedInUser(){
+        return userService.getCurrentUser();
+    }
+
+    @PostMapping("/login")
+    public void login(){}
 
 }

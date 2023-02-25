@@ -4,6 +4,7 @@ import com.example.haircuttime.service.user.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,13 +24,14 @@ public class Security {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
 
-                .authorizeHttpRequests((request) -> request.requestMatchers("/**").permitAll())
-//                       .requestMatchers("/user/**", "/absence/**", "/barber/**", "/products/**",
+                .authorizeHttpRequests((request) -> request.anyRequest().permitAll())
+//                       .requestMatchers( "/absence/**", "/barber/**", "/products/**",
 //                                "/appointment/**", "/workday/**", "/workyear/**", "/workdefinition/**")
-//                      .hasAuthority("ADMIN")
-//                        .requestMatchers("/absence/create", "/absence/get/barber").hasAuthority("PERSONNEL")
-//                        .requestMatchers("/user/create", "/user/delete/{id}", "/user/update",
-//                               "/products/get", "/barber/all", "/appointment/**").hasAuthority("USER")
+//                      .hasAuthority("ROLE_ADMIN")
+//                        .requestMatchers("/absence/create", "/absence/get/barber").hasAuthority("ROLE_PERSONNEL")
+//                        .requestMatchers( "/user/delete/{id}", "/user/update",
+//                               "/products/get", "/barber/get", "/appointment/**","/user/login").hasAuthority("ROLE_USER")
+//                        .requestMatchers("/user/create").permitAll()
 //                        .anyRequest().permitAll()
 //                )
 //                .formLogin()
@@ -37,7 +39,7 @@ public class Security {
 //                .failureUrl("/http://localhost:3000:")
 //                .and()
 //               .logout().permitAll()
- //            .and()
+//             .and()
              .csrf().disable()
                 .httpBasic();
         return httpSecurity.build();

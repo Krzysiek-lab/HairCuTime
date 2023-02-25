@@ -62,7 +62,7 @@ return roles.stream().map(e -> new SimpleGrantedAuthority(e.getName().toString()
 
     @Override
     public boolean isAccountNonLocked() {
-        return !locked;
+        return true;
     }
 
     @Override
@@ -72,7 +72,7 @@ return roles.stream().map(e -> new SimpleGrantedAuthority(e.getName().toString()
 
     @Override
     public boolean isEnabled() {
-      return enabled;
+      return true;
 
     }
 }

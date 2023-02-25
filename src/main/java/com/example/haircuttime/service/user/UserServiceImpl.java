@@ -94,4 +94,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 .forEach(currentUser::add);
         return currentUser.get(0);
     }
+
+    @Override
+    public UserDto getLoggedInUser() {
+        var user =  (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userMapper.toDto(user);
+    }
 }
