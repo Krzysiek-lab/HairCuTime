@@ -17,10 +17,8 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class User implements UserDetails {
-    private Boolean locked = false;
-    private Boolean enabled = true;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, name = "id")
@@ -37,7 +35,6 @@ public class User implements UserDetails {
     private String email;
     @Column(name = "phone_number")
     private String phoneNumber;
-
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<RoleEntity> roles;
 
@@ -46,9 +43,14 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-return roles.stream().map(e -> new SimpleGrantedAuthority(e.getName().toString())).toList();
-
+        return roles.stream().map(e -> new SimpleGrantedAuthority(e.getName().name())).toList();
     }
+
+//    public static User build(User user) {
+//        return new User(user.getId(), user.getName(), user.getSurname(), user.getUsername(), user.getPassword()
+//                , user.getEmail(), user.getPhoneNumber(), user.getRoles(), user.getAppointments());//getRoles na getAuthorities()
+//    }
+
 
     @Override
     public String getUsername() {
@@ -57,7 +59,7 @@ return roles.stream().map(e -> new SimpleGrantedAuthority(e.getName().toString()
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
@@ -67,12 +69,12 @@ return roles.stream().map(e -> new SimpleGrantedAuthority(e.getName().toString()
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-      return true;
+        return true;
 
     }
 }

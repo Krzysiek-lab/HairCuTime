@@ -72,13 +72,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.deleteById(id);
     }
 
-
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         return userRepository.findByLogin(login).orElseThrow(() -> new UsernameNotFoundException(
-                String.format(USER_NOT_FOUND, login)
-        ));
+                String.format(USER_NOT_FOUND, login)));
+        //return User.build(user);
     }
+
     @Override
     public UserDto getCurrentUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -87,6 +88,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 .map(userMapper::toDto).collect(Collectors.toList());
         return findCurrentUser(login, users);
     }
+
     public UserDto findCurrentUser(String login, List<UserDto> users) {
         List<UserDto> currentUser = new ArrayList<>();
         users.stream()
@@ -97,7 +99,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDto getLoggedInUser() {
-        var user =  (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        var user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userMapper.toDto(user);
     }
 }

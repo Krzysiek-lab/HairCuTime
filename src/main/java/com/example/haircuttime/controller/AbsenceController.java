@@ -42,7 +42,6 @@ public class AbsenceController {
         return absenceService.getAbsenceByBarber(id);
     }
 
-
     @GetMapping("/absence/get/workday")
     public List<AbsenceDto> getAbsencesByWorkDay(@RequestParam Long id) {
         return absenceService.getAbsenceByWorkDay(id);
@@ -53,7 +52,6 @@ public class AbsenceController {
         absenceRepositoryEventHandler.handleAbsenceBeforeCreate(absenceMapper.toNewEntity(absenceDto));
         return absenceService.addAbsence(absenceDto);
     }
-
 
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateAbsence(@PathVariable("id") long id, @RequestBody @Valid AbsenceDto absence) {
